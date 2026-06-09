@@ -1,72 +1,92 @@
-# variables.py
-# Author: Sehar Andleeb
-# Day 2 - AI Engineer Internship at Xeven Solutions
-# Purpose: Demonstrate variable naming conventions and dynamic typing
+"""
+Script Purpose: Variables and PEP 8 Naming Conventions
+Author: Sehar Andleeb
+Company: Xeven Solutions
+Day: 2 of 30
+
+This script demonstrates proper variable naming following
+PEP 8 standards, dynamic typing, and multiple assignment.
+It also shows how variables can change type in Python.
+"""
 
 
-# ─── PEP 8 VARIABLE NAMING ─────────────────────────
-# Always use snake_case: lowercase with underscores
-# Names should be descriptive and meaningful
+# ─── PEP 8 NAMING CONVENTIONS ──────────────────────
+# snake_case for variables and functions
+# UPPERCASE for constants
+# Descriptive names that explain the purpose
 
-intern_name = "Sehar Andleeb"
-company_name = "Xeven Solutions"
-internship_duration = 30
-current_day = 2
+intern_name = "Sehar Andleeb"        # full name of intern
+company_name = "Xeven Solutions"     # company name
+current_day = 2                      # current day of internship
+total_days = 30                      # total internship days
+daily_hours = 8.5                    # working hours per day
+is_active = True                     # internship is active
 
 print("--- PEP 8 Variable Naming ---")
-print(intern_name)
-print(company_name)
-print(internship_duration)
-print(current_day)
+print(f"Intern   : {intern_name}")
+print(f"Company  : {company_name}")
+print(f"Day      : {current_day} of {total_days}")
+print(f"Hours    : {daily_hours} per day")
+print(f"Active   : {is_active}")
 
 
 # ─── CONSTANTS ─────────────────────────────────────
-# Constants are written in UPPERCASE_WITH_UNDERSCORES
-# Their value should never change during the program
+# Constants never change during the program
+# Always written in UPPERCASE_WITH_UNDERSCORES
 
-MAX_DAYS = 30
-COMPANY_NAME = "Xeven Solutions"
+MAX_DAYS = 30                        # maximum internship days
+MIN_HOURS = 8                        # minimum daily hours
+COMPANY_NAME = "Xeven Solutions"     # company never changes
 
 print("\n--- Constants ---")
-print(MAX_DAYS)
-print(COMPANY_NAME)
+print(f"Max Days    : {MAX_DAYS}")
+print(f"Min Hours   : {MIN_HOURS}")
+print(f"Company     : {COMPANY_NAME}")
 
 
 # ─── DYNAMIC TYPING ────────────────────────────────
-# In Python, a variable can change its type anytime
-# This is called dynamic typing
+# Python automatically decides the type based on value
+# Same variable can hold different types at different times
 
-my_variable = 10
+my_variable = 100                    # starts as integer
 print("\n--- Dynamic Typing ---")
-print(my_variable)
-print(type(my_variable))
+print(f"Value: {my_variable} | Type: {type(my_variable)}")
 
-my_variable = 3.14
-print(my_variable)
-print(type(my_variable))
+my_variable = 3.14                   # now becomes float
+print(f"Value: {my_variable} | Type: {type(my_variable)}")
 
-my_variable = "Now I am a string"
-print(my_variable)
-print(type(my_variable))
+my_variable = "Now I am a string"    # now becomes string
+print(f"Value: {my_variable} | Type: {type(my_variable)}")
 
-my_variable = True
-print(my_variable)
-print(type(my_variable))
+my_variable = True                   # now becomes boolean
+print(f"Value: {my_variable} | Type: {type(my_variable)}")
 
 
 # ─── MULTIPLE ASSIGNMENT ───────────────────────────
-# You can assign values to multiple variables in one line
+# Assign values to multiple variables in one line
 
 x, y, z = 10, 20, 30
 print("\n--- Multiple Assignment ---")
-print(x)
-print(y)
-print(z)
+print(f"x = {x}, y = {y}, z = {z}")
 
 
 # ─── SAME VALUE TO MULTIPLE VARIABLES ──────────────
+# All three variables get the same value
+
 a = b = c = 100
-print("\n--- Same Value to Multiple Variables ---")
-print(a)
-print(b)
-print(c)
+print("\n--- Same Value Assignment ---")
+print(f"a = {a}, b = {b}, c = {c}")
+
+
+# ─── SWAPPING VARIABLES ────────────────────────────
+# Python allows swapping without a temporary variable
+
+first = "Hello"
+second = "World"
+
+print("\n--- Swapping Variables ---")
+print(f"Before swap: first = {first}, second = {second}")
+
+first, second = second, first        # swap in one line
+
+print(f"After swap : first = {first}, second = {second}")
