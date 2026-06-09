@@ -198,3 +198,56 @@ flat elif chains and nested if statements. Both can solve the same
 problem but flat elif is always more readable. A good rule I will
 follow: if I am nesting more than 2 levels deep, I need to rethink
 my approach and restructure the logic.
+
+---
+
+---
+
+## Day 4 — Operators and Type Conversion
+**Date:** June 9, 2026
+
+### What I Learned
+- Python has 7 operator types: arithmetic, comparison, logical, assignment, bitwise, identity, membership
+- Operator precedence follows PEMDAS: Parentheses → Exponents → Multiply/Divide → Add/Subtract
+- `//` is floor division (always rounds down), `%` gives the remainder
+- Exponentiation `**` is right-associative: `2 ** 3 ** 2` = `2 ** 9` = 512 (not 64)
+- `and`, `or`, `not` are logical operators used for multi-condition checks
+- `input()` always returns a string — must convert with `int()` or `float()` before math
+- `int()` truncates decimals — `int(3.9)` gives `3`, not `4`
+- Always wrap type conversions in `try/except` to handle invalid input gracefully
+
+### Operator Precedence (High → Low)
+| Priority | Operator | Example |
+|----------|----------|---------|
+| 1 | `()` Parentheses | `(2+3)*4 = 20` |
+| 2 | `**` Exponent | `2**3 = 8` |
+| 3 | `*, /, //, %` | `10/2*3 = 15` |
+| 4 | `+, -` | `5+3-1 = 7` |
+| 5 | `==, !=, <, >` | `5 > 3 = True` |
+| 6 | `not` | `not True = False` |
+| 7 | `and` | `True and False = False` |
+| 8 | `or` | `True or False = True` |
+
+### Soft Skill — Debugging
+- Type errors are the most common beginner mistake in Python
+- Systematic debugging approach practiced today:
+  1. Read the error message carefully — it tells you the line and type
+  2. Print the variable AND its type: `print(x, type(x))`
+  3. Trace back where the variable was created
+  4. Apply the correct conversion (`int()`, `float()`, `str()`)
+  5. Wrap in `try/except` to handle edge cases
+
+### Challenge Overcome Today
+- **Problem:** `git add day04/git commit` — accidentally joined two commands without semicolon
+- **Fix:** Ran them separately: `git add .` then `git commit -m "..."`
+- **Lesson:** Always double-check PowerShell commands before pressing Enter
+
+### Scripts Written
+| Script | Concept |
+|--------|---------|
+| `type_conversion.py` | Implicit/explicit conversion, safe casting |
+| `operator_precedence.py` | PEMDAS, floor div, modulo, exponents |
+| `advanced_calculator.py` | All operators with user input |
+| `login_system.py` | Logical operators, comparison, validation |
+| `practical/task1_advanced_login.py` | Combined operators + type conversion |
+| `practical/task2_calculator.py` | User-driven operations + error handling |
