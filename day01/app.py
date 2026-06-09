@@ -1,4 +1,12 @@
 
+# app.py - First Python Script
 # Author: Sehar Andleeb
-# Day 1 - AI Engineer Internship at Xeven Solutions
-print("Hi, this is Sehar, future AI engineer!")
+# Purpose: Print a personalized greeting message
+
+
+# Define intern details
+intern_name = "Sehar Andleeb"
+role = "future AI engineer"
+
+# Print personalized greeting
+print(f'Hi, this is {intern_name}, {role}!')
