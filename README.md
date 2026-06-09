@@ -42,8 +42,8 @@ ai-internship-xeven-2026/
 | Day | Topic | Status |
 |---|---|---|
 | Day 01 | Python basics, Git setup, GitHub configuration | Done |
-| Day 02 | Python fundamentals | Upcoming |
-| Day 03 | Data types and variables | Upcoming |
+| Day 02 | Python Basics — Variables and Data Types | Done |
+
 
 ---
 
