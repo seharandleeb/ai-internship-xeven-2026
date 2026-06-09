@@ -74,6 +74,35 @@ python app.py
 
 ---
 
+---
+
+## What is AI and the Role of an AI Engineer
+
+Artificial Intelligence, or AI, is the ability of a computer to think
+and learn like a human. Instead of being told exactly what to do, an
+AI system learns from examples and experiences, just like how a child
+learns to recognize a cat after seeing many cats.
+
+We already use AI every single day without realizing it. When Netflix
+suggests a show you might like, when Google Maps finds the fastest
+route, when your phone unlocks with your face, or when Gmail filters
+out spam — that is all AI working behind the scenes.
+
+AI matters because it saves time, reduces human error, and solves
+problems that would take humans years to figure out. In healthcare, AI
+helps doctors detect diseases earlier. In education, it personalizes
+lessons for each student. In business, it predicts what customers want
+before they even ask.
+
+An AI Engineer is the person who builds these intelligent systems.
+They collect and clean data, train the AI to learn from it, test
+whether it is working correctly, and then deploy it so real people can
+use it. Think of them as the architects behind the smart technology we
+depend on daily.
+
+In short, AI is changing every industry — and AI Engineers are the
+people making that change happen.
+
 ## Contact
 
 - GitHub: https://github.com/seharandleeb
