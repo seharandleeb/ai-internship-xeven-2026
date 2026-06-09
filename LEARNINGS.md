@@ -135,3 +135,66 @@ daily_progress = intern_age / total_days
 
 The second version needs no comment because the variable names
 already explain what the code is doing.
+
+---
+
+# Day 3 — Conditional Statements and Logic
+
+## What I Learned Today
+
+- if-elif-else allows programs to make decisions based on conditions
+- Only ONE block in an if-elif-else chain ever runs
+- Always check the highest boundary first in elif chains
+- Use == for comparison, never = inside an if statement
+- Nested conditionals should not go deeper than 2 levels
+- Every value in Python is either Truthy or Falsy
+- try-except handles invalid inputs without crashing the program
+- Flat elif chains are more readable than deeply nested if statements
+
+---
+
+## Research Sources
+
+### Source 1 — ChatGPT[09 june 2026]
+**Topic:** Boolean logic in programming
+**Key Takeaway:** Every condition in Python evaluates to True or
+False and truthy/falsy values allow non-boolean types to be used
+in conditions naturally
+
+### Source 2 — Gemini[09 june 2026]
+**Topic:** Best practices for if-elif-else statements
+**Key Takeaway:** Keep conditions flat, check most specific cases
+first, and avoid deeply nested conditionals for readability
+
+### Source 3 — Claude[09 june 2026]
+**Topic:** Writing clean conditional statements in Python
+**Key Takeaway:** Flat elif chains are always preferred over nested
+ifs because they are easier to read, debug, and maintain
+
+### Source 4 — Real Python Article[09 june 2026]
+**Title:** Python Conditional Statements
+**Link:** https://realpython.com/python-conditional-statements
+**Key Takeaway:** Proper use of comparison operators and avoiding
+the common mistake of using = instead of == in conditions
+
+---
+
+## Comparison Table — Conditional Statements (Across 4 Sources)
+
+| Concept | ChatGPT | Gemini | Claude | Real Python |
+|---|---|---|---|---|
+| if-elif-else syntax | Covered | Covered | Covered | Covered in depth |
+| Truthy/Falsy values | Covered in depth | Briefly mentioned | Covered | Covered |
+| Nested conditionals | Covered | Covered | Covered in depth | Covered |
+| Common pitfalls | Mentioned | Covered | Covered in depth | Covered in depth |
+| Best practices | Covered | Covered in depth | Covered in depth | Covered |
+
+---
+
+## Personal Insight
+
+The most valuable thing I learned today is the difference between
+flat elif chains and nested if statements. Both can solve the same
+problem but flat elif is always more readable. A good rule I will
+follow: if I am nesting more than 2 levels deep, I need to rethink
+my approach and restructure the logic.

@@ -43,6 +43,7 @@ ai-internship-xeven-2026/
 |---|---|---|
 | Day 01 | Python basics, Git setup, GitHub configuration | Done |
 | Day 02 | Python Basics — Variables and Data Types | Done |
+| Day 03 | Conditional Statements and Logic | Done |
 
 
 ---
