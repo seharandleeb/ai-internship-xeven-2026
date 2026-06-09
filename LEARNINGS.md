@@ -251,3 +251,85 @@ my approach and restructure the logic.
 | `login_system.py` | Logical operators, comparison, validation |
 | `practical/task1_advanced_login.py` | Combined operators + type conversion |
 | `practical/task2_calculator.py` | User-driven operations + error handling |
+
+
+---
+
+# Day 5 — Machine Learning Concepts
+
+## What I Learned Today
+
+- Machine Learning is a branch of AI where computers learn
+  from data without being explicitly programmed
+- Supervised learning uses labeled data to make predictions
+- Unsupervised learning finds hidden patterns without labels
+- Reinforcement learning learns through rewards and penalties
+- Regression predicts continuous values like price or temperature
+- Classification predicts discrete categories like spam or not spam
+- Decision trees make decisions by asking a series of questions
+- Root node is the first question, leaf nodes are final answers
+- Feature engineering directly affects model quality
+- Overfitting happens when model learns training data too well
+
+---
+
+## Research Sources
+
+### Source 1 — ChatGPT
+**Topic:** Types of Machine Learning
+**Date:** June 2026
+**Key Takeaway:** Clear explanation of all three ML types with
+everyday examples that are easy to understand for beginners
+
+### Source 2 — Gemini
+**Topic:** Decision Trees in Machine Learning
+**Date:** June 2026
+**Key Takeaway:** Detailed technical explanation of tree structure
+including root nodes, internal nodes, and leaf nodes with diagrams
+
+### Source 3 — Claude
+**Topic:** Supervised, Unsupervised, Reinforcement Learning
+**Date:** June 2026
+**Key Takeaway:** Most practical source — provided code examples
+for all three ML types that could be directly implemented
+
+### Source 4 — Medium Article
+**Title:** Introduction to Machine Learning —
+          Types and Working Mechanism
+**Author:** Jagriti Bansal
+**URL:** https://medium.com/@jagriti.bansal/introduction-to-machine-learning-types-and-working-mechanism-012710ab9c7d
+**Date:** June 2026
+**Key Takeaway:** Best beginner friendly explanation of ML types
+with real world analogies that made concepts very clear
+
+### Source 5 — Dev.to Article
+**Title:** Complete Beginner's Guide to Machine Learning
+**Author:** Marcelo Gobea
+**URL:** https://dev.to/mgobea/complete-beginners-guide-to-machine-learning-9k5
+**Date:** June 2026
+**Key Takeaway:** Best explanation of the complete ML workflow
+from data collection to model deployment
+
+---
+
+## Comparison Table
+
+| Concept | ChatGPT | Gemini | Claude | Medium | Dev.to |
+|---|---|---|---|---|---|
+| ML Definition | Clear | Technical | Practical | Beginner friendly | Very clear |
+| Supervised Learning | Covered | Covered | With code | In depth | Covered |
+| Unsupervised Learning | Covered | Covered | With code | Covered | Covered |
+| Reinforcement Learning | Covered | Detailed | With code | Covered | Mentioned |
+| Decision Trees | Mentioned | Detailed | With code | Not covered | Covered |
+| ML Workflow | Basic | Detailed | Mentioned | Mentioned | In depth |
+| Overfitting | Mentioned | Detailed | Mentioned | Not covered | Covered |
+
+---
+
+## Personal Insight
+
+The most valuable thing I learned today is the difference between
+regression and classification. Before today I thought they were
+the same thing. Now I understand that regression predicts a number
+and classification predicts a category. This single distinction
+changes how you approach every ML problem you encounter.

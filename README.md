@@ -45,7 +45,7 @@ ai-internship-xeven-2026/
 | Day 02 | Python Basics — Variables and Data Types | Done |
 | Day 03 | Conditional Statements and Logic | Done |
 | Day 04 | Operators and Type Conversion | Done |
-
+| Day 05 | Machine Learning Concepts — Supervised, Unsupervised, Decision Trees | Done |
 ---
 
 ## How to Run
