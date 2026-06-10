@@ -1,1 +1,40 @@
- 
+
+# UV Virtual Environment
+.venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# VS Code settings
+.vscode/
+
+# Environment variables and API keys
+.env
+*.env
+
+# UV specific
+.python-version
+uv.lock
+
+# System files
+Thumbs.db
+desktop.ini
+
+# Word documents temporary files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Log files
+*.log
+
+# Distribution files
+dist/
+build/
+*.egg-info/
