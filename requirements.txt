@@ -1,0 +1,6 @@
+# Requirements for AI Engineer Internship
+# Xeven Solutions 2026
+
+jupyter==3.0.0
+notebook==7.0.0
+ipykernel==6.29.0
