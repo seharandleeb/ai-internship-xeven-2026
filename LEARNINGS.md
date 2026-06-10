@@ -333,3 +333,75 @@ regression and classification. Before today I thought they were
 the same thing. Now I understand that regression predicts a number
 and classification predicts a category. This single distinction
 changes how you approach every ML problem you encounter.
+
+---
+
+# Day 6 — Python Data Structures: Lists
+
+## What I Learned Today
+
+- Lists are ordered mutable collections holding mixed data types
+- Indexing starts at 0, negative indexing starts at -1 from end
+- Slicing uses start:end:step — end index is never included
+- append() adds one item, extend() adds many, insert() at position
+- remove() deletes by value, pop() by index, clear() removes all
+- sort() modifies original list, sorted() returns a new list
+- List comprehension creates lists in one clean readable line
+- IndexError occurs on invalid index — handled with try-except
+- ValueError occurs when removing non-existent value
+- Parallel lists use same index to represent related student data
+
+---
+
+## Research Sources
+
+### Source 1 — ChatGPT
+**Topic:** List operations with practical examples
+**Date:** June 2026
+**Key Takeaway:** append() is O(1) constant time, insert() is O(n)
+because it shifts all elements — use append() when possible
+
+### Source 2 — Gemini
+**Topic:** List slicing visual explanation
+**Date:** June 2026
+**Key Takeaway:** Visual diagram of index positions made slicing
+syntax immediately clear — start is inclusive, end is exclusive
+
+### Source 3 — Claude
+**Topic:** List comprehension and error handling
+**Date:** June 2026
+**Key Takeaway:** List comprehension is not just cleaner but
+actually faster than for loops because Python optimizes it
+
+### Source 4 — Medium Article
+**Title:** Python Lists — Complete Guide from Basics
+          to List Comprehension
+**Author:** Anastasiia Sydorenko
+**URL:** https://medium.com/@dotsyko/python-lists-complete-guide-from-basics-to-list-comprehension-c787867ea6e2
+**Date:** June 2026
+**Key Takeaway:** Lists are dynamic arrays that automatically
+resize — this is why append() is faster than insert()
+
+---
+
+## Comparison Table
+
+| Concept | ChatGPT | Gemini | Claude | Medium |
+|---|---|---|---|---|
+| List basics | Covered | Covered | Covered | Covered |
+| Slicing | Good | Best — visual | Good | Covered |
+| List methods | Covered | Covered | With code | Covered |
+| Comprehension | Covered | Covered | Best — code | Covered |
+| Performance | Covered | Mentioned | Mentioned | Covered |
+| Error handling | Mentioned | Mentioned | Best — code | Not covered |
+
+---
+
+## Personal Insight
+
+Today I learned that append() is always faster than insert()
+because insert() has to shift every element after the insertion
+point. This means if I am building a list of 1 million items,
+always appending is much faster than inserting at position 0
+every time. Understanding performance of basic operations is
+what separates a good programmer from an average one.

@@ -46,6 +46,7 @@ ai-internship-xeven-2026/
 | Day 03 | Conditional Statements and Logic | Done |
 | Day 04 | Operators and Type Conversion | Done |
 | Day 05 | Machine Learning Concepts — Supervised, Unsupervised, Decision Trees | Done |
+| Day 06 | Python Data Structures — Lists | Done |
 ---
 
 ## How to Run

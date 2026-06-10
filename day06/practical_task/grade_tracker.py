@@ -34,11 +34,11 @@ def display_all_students(student_names, student_grades):
     for index in range(len(student_names)):
         # ─── DETERMINE PASS OR FAIL ────────────────
         status = ("Pass" if student_grades[index] >= PASS_MARKS
-                  else "Fail")
+        else "Fail")
         print(f"   {index + 1:<5} "
-              f"{student_names[index]:<20} "
-              f"{student_grades[index]:<8} "
-              f"{status}")
+            f"{student_names[index]:<20} "
+            f"{student_grades[index]:<8} "
+            f"{status}")
 
     print(THIN_LINE)
 
@@ -176,7 +176,7 @@ def run_grade_tracker():
     print(f"   Total Students : {len(student_names)}")
     print(f"   Passed         : {len(passed_students)}")
     print(f"   Failed         : "
-          f"{len(student_names) - len(passed_students)}")
+        f"{len(student_names) - len(passed_students)}")
     print(THIN_LINE)
 
     # ─── DISPLAY PASSED STUDENTS ───────────────────
