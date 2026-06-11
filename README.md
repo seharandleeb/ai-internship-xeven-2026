@@ -192,6 +192,7 @@ Every file in this repository follows these non-negotiable standards:
 ---
 
 ## What is AI and the Role of an AI Engineer
+##  AI
 Artificial Intelligence, or AI, is the ability of a computer to think
 and learn like a human. Instead of being told exactly what to do, an
 AI system learns from examples and experiences, just like how a child
@@ -205,6 +206,7 @@ problems that would take humans years to figure out. In healthcare, AI
 helps doctors detect diseases earlier. In education, it personalizes
 lessons for each student. In business, it predicts what customers want
 before they even ask.
+##  Role of an AI Engineer
 An AI Engineer is the person who builds these intelligent systems.
 They collect and clean data, train the AI to learn from it, test
 whether it is working correctly, and then deploy it so real people can
