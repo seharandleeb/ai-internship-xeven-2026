@@ -111,8 +111,8 @@ def perform_basic_arithmetic(first_number, second_number):
 
     # ─── SAVE TO HISTORY ───────────────────────────
     record = (f"{first_number} + {second_number} = {sum_result} | "
-              f"{first_number} - {second_number} = {difference_result} | "
-              f"{first_number} x {second_number} = {product_result}")
+            f"{first_number} - {second_number} = {difference_result} | "
+            f"{first_number} x {second_number} = {product_result}")
     calculation_history.append(record)
     all_results.append(sum_result)
     total_calculations += 1
