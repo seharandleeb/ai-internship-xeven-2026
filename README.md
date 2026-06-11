@@ -47,6 +47,9 @@ ai-internship-xeven-2026/
 | Day 04 | Operators and Type Conversion | Done |
 | Day 05 | Machine Learning Concepts — Supervised, Unsupervised, Decision Trees | Done |
 | Day 06 | Python Data Structures — Lists | Done |
+| Day 07 | Week 1 Review and Self-Assessment | Done |
+| Day 08 | Tuples, Sets and Advanced List Operations | Done |
+| Day 09 | Tuples and Sets — Applied Projects (Geographic Coordinates, Visitor Tracker, Email Validation) | Done |
 ---
 
 ## How to Run
