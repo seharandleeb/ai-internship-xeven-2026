@@ -1,0 +1,30 @@
+{
+    "sample_001": {
+        "text": "The model achieved 95% accuracy.",
+        "label": "positive",
+        "metadata": {
+            "source": "arxiv",
+            "year": 2024,
+            "tokens": 7,
+            "reviewed": true
+        }
+    },
+    "sample_002": {
+        "text": "Training failed due to OOM error.",
+        "label": "negative",
+        "metadata": {
+            "source": "blog",
+            "year": 2023,
+            "tokens": 7
+        }
+    },
+    "sample_003": {
+        "text": "Transformer attention is O(n²) in sequence length.",
+        "label": "neutral",
+        "metadata": {
+            "source": "textbook",
+            "year": 2025,
+            "tokens": 9
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "app": {
+        "name": "XevenAI Platform",
+        "version": "1.0.0",
+        "environment": "production",
+        "debug": false,
+        "log_level": "WARNING"
+    },
+    "database": {
+        "host": "localhost",
+        "port": 5432,
+        "name": "xeven_ai_db",
+        "user": "admin",
+        "password": "CHANGE_ME",
+        "pool_size": 5,
+        "timeout_seconds": 30
+    },
+    "api": {
+        "base_url": "https://api.xeven.ai/v1",
+        "key": "sk-PLACEHOLDER-KEY",
+        "rate_limit_rpm": 60,
+        "timeout_seconds": 10,
+        "retry_attempts": 3
+    },
+    "features": {
+        "enable_caching": true,
+        "enable_logging": true,
+        "enable_metrics": true,
+        "max_upload_mb": 50,
+        "supported_languages": [
+            "en",
+            "ur",
+            "ar"
+        ]
+    },
+    "model": {
+        "default": "gpt-4o",
+        "temperature": 0.2,
+        "max_tokens": 8192,
+        "top_p": 1.0
+    }
+}

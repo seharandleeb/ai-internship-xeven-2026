@@ -1,0 +1,86 @@
+{
+    "summary": {
+        "total_products": 6,
+        "total_inventory_value_pkr": 5631000,
+        "categories": [
+            "GPU",
+            "Storage",
+            "RAM",
+            "Networking",
+            "Power"
+        ],
+        "low_stock_count": 5
+    },
+    "category_average_prices": {
+        "GPU": 775000.0,
+        "Storage": 55000.0,
+        "RAM": 42000.0,
+        "Networking": 18000.0,
+        "Power": 35000.0
+    },
+    "low_stock_items": [
+        {
+            "product_id": "P002",
+            "name": "A100 80GB",
+            "quantity": 2
+        },
+        {
+            "product_id": "P001",
+            "name": "RTX 4090",
+            "quantity": 3
+        },
+        {
+            "product_id": "P006",
+            "name": "UPS 3000VA",
+            "quantity": 3
+        },
+        {
+            "product_id": "P005",
+            "name": "10GbE NIC",
+            "quantity": 5
+        },
+        {
+            "product_id": "P004",
+            "name": "64GB DDR5 RAM",
+            "quantity": 8
+        }
+    ],
+    "products": {
+        "P001": {
+            "name": "RTX 4090",
+            "price": 350000,
+            "quantity": 3,
+            "category": "GPU"
+        },
+        "P002": {
+            "name": "A100 80GB",
+            "price": 1200000,
+            "quantity": 2,
+            "category": "GPU"
+        },
+        "P003": {
+            "name": "NVMe SSD 4TB",
+            "price": 55000,
+            "quantity": 30,
+            "category": "Storage"
+        },
+        "P004": {
+            "name": "64GB DDR5 RAM",
+            "price": 42000,
+            "quantity": 8,
+            "category": "RAM"
+        },
+        "P005": {
+            "name": "10GbE NIC",
+            "price": 18000,
+            "quantity": 5,
+            "category": "Networking"
+        },
+        "P006": {
+            "name": "UPS 3000VA",
+            "price": 35000,
+            "quantity": 3,
+            "category": "Power"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "NB01": {
+        "name": "Nadia Baig",
+        "age": 21,
+        "grades": {
+            "Python": 94,
+            "AI Fundamentals": 91,
+            "Data Structures": 89
+        }
+    },
+    "ZK02": {
+        "name": "Zain Khan",
+        "age": 22,
+        "grades": {
+            "Python": 77,
+            "AI Fundamentals": 82,
+            "Data Structures": 71
+        }
+    },
+    "RM03": {
+        "name": "Rida Malik",
+        "age": 20,
+        "grades": {
+            "Python": 88,
+            "AI Fundamentals": 79
+        }
+    }
+}

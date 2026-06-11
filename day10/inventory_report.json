@@ -1,0 +1,103 @@
+{
+    "summary": {
+        "total_products": 10,
+        "total_inventory_value_pkr": 3512400,
+        "categories": [
+            "Electronics",
+            "Peripherals",
+            "Accessories",
+            "Storage"
+        ],
+        "low_stock_count": 4
+    },
+    "category_average_prices": {
+        "Electronics": 217500.0,
+        "Peripherals": 11050.0,
+        "Accessories": 2000.0,
+        "Storage": 18250.0
+    },
+    "low_stock_items": [
+        {
+            "product_id": "P005",
+            "name": "Laptop Stand",
+            "quantity": 1
+        },
+        {
+            "product_id": "P001",
+            "name": "GPU RTX 4090",
+            "quantity": 3
+        },
+        {
+            "product_id": "P009",
+            "name": "Webcam 4K",
+            "quantity": 7
+        },
+        {
+            "product_id": "P008",
+            "name": "16GB DDR5 RAM",
+            "quantity": 9
+        }
+    ],
+    "products": {
+        "P001": {
+            "name": "GPU RTX 4090",
+            "price": 350000,
+            "quantity": 3,
+            "category": "Electronics"
+        },
+        "P002": {
+            "name": "Mechanical Keyboard",
+            "price": 12500,
+            "quantity": 30,
+            "category": "Peripherals"
+        },
+        "P003": {
+            "name": "USB-C Hub (7-in-1)",
+            "price": 4200,
+            "quantity": 28,
+            "category": "Peripherals"
+        },
+        "P004": {
+            "name": "27\" 4K Monitor",
+            "price": 85000,
+            "quantity": 12,
+            "category": "Electronics"
+        },
+        "P005": {
+            "name": "Laptop Stand",
+            "price": 2800,
+            "quantity": 1,
+            "category": "Accessories"
+        },
+        "P006": {
+            "name": "Noise-Cancelling Headset",
+            "price": 18000,
+            "quantity": 20,
+            "category": "Peripherals"
+        },
+        "P007": {
+            "name": "NVMe SSD 1TB",
+            "price": 22000,
+            "quantity": 15,
+            "category": "Storage"
+        },
+        "P008": {
+            "name": "16GB DDR5 RAM",
+            "price": 14500,
+            "quantity": 9,
+            "category": "Storage"
+        },
+        "P009": {
+            "name": "Webcam 4K",
+            "price": 9500,
+            "quantity": 7,
+            "category": "Peripherals"
+        },
+        "P010": {
+            "name": "RGB Mouse Pad XL",
+            "price": 1200,
+            "quantity": 50,
+            "category": "Accessories"
+        }
+    }
+}

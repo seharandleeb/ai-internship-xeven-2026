@@ -1,0 +1,55 @@
+{
+    "S001": {
+        "name": "Ayesha Khan",
+        "age": 20,
+        "grades": {
+            "Mathematics": 92,
+            "Physics": 88,
+            "AI Fundamentals": 95,
+            "Python Programming": 97,
+            "Data Structures": 90
+        }
+    },
+    "S002": {
+        "name": "Bilal Ahmed",
+        "age": 21,
+        "grades": {
+            "Mathematics": 74,
+            "Physics": 69,
+            "AI Fundamentals": 78,
+            "Python Programming": 82,
+            "Data Structures": 71
+        }
+    },
+    "S003": {
+        "name": "Sana Malik",
+        "age": 19,
+        "grades": {
+            "Mathematics": 55,
+            "Physics": 60,
+            "AI Fundamentals": 63,
+            "Python Programming": 70,
+            "Data Structures": 58
+        }
+    },
+    "S004": {
+        "name": "Usman Tariq",
+        "age": 22,
+        "grades": {
+            "Mathematics": 98,
+            "Physics": 95,
+            "AI Fundamentals": 99,
+            "Python Programming": 100,
+            "Data Structures": 97
+        }
+    },
+    "S005": {
+        "name": "Fatima Zahra",
+        "age": 20,
+        "grades": {
+            "Mathematics": 88,
+            "Python Programming": 91,
+            "AI Fundamentals": 85
+        }
+    }
+}
