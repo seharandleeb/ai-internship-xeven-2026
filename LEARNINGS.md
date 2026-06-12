@@ -566,3 +566,66 @@ The biggest insight today was connecting O(1) set lookups to real AI engineering
 ## Personal Insight
  
 Day 9 shifted my thinking about data structures from "what syntax do I use" to "what contract am I expressing." Choosing a `tuple` for city coordinates is not just a performance decision — it is a statement that these values are facts about the world and should not change at runtime. Choosing `frozenset` for valid email domains is not just immutability for its own sake — it communicates to every reader of the code that this list is a policy, not a variable. This is what engineers mean when they say code should be self-documenting. The type itself carries intent.
+
+---
+
+# Day 10 — Dictionaries & JSON (Applied Projects)
+
+## What I Learned Today
+
+- Dictionaries are hash tables under the hood, which is why key lookup, insertion, and deletion are all O(1) on average — the same CPython mechanism that makes set membership O(1), just storing a value alongside each key
+- `.get(key, default)` is the single most important habit for writing crash-proof dict code — it returns a fallback instead of raising `KeyError`, which matters enormously when parsing config files or API responses where a key may simply be absent
+- Nested dictionaries (`{student_id: {"name": ..., "grades": {subject: score}}}`) model real-world structured records far more naturally than parallel lists — the data hierarchy in the code mirrors the hierarchy in the domain
+- `.items()` is the idiomatic way to iterate keys and values together — `for k, v in d.items()` is cleaner and faster than looping keys and re-indexing the dict each time
+- Dictionary comprehensions like `{k: v for k, v in pairs if condition}` express transform-and-filter in one readable line, the dict equivalent of a list comprehension
+- Python dicts map one-to-one onto JSON objects, which is why `json.dump()` / `json.load()` feel seamless — the in-memory structure and the on-disk format are the same shape
+- `json.dump()` writes to a file object while `json.dumps()` returns a string — the trailing `s` stands for "string", a small naming detail that prevents constant confusion
+- Passing `indent=2` to `json.dump()` produces human-readable output, which matters when the JSON file is meant to be edited by hand (like `config.json`) rather than just machine-consumed
+- A Configuration Manager should validate required keys on load and supply defaults for optional ones — failing fast on a missing critical key is better than crashing deep inside the app later
+- Separating persisted data (`students.json`) from generated reports (`inventory_report.json`) keeps source-of-truth data distinct from derived output — a clean habit that prevents accidentally treating a report as the database
+
+---
+
+## Research Sources
+
+### Source 1 — ChatGPT
+**Topic:** How Python handles dictionary memory and hashing
+**Date:** June 2026
+**Key Takeaway:** Dicts trade memory for speed — they over-allocate hash table slots to keep the load factor low, which is what guarantees O(1) average lookup even as the dict grows
+
+### Source 2 — Gemini
+**Topic:** Nested dictionaries vs parallel lists for structured data
+**Date:** June 2026
+**Key Takeaway:** Nested dicts scale better than parallel lists because adding a field touches one place, not N synchronized lists — parallel lists silently break when they drift out of alignment
+
+### Source 3 — Claude
+**Topic:** Safe dictionary access patterns and `.get()` best practices
+**Date:** June 2026
+**Key Takeaway:** Prefer `.get()` for optional keys and direct `d[key]` only when a missing key genuinely is a bug worth crashing on — the choice itself documents whether a key is required or optional
+
+### Source 4 — Real Python
+**Title:** Working With JSON Data in Python
+**URL:** https://realpython.com/python-json
+**Date:** June 2026
+**Key Takeaway:** `json.load` reads from a file, `json.loads` reads from a string — and the dump/dumps pair mirrors this exactly, so remembering one rule covers all four functions
+
+---
+
+## Comparison Table
+
+| Concept | ChatGPT | Gemini | Claude | Real Python |
+|---|---|---|---|---|
+| Dict hashing / memory internals | Best — slot detail | Covered | Covered | Mentioned |
+| Nested dict vs parallel lists | Covered | Best — scaling argument | Covered | Covered |
+| Safe access with `.get()` | Covered | Covered | Best — required vs optional | Covered |
+| Dictionary comprehensions | Covered | Covered | Covered | Covered |
+| JSON serialization (dump/load) | Covered | Covered | Covered | Best — full reference |
+| Config validation patterns | Mentioned | Covered | Best — fail-fast framing | Covered |
+
+---
+
+## Personal Insight
+
+Day 10 taught me that a dictionary is really a contract about access patterns. When I reach for a dict instead of a list, I am saying "I will look things up by name, not by position, and I want that lookup to be instant." The `.get()` versus `d[key]` choice turned out to be the deepest lesson — it is not just about avoiding crashes, it is about encoding intent. Writing `config.get("timeout", 30)` tells the next reader "this setting is optional and 30 is sensible." Writing `config["api_key"]` tells them "if this is missing, the program *should* stop." JSON tied it all together: because a dict and a JSON object are the same shape, persistence stopped feeling like a separate skill and became a natural extension of choosing the right structure in the first place.
+
+---
