@@ -1,243 +1,144 @@
-# 🤖 AI Engineering Internship — Xeven Solutions 2026
+# AI Engineer Internship — Xeven Solutions 2026
 
-> A compressed 30-day AI Engineering roadmap completed at **Xeven Solutions, Lahore** — building production-grade Python skills, ML fundamentals, and real-world AI pipeline patterns through daily hands-on projects.
-
----
-
-## 👩‍💻 Intern Details
-
-| Field | Details |
-|---|---|
-| **Name** | Sehar Andleeb |
-| **Role** | AI Engineering Intern |
-| **Company** | Xeven Solutions, Lahore |
-| **Mentor** | Mubashir Sir — Sr. Machine Learning Engineer |
-| **Duration** | 30 Days (compressed, ~1 week) |
-| **Start Date** | June 2026 |
-| **Stack** | Python 3.13 · UV · VS Code · Jupyter · Git |
+A 30-day internship program at Xeven Solutions focused on building
+practical skills in Python, Machine Learning, and AI development
+through daily hands-on work.
 
 ---
 
-## 🗂️ Project Structure
+## Intern Details
+
+| Field      | Details            |
+| ---------- | ------------------ |
+| Name       | Sehar Andleeb      |
+| Role       | AI Engineer Intern |
+| Company    | Xeven Solutions    |
+| Duration   | 30 Days            |
+| Start Date | June 8, 2026       |
+
+---
+
+## Tools and Technologies
+
+- Python 3.13
+- VS Code
+- Git and GitHub
+- UV Virtual Environment
+- Jupyter Notebook
+
+---
+
+## Project Structure
 
 ```
 ai-internship-xeven-2026/
 │
-├── day01/                          # Python basics, Git & GitHub setup
-│   ├── app.py
-│   ├── app_output.png
-│   ├── Day 1.docx
-│   ├── day01.ipynb
-│   └── [setup screenshots]
+├── day01/   Python basics, Git & GitHub setup
+├── day02/   Variables, Data Types, I/O, Type Conversion
+├── day03/   Conditional Statements and Logic
+├── day04/   Operators, Precedence, Type Conversion
+├── day05/   ML Concepts — Supervised, Unsupervised, Decision Trees
+├── day06/   Python Data Structures — Lists
+├── day07/   Week 1 Review and Self-Assessment
+├── day08/   Tuples, Sets, Advanced List Operations
+├── day09/   Dictionaries and Hashmaps
+├── day10/   Dictionaries & JSON
+├── day11/   Loops & Iteration
+├── day12/   Functions Fundamentals
 │
-├── day02/                          # Variables and Data Types
-│   ├── calculator.py
-│   ├── data_types.py
-│   ├── day02.ipynb
-│   ├── input_output.py
-│   ├── type_conversion.py
-│   └── variables.py
-│
-├── day03/                          # Conditional Statements and Logic
-│   ├── age_verification.py
-│   ├── day03.ipynb
-│   ├── grade_calculator.py
-│   ├── number_classifier.py
-│   └── simple_grade_calculator.py
-│
-├── day04/                          # Operators and Type Conversion
-│   ├── practical/
-│   ├── advanced_calculator.py
-│   ├── day04_operators_notebook.ipynb
-│   ├── login_system.py
-│   ├── operator_precedence.py
-│   └── type_conversion.py
-│
-├── day05/                          # ML Concepts — Supervised, Unsupervised, Decision Trees
-│   ├── practical_tasks/
-│   ├── day05.ipynb
-│   ├── decision_tree.py
-│   ├── ml_concepts.py
-│   └── regression_vs_classification.py
-│
-├── day06/                          # Python Data Structures — Lists
-│   ├── practical_task/
-│   ├── day06.ipynb
-│   ├── list_basics.py
-│   ├── list_operations.py
-│   └── student_management.py
-│
-├── day07/                          # Week 1 Review and Self-Assessment
-│   └── FEEDBACK_WEEK1.md
-│
-├── day08/                          # Tuples, Sets, Advanced List Operations
-│   ├── data_cleaning_pipeline.py
-│   ├── day08.ipynb
-│   ├── shopping_cart.py
-│   └── student_grade_manager.py
-│
-├── day09/                          # Dictionaries and Hashmaps
-│   ├── day09.ipynb
-│   ├── email_validation.py
-│   ├── geographic_coordinates.py
-│   └── visitor_tracker.py
-│
-├── day10/                          # Dictionaries & JSON — Applied Projects
-│   ├── configuration_manager.py
-│   ├── day10.ipynb
-│   ├── product_inventory_manager.py
-│   ├── student_information_system.py
-│   ├── config.json
-│   ├── inventory.json
-│   ├── inventory_report.json
-│   └── students.json
-|
-├── day10/
-│   ├── day10.ipynb
-│   ├── configuration_manager.py
-│   ├── product_inventory_manager.py
-│   ├── student_information_system.py
-│   ├── config.json
-│   ├── students.json
-│   ├── inventory.json
-│   ├── inventory_report.json
-│   ├── dataset_snapshot.json
-│   ├── notebook_config.json
-│   ├── notebook_students.json
-│   └── notebook_inventory_report.json
-├── day11/
-│   ├── day11.ipynb
-│   ├── data_processing_pipeline.py
-│   ├── number_analysis_system.py
-│   └── pattern_generators.py
 ├── .gitignore
+├── requirements.txt
 ├── LEARNINGS.md
-├── README.md
-└── requirements.txt
-
+└── README.md
 ```
 
 ---
 
-## 📅 Daily Progress
+## Daily Progress
 
 | Day | Topic | Key Files | Status |
 |-----|-------|-----------|--------|
 | 01 | Python basics, Git & GitHub setup | `app.py`, `day01.ipynb` | ✅ Done |
 | 02 | Variables, Data Types, I/O, Type Conversion | `variables.py`, `data_types.py`, `calculator.py`, `day02.ipynb` | ✅ Done |
-| 03 | Conditional Statements and Logic | `age_verification.py`, `grade_calculator.py`, `number_classifier.py` | ✅ Done |
-| 04 | Operators, Precedence, Type Conversion | `advanced_calculator.py`, `login_system.py`, `operator_precedence.py` | ✅ Done |
-| 05 | ML Concepts — Supervised, Unsupervised, Decision Trees | `ml_concepts.py`, `decision_tree.py`, `regression_vs_classification.py` | ✅ Done |
-| 06 | Python Data Structures — Lists | `list_basics.py`, `list_operations.py`, `student_management.py` | ✅ Done |
-| 07 | Week 1 Review and Self-Assessment | `FEEDBACK_WEEK1.md` | ✅ Done |
-| 08 | Tuples, Sets, Advanced List Operations | `data_cleaning_pipeline.py`, `shopping_cart.py`, `student_grade_manager.py` | ✅ Done |
-| 09 | Dictionaries and Hashmaps | `geographic_coordinates.py`, `visitor_tracker.py`, `email_validation.py` | ✅ Done |
-| 10 | Dictionaries & JSON — Applied Projects | `student_information_system.py`, `product_inventory_manager.py`, `configuration_manager.py` | ✅ Done |
-| Day 10 | Dictionaries & JSON | ✅ Done | Student Info System, Inventory Manager, Config Manager |
-| Day 11 | Loops & Iteration | ✅ Done | Data Pipeline, Pattern Generators, Number Analysis |
+| 03 | Conditional Statements and Logic | `age_verification.py`, `grade_calculator.py`, `number_classifier.py`, `day03.ipynb` | ✅ Done |
+| 04 | Operators, Precedence, Type Conversion | `advanced_calculator.py`, `login_system.py`, `operator_precedence.py`, `day04.ipynb` | ✅ Done |
+| 05 | ML Concepts — Supervised, Unsupervised, Decision Trees | `ml_concepts.py`, `decision_tree.py`, `regression_vs_classification.py`, `day05.ipynb` | ✅ Done |
+| 06 | Python Data Structures — Lists | `list_basics.py`, `list_operations.py`, `student_management.py`, `day06.ipynb` | ✅ Done |
+| 07 | Week 1 Review and Self-Assessment | `FEEDBACK_WEEK1.md`, `day07.ipynb` | ✅ Done |
+| 08 | Tuples, Sets, Advanced List Operations | `data_cleaning_pipeline.py`, `shopping_cart.py`, `student_grade_manager.py`, `day08.ipynb` | ✅ Done |
+| 09 | Dictionaries and Hashmaps | `geographic_coordinates.py`, `visitor_tracker.py`, `email_validation.py`, `day09.ipynb` | ✅ Done |
+| 10 | Dictionaries & JSON | `student_info_system.py`, `inventory_manager.py`, `config_manager.py`, `day10.ipynb` | ✅ Done |
+| 11 | Loops & Iteration | `data_processing_pipeline.py`, `pattern_generators.py`, `number_analysis_system.py`, `day11.ipynb` | ✅ Done |
+| 12 | Functions Fundamentals | `math_utils.py`, `text_processing.py`, `validators.py`, `day12.ipynb` | ✅ Done |
 
 ---
 
-## 🛠️ Tools and Technologies
+## How to Run
 
-| Category | Tool |
-|---|---|
-| **Language** | Python 3.13 |
-| **IDE** | VS Code |
-| **Notebooks** | Jupyter Notebook |
-| **Version Control** | Git & GitHub |
-| **Environment** | UV Virtual Environment |
-| **OS** | Windows (PowerShell) |
+Clone the repository:
 
----
-
-## ⚙️ How to Run
-
-**Clone the repository:**
-```bash
+```
 git clone https://github.com/seharandleeb/ai-internship-xeven-2026.git
+```
+
+Navigate to the folder:
+
+```
 cd ai-internship-xeven-2026
 ```
 
-**Activate virtual environment:**
-```powershell
+Activate the virtual environment:
+
+```
 .venv\Scripts\activate
 ```
 
-**Install dependencies:**
-```bash
+Install dependencies:
+
+```
 pip install -r requirements.txt
 ```
 
-**Run any script:**
-```bash
-cd day10
-python student_information_system.py
-```
+Run a script:
 
-**Open a notebook:**
-```bash
-jupyter notebook day10/day10.ipynb
+```
+cd day12
+python math_utils.py
 ```
 
 ---
 
-## 🎯 Goals
+## Goals
 
-- [x] Strengthen Python programming foundations
-- [x] Master core data structures — lists, tuples, sets, dicts
-- [x] Understand ML concepts — supervised, unsupervised, decision trees
-- [ ] Work with real datasets and feature engineering pipelines
-- [ ] Build, train, and evaluate ML models from scratch
-- [ ] Integrate LLM APIs into production-ready applications
-- [ ] Complete a capstone AI engineering project
-
----
-
-## 📐 Coding Standards
-
-Every file in this repository follows these non-negotiable standards:
-
-- **PEP 8** — consistent formatting throughout
-- **Docstrings** on every function (`Args`, `Returns` documented)
-- **Inline comments** explaining the *why*, not just the *what*
-- **`snake_case`** variables, **`UPPERCASE`** constants
-- **`try/except`** error handling on all I/O and external operations
-- **`if __name__ == "__main__"`** structure in every script
-- **Descriptive variable names** — no single-letter variables outside loops
+- Strengthen Python programming foundations
+- Learn core Machine Learning concepts
+- Work with real datasets
+- Build and evaluate ML models
+- Gain practical project experience
 
 ---
 
 ## What is AI and the Role of an AI Engineer
-##  AI
+
 Artificial Intelligence, or AI, is the ability of a computer to think
 and learn like a human. Instead of being told exactly what to do, an
 AI system learns from examples and experiences, just like how a child
 learns to recognize a cat after seeing many cats.
+
 We already use AI every single day without realizing it. When Netflix
 suggests a show you might like, when Google Maps finds the fastest
 route, when your phone unlocks with your face, or when Gmail filters
 out spam — that is all AI working behind the scenes.
-AI matters because it saves time, reduces human error, and solves
-problems that would take humans years to figure out. In healthcare, AI
-helps doctors detect diseases earlier. In education, it personalizes
-lessons for each student. In business, it predicts what customers want
-before they even ask.
-##  Role of an AI Engineer
+
 An AI Engineer is the person who builds these intelligent systems.
 They collect and clean data, train the AI to learn from it, test
 whether it is working correctly, and then deploy it so real people can
-use it. Think of them as the architects behind the smart technology we
-depend on daily.
-In short, AI is changing every industry — and AI Engineers are the
-people making that change happen.
+use it.
 
 ---
 
-## 📬 Contact
+## Contact
 
-| | |
-|---|---|
-| **GitHub** | [github.com/seharandleeb](https://github.com/seharandleeb) |
-| **Email** | seharm518@gmail.com |
-| **Company** | [Xeven Solutions](https://www.xevensolutions.com/) |
+- GitHub: https://github.com/seharandleeb
+- Company: Xeven Solutions
+- Email: seharm518@gmail.com
