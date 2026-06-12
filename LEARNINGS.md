@@ -223,3 +223,33 @@ The biggest shift was realising these features are about expressing intent
 clearly, not just writing less code. Choosing a comprehension over a loop,
 or a lambda over a full function, is a readability decision as much as a
 performance one — and knowing when *not* to use them is the real skill.
+
+---
+
+# Day 14 — Week 2 Review & Mini-Project
+
+## What I Learned Today
+Today I consolidated Week 2 by building a complete Contact Management
+System that combines every data structure I have learned. I created a
+cheat sheet comparing list, tuple, set, and dict across mutability,
+ordering, and time complexity, which clarified why fast membership
+checks belong to sets and dicts (O(1)) rather than lists (O(n)). I then
+applied that directly: the contact manager uses a dict keyed by id, a
+set for each contact's tags, and a list for notes — each structure
+chosen for its strengths. I implemented CRUD functions, partial-match
+search with a dict comprehension, tag handling with set operations, and
+JSON save/load. The biggest lesson came from persistence: Python sets
+are not JSON-serializable, so I convert each tag set to a sorted list on
+save and back to a set on load, wrapped in try/except.
+
+## Research Sources
+Consulted ChatGPT, Gemini, Claude, and a Real Python Big-O article
+(consulted June 14, 2026).
+
+**Clearest Explanation:** Claude — it connected data-model choices to
+Big-O behaviour and flagged the JSON set issue before I hit it.
+
+## Personal Insight
+Building one system from many small pieces taught me that choosing the
+right data structure upfront is a design decision that shapes how clean
+every later function turns out.

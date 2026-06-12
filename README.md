@@ -108,11 +108,15 @@ ai-internship-xeven-2026/
 │   ├── text_processing.py
 │   ├── validators.py
 │   └── day12.ipynb
-└── day13/                     # Advanced Functions
-    ├── flexible_logger.py         # *args/**kwargs logger
-    ├── data_transformer.py        # lambda + map/filter/sorted
-    ├── comprehensions_toolkit.py  # list/dict comprehensions
-    └── day13.ipynb
+├── day13/                     # Advanced Functions
+│   ├── flexible_logger.py         # *args/**kwargs logger
+│   ├── data_transformer.py        # lambda + map/filter/sorted
+│   ├── comprehensions_toolkit.py  # list/dict comprehensions
+│   └── day13.ipynb
+└── day14/                     # Week 2 Review & Mini-Project
+    ├── data_structures_cheatsheet.py  # Task 1: List/Tuple/Set/Dict
+    ├── contact_manager.py             # Task 2: Contact Management System
+    └── day14.ipynb                    # Cheat sheet + live demos
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -138,6 +142,7 @@ executed output.
 | 11 | Loops & Iteration | `data_processing_pipeline.py`, `pattern_generators.py`, `number_analysis_system.py`, `day11.ipynb` | ✅ Done |
 | 12 | Functions Fundamentals | `math_utils.py`, `text_processing.py`, `validators.py`, `day12.ipynb` | ✅ Done |
 | 13 | Advanced Functions (`*args`/`**kwargs`, lambda, comprehensions) | `day13/flexible_logger.py`, `day13/data_transformer.py`, `day13/comprehensions_toolkit.py`, `day13/day13.ipynb` | ✅ Done |
+| 14 | Week 2 Review & Mini-Project (Contact Management System) | `day14/data_structures_cheatsheet.py`, `day14/contact_manager.py`, `day14/day14.ipynb` | ✅ Done |
 ---
 
 ## How to Run
