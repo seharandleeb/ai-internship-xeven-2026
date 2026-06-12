@@ -24,6 +24,12 @@ dist/
 # Jupyter
 *.ipynb_checkpoints
 
+# Logs and generated files
+*.log
+
+# Scratch / local-only
+rough/
+
 # IDE / editor
 .vscode/
 .idea/

@@ -32,25 +32,92 @@ through daily hands-on work.
 
 ```
 ai-internship-xeven-2026/
+├── README.md                  # Overview + daily progress table
+├── LEARNINGS.md               # Daily ~200-word learning summaries
+├── requirements.txt           # Shared dependencies
+├── .gitignore                 # Ignores logs, __pycache__, scratch files
 │
-├── day01/   Python basics, Git & GitHub setup
-├── day02/   Variables, Data Types, I/O, Type Conversion
-├── day03/   Conditional Statements and Logic
-├── day04/   Operators, Precedence, Type Conversion
-├── day05/   ML Concepts — Supervised, Unsupervised, Decision Trees
-├── day06/   Python Data Structures — Lists
-├── day07/   Week 1 Review and Self-Assessment
-├── day08/   Tuples, Sets, Advanced List Operations
-├── day09/   Dictionaries and Hashmaps
-├── day10/   Dictionaries & JSON
-├── day11/   Loops & Iteration
-├── day12/   Functions Fundamentals
-│
-├── .gitignore
-├── requirements.txt
-├── LEARNINGS.md
-└── README.md
+├── day01/                     # AI fundamentals + environment setup
+│   ├── app.py
+│   ├── day01.ipynb
+│   └── images/                 # Setup verification screenshots
+├── day02/                     # Variables, data types, I/O
+│   ├── calculator.py
+│   ├── data_types.py
+│   ├── input_output.py
+│   ├── type_conversion.py
+│   ├── variables.py
+│   └── day02.ipynb
+├── day03/                     # Conditionals & decision logic
+│   ├── age_verification.py
+│   ├── grade_calculator.py
+│   ├── number_classifier.py
+│   ├── simple_grade_calculator.py
+│   └── day03.ipynb
+├── day04/                     # Operators & precedence
+│   ├── advanced_calculator.py
+│   ├── login_system.py
+│   ├── operator_precedence.py
+│   ├── type_conversion.py
+│   ├── day04_operators_notebook.ipynb
+│   └── practical/
+│       ├── task1_advanced_login.py
+│       └── task2_calculator.py
+├── day05/                     # ML concepts
+│   ├── decision_tree.py
+│   ├── ml_concepts.py
+│   ├── regression_vs_classification.py
+│   ├── day05.ipynb
+│   └── practical_tasks/
+│       ├── decision_tree_simulator.py
+│       └── transcript.md
+├── day06/                     # Lists & list operations
+│   ├── list_basics.py
+│   ├── list_operations.py
+│   ├── student_management.py
+│   ├── day06.ipynb
+│   └── practical_task/
+│       ├── grade_tracker.py
+│       ├── list_slicing.py
+│       └── student_management.py
+├── day07/                     # Week 1 review
+│   └── FEEDBACK_WEEK1.md
+├── day08/                     # Data structures in practice
+│   ├── data_cleaning_pipeline.py
+│   ├── shopping_cart.py
+│   ├── student_grade_manager.py
+│   └── day08.ipynb
+├── day09/                     # Validation & regex
+│   ├── email_validation.py
+│   ├── geographic_coordinates.py
+│   ├── visitor_tracker.py
+│   └── day09.ipynb
+├── day10/                     # Dictionaries & JSON persistence
+│   ├── configuration_manager.py
+│   ├── product_inventory_manager.py
+│   ├── student_information_system.py
+│   ├── *.json                 # Config/inventory/student data files
+│   └── day10.ipynb
+├── day11/                     # Loops & iteration pipelines
+│   ├── data_processing_pipeline.py
+│   ├── number_analysis_system.py
+│   ├── pattern_generators.py
+│   └── day11.ipynb
+├── day12/                     # Functions Fundamentals
+│   ├── math_utils.py
+│   ├── text_processing.py
+│   ├── validators.py
+│   └── day12.ipynb
+└── day13/                     # Advanced Functions
+    ├── flexible_logger.py         # *args/**kwargs logger
+    ├── data_transformer.py        # lambda + map/filter/sorted
+    ├── comprehensions_toolkit.py  # list/dict comprehensions
+    └── day13.ipynb
 ```
+
+Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
+notebook that explains the concepts and demonstrates every task with
+executed output.
 
 ---
 
@@ -70,7 +137,7 @@ ai-internship-xeven-2026/
 | 10 | Dictionaries & JSON | `student_info_system.py`, `inventory_manager.py`, `config_manager.py`, `day10.ipynb` | ✅ Done |
 | 11 | Loops & Iteration | `data_processing_pipeline.py`, `pattern_generators.py`, `number_analysis_system.py`, `day11.ipynb` | ✅ Done |
 | 12 | Functions Fundamentals | `math_utils.py`, `text_processing.py`, `validators.py`, `day12.ipynb` | ✅ Done |
-
+| 13 | Advanced Functions (`*args`/`**kwargs`, lambda, comprehensions) | `day13/flexible_logger.py`, `day13/data_transformer.py`, `day13/comprehensions_toolkit.py`, `day13/day13.ipynb` | ✅ Done |
 ---
 
 ## How to Run

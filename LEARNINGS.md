@@ -193,3 +193,33 @@ ChatGPT (definition & returns), Gemini (argument types), Claude (scope & LEGB), 
 
 ## Personal Insight
 Today crystallized why "one function, one job" matters. Building `process_text()` by chaining small helpers like `remove_punctuation()` and `title_case()` made each piece independently testable and kept the logic readable. The validation suite drove home a second lesson: returning a `(is_valid, error_message)` tuple is cleaner than raising exceptions for ordinary invalid input. Splitting the work across three scripts and using the notebook as documentation made the day feel like real engineering.
+
+---
+
+# Day 13 — Advanced Functions
+
+## What I Learned Today
+Today I moved from defining functions to using them flexibly. I learned
+how `*args` collects extra positional arguments into a tuple and `**kwargs`
+collects keyword arguments into a dict, and that the same `*`/`**` syntax
+also unpacks a list or dict back into a call. I practiced lambda functions
+as short, anonymous callbacks inside `map()`, `filter()`, and `sorted()`,
+and learned to reach for a named `def` whenever the logic grows. I also
+learned list and dictionary comprehensions as concise, faster replacements
+for the build-a-list-in-a-loop pattern, using them to flatten nested lists,
+transpose a matrix, invert a dict, and count word frequency. Benchmarking
+showed the list comprehension running about twice as fast as lambda+map,
+because its loop runs in optimized C with no per-item call overhead.
+
+## Research Sources
+Consulted ChatGPT, Gemini, Claude, and a Real Python article on advanced
+functions (consulted June 13, 2026).
+
+**Clearest Explanation:** Claude — it tied each construct to a concrete
+when-to-use-it rule and explained *why* comprehensions are faster.
+
+## Personal Insight
+The biggest shift was realising these features are about expressing intent
+clearly, not just writing less code. Choosing a comprehension over a loop,
+or a lambda over a full function, is a readability decision as much as a
+performance one — and knowing when *not* to use them is the real skill.
