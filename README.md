@@ -25,6 +25,7 @@ through daily hands-on work.
 - Git and GitHub
 - UV Virtual Environment
 - Jupyter Notebook
+- Groq API (free tier) — Llama 3.3
 
 ---
 
@@ -113,10 +114,15 @@ ai-internship-xeven-2026/
 │   ├── data_transformer.py        # lambda + map/filter/sorted
 │   ├── comprehensions_toolkit.py  # list/dict comprehensions
 │   └── day13.ipynb
-└── day14/                     # Week 2 Review & Mini-Project
-    ├── data_structures_cheatsheet.py  # Task 1: List/Tuple/Set/Dict
-    ├── contact_manager.py             # Task 2: Contact Management System
-    └── day14.ipynb                    # Cheat sheet + live demos
+├── day14/                     # Week 2 Review & Mini-Project
+│   ├── data_structures_cheatsheet.py  # Task 1: List/Tuple/Set/Dict
+│   ├── contact_manager.py             # Task 2: Contact Management System
+│   └── day14.ipynb
+└── day15/                     # Introduction to LLMs — Week 3 Start
+    ├── task1_openai_setup.py      # Basic API call + temperature experiment
+    ├── task2_parameter_exploration.py  # temperature/max_tokens/top_p tests
+    ├── task3_chatbot.py           # Chatbot with history + error handling
+    └── day15.ipynb                # Concepts, research, task demonstrations
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -141,8 +147,10 @@ executed output.
 | 10 | Dictionaries & JSON | `student_info_system.py`, `inventory_manager.py`, `config_manager.py`, `day10.ipynb` | ✅ Done |
 | 11 | Loops & Iteration | `data_processing_pipeline.py`, `pattern_generators.py`, `number_analysis_system.py`, `day11.ipynb` | ✅ Done |
 | 12 | Functions Fundamentals | `math_utils.py`, `text_processing.py`, `validators.py`, `day12.ipynb` | ✅ Done |
-| 13 | Advanced Functions (`*args`/`**kwargs`, lambda, comprehensions) | `day13/flexible_logger.py`, `day13/data_transformer.py`, `day13/comprehensions_toolkit.py`, `day13/day13.ipynb` | ✅ Done |
-| 14 | Week 2 Review & Mini-Project (Contact Management System) | `day14/data_structures_cheatsheet.py`, `day14/contact_manager.py`, `day14/day14.ipynb` | ✅ Done |
+| 13 | Advanced Functions (`*args`/`**kwargs`, lambda, comprehensions) | `flexible_logger.py`, `data_transformer.py`, `comprehensions_toolkit.py`, `day13.ipynb` | ✅ Done |
+| 14 | Week 2 Review & Mini-Project (Contact Management System) | `data_structures_cheatsheet.py`, `contact_manager.py`, `day14.ipynb` | ✅ Done |
+| 15 | Introduction to LLMs — Transformer architecture, API integration, Chatbot | `task1_openai_setup.py`, `task2_parameter_exploration.py`, `task3_chatbot.py`, `day15.ipynb` | ✅ Done |
+
 ---
 
 ## How to Run
@@ -168,14 +176,14 @@ Activate the virtual environment:
 Install dependencies:
 
 ```
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
 
 Run a script:
 
 ```
-cd day12
-python math_utils.py
+cd day15
+python task1_openai_setup.py
 ```
 
 ---

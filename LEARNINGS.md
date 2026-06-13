@@ -253,3 +253,53 @@ Big-O behaviour and flagged the JSON set issue before I hit it.
 Building one system from many small pieces taught me that choosing the
 right data structure upfront is a design decision that shapes how clean
 every later function turns out.
+
+---
+
+# Day 15 — Introduction to Large Language Models
+
+## What I Learned Today
+
+Today began Week 3 (AI & LangChain) with a full deep-dive into Large
+Language Models. I learned how the Transformer architecture processes
+entire sequences in parallel using self-attention, where Query, Key, and
+Value matrices let every token attend to every other token simultaneously
+— solving long-range dependency issues that crippled older RNNs. I
+understood the three training phases: pre-training (learning general
+language from trillions of tokens), supervised fine-tuning (adapting to
+a specific task), and RLHF (aligning outputs to human preferences). On
+the practical side, I integrated the Groq API (free tier, Llama3-8b
+model) and ran three sets of experiments: temperature at 0.0/0.7/1.5
+showing how randomness scales; max_tokens at 15/50/200 confirming that
+finish_reason='length' signals truncation; and top_p at 0.1/0.5/0.9
+demonstrating vocabulary breadth changes. I also built a full chatbot
+with a system message persona (Zara), multi-turn conversation history,
+error handling for rate limits and connection failures, and per-turn
+token tracking. The biggest realisation: LLMs have no internal state —
+the entire conversation history must be re-sent with every API call,
+which directly drives token usage.
+
+## Research Sources
+
+ChatGPT (GPT-4o) via chat.openai.com — API parameter trade-offs;
+Gemini via gemini.google.com — Q/K/V attention visualisation; Claude
+via claude.ai — LLM limitations and RLHF; Jay Alammar, The Illustrated
+Transformer (jalammar.github.io/illustrated-transformer/) and OpenAI
+Tokenizer (platform.openai.com/tokenizer) (consulted June 13, 2026).
+
+**Clearest Explanation:** Jay Alammar's Illustrated Transformer — the
+animated step-by-step diagrams make the Q/K/V attention computation
+intuitive where text descriptions alone leave it abstract.
+
+## Personal Insight
+
+Working with a real LLM API for the first time made everything concrete.
+When I saw finish_reason='length' after setting max_tokens=15 and watched
+the response cut off mid-sentence, the abstract idea of token limits
+became a real engineering constraint. The chatbot task also permanently
+changed how I think about AI memory — there is no magic, just a growing
+list being re-sent every turn. That immediately made me think about
+efficiency: every extra turn costs more tokens. Using Groq's free tier
+also taught me that the API interface is standardised enough that
+switching providers only requires changing three lines of code, which
+shows how well the industry has converged on OpenAI's API structure.
