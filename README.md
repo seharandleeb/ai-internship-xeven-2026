@@ -26,6 +26,8 @@ through daily hands-on work.
 - UV Virtual Environment
 - Jupyter Notebook
 - Groq API (free tier) — Llama 3.3
+- LangChain (LCEL) — chains, document loaders
+- Hugging Face `sentence-transformers` & FAISS — embeddings + semantic search (Day 17)
 
 ---
 
@@ -123,17 +125,30 @@ ai-internship-xeven-2026/
 │   ├── task2_parameter_exploration.py  # temperature/max_tokens/top_p tests
 │   ├── task3_chatbot.py           # Chatbot with history + error handling
 │   └── day15.ipynb                # Concepts, research, task demonstrations
-└── day16/                     # LangChain Setup & First Chains
-    ├── task1_setup_first_chain.py   # ChatGroq setup + first LCEL chain
-    ├── task2_document_loaders.py    # Text/PDF/CSV/Web loaders + generic loader
-    ├── task3_document_qa_chain.py   # Document Q&A chain (LCEL) + context guard
-    ├── day16.ipynb                  # Concepts, research table, task demos
-    └── samples/                     # Auto-created sample.txt / .csv / .pdf
+├── day16/                     # LangChain Setup & First Chains
+│   ├── task1_setup_first_chain.py   # ChatGroq setup + first LCEL chain
+│   ├── task2_document_loaders.py    # Text/PDF/CSV/Web loaders + generic loader
+│   ├── task3_document_qa_chain.py   # Document Q&A chain (LCEL) + context guard
+│   ├── day16.ipynb                  # Concepts, research table, task demos
+│   └── samples/                     # Auto-created sample.txt / .csv / .pdf
+└── day17/                     # Text Embeddings & Semantic Search
+    ├── day17.ipynb                             # Concepts, research table, task demos, FAISS bonus
+    └── scripts/
+        ├── day17_task1_embeddings_compare.py   # cosine from scratch + similarity heatmap
+        ├── day17_task2_semantic_search.py      # 60-sentence semantic search engine
+        ├── day17_task3_document_similarity.py  # clustering + near-duplicate finder + t-SNE
+        └── outputs/                            # Auto-generated heatmap + t-SNE plots
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
 notebook that explains the concepts and demonstrates every task with
 executed output.
+
+> **Day 17 note:** This day uses local embeddings (`sentence-transformers`,
+> model `all-MiniLM-L6-v2`, 384-dim) and FAISS, since Groq has no embeddings
+> endpoint. Run it inside a **Python 3.12** environment — `faiss-cpu` does not
+> yet ship a wheel for Python 3.13. Extra packages: `langchain-huggingface`,
+> `sentence-transformers`, `faiss-cpu`, `scikit-learn`, `matplotlib`.
 
 ---
 
@@ -157,6 +172,7 @@ executed output.
 | 14 | Week 2 Review & Mini-Project (Contact Management System) | `data_structures_cheatsheet.py`, `contact_manager.py`, `day14.ipynb` | ✅ Done |
 | 15 | Introduction to LLMs — Transformer architecture, API integration, Chatbot | `task1_openai_setup.py`, `task2_parameter_exploration.py`, `task3_chatbot.py`, `day15.ipynb` | ✅ Done |
 | 16 | LangChain Setup & First Chains — LCEL, document loaders, Q&A chain | `task1_setup_first_chain.py`, `task2_document_loaders.py`, `task3_document_qa_chain.py`, `day16.ipynb` | ✅ Done |
+| 17 | Text Embeddings & Semantic Search — cosine from scratch, semantic search, clustering & near-duplicate detection | `day17_task1_embeddings_compare.py`, `day17_task2_semantic_search.py`, `day17_task3_document_similarity.py`, `day17.ipynb` | ✅ Done |
 
 ---
 
@@ -192,6 +208,13 @@ Run a script:
 cd day15
 python task1_openai_setup.py
 ```
+
+> **Day 17 only:** create a Python 3.12 environment for the embeddings stack
+> (`uv venv .venv312 --python 3.12`), activate it, then
+> `uv pip install langchain-huggingface sentence-transformers faiss-cpu langchain-community numpy scikit-learn matplotlib`.
+> Run the scripts from inside `day17/scripts/` (they save plots to `outputs/`
+> relative to that folder). The first run downloads the MiniLM model once
+> (~80 MB), then caches it.
 
 ---
 

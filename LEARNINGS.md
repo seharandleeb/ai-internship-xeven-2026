@@ -332,3 +332,35 @@ component's output becomes the next one's input.
 ## Personal Insight
 Truncation is a band-aid; the real fix is retrieval (chunk + embed + vector
 store), which is exactly where the roadmap heads next.
+
+---
+
+# Day 17 — Text Embeddings & Semantic Search
+
+## What I Learned
+Embeddings turn text into dense vectors so that meaning becomes geometry:
+semantically similar sentences land close together in high-dimensional space.
+I implemented cosine similarity from scratch — `(a·b)/(‖a‖‖b‖)` — and used it to
+confirm that *dog* and *puppy* score high while *dog* and *car* score low. I
+built a 60-sentence semantic search engine that ranks results by meaning rather
+than keywords, and a document tool that clusters articles by a cosine threshold
+and flags near-duplicates above 0.95. Since Groq has no embeddings endpoint, I
+used the free local model `all-MiniLM-L6-v2` (384 dims) via
+`langchain-huggingface`, then mirrored the from-scratch search with a real
+FAISS vector store.
+
+## Research Sources (consulted 14 Jun 2026)
+ChatGPT, Gemini, Claude, plus OpenAI's "New embedding models" post and
+Pinecone's "What are Vector Embeddings" article. Full comparison table is in
+`day17.ipynb`.
+
+**Clearest Explanation:** an embedding model maps text to a point in space where
+distance ≈ difference in meaning, so we compare points with cosine similarity.
+
+## Personal Insight
+Seeing the query words *absent* from the top search hits made semantic search
+click — it's matching ideas, not strings. That reframes how I'll build RAG. I
+also learned thresholds are model-dependent: a loose paraphrase scored 0.62
+(related) while a near-identical rewrite scored 0.966 (duplicate), so clustering
+and de-duplication need different cut-offs, and textbook OpenAI-calibrated
+values don't transfer unchanged to a local 384-dim model.
