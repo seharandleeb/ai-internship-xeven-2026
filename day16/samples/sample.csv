@@ -1,0 +1,5 @@
+component,role
+Model,Wraps an LLM behind a common interface
+Prompt,Templates the text sent to the model
+Chain,Composes steps into a workflow with LCEL
+Memory,Persists state across turns

@@ -118,11 +118,17 @@ ai-internship-xeven-2026/
 │   ├── data_structures_cheatsheet.py  # Task 1: List/Tuple/Set/Dict
 │   ├── contact_manager.py             # Task 2: Contact Management System
 │   └── day14.ipynb
-└── day15/                     # Introduction to LLMs — Week 3 Start
-    ├── task1_openai_setup.py      # Basic API call + temperature experiment
-    ├── task2_parameter_exploration.py  # temperature/max_tokens/top_p tests
-    ├── task3_chatbot.py           # Chatbot with history + error handling
-    └── day15.ipynb                # Concepts, research, task demonstrations
+├── day15/                     # Introduction to LLMs — Week 3 Start
+│   ├── task1_openai_setup.py      # Basic API call + temperature experiment
+│   ├── task2_parameter_exploration.py  # temperature/max_tokens/top_p tests
+│   ├── task3_chatbot.py           # Chatbot with history + error handling
+│   └── day15.ipynb                # Concepts, research, task demonstrations
+└── day16/                     # LangChain Setup & First Chains
+    ├── task1_setup_first_chain.py   # ChatGroq setup + first LCEL chain
+    ├── task2_document_loaders.py    # Text/PDF/CSV/Web loaders + generic loader
+    ├── task3_document_qa_chain.py   # Document Q&A chain (LCEL) + context guard
+    ├── day16.ipynb                  # Concepts, research table, task demos
+    └── samples/                     # Auto-created sample.txt / .csv / .pdf
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -150,6 +156,7 @@ executed output.
 | 13 | Advanced Functions (`*args`/`**kwargs`, lambda, comprehensions) | `flexible_logger.py`, `data_transformer.py`, `comprehensions_toolkit.py`, `day13.ipynb` | ✅ Done |
 | 14 | Week 2 Review & Mini-Project (Contact Management System) | `data_structures_cheatsheet.py`, `contact_manager.py`, `day14.ipynb` | ✅ Done |
 | 15 | Introduction to LLMs — Transformer architecture, API integration, Chatbot | `task1_openai_setup.py`, `task2_parameter_exploration.py`, `task3_chatbot.py`, `day15.ipynb` | ✅ Done |
+| 16 | LangChain Setup & First Chains — LCEL, document loaders, Q&A chain | `task1_setup_first_chain.py`, `task2_document_loaders.py`, `task3_document_qa_chain.py`, `day16.ipynb` | ✅ Done |
 
 ---
 
