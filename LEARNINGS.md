@@ -303,3 +303,32 @@ efficiency: every extra turn costs more tokens. Using Groq's free tier
 also taught me that the API interface is standardised enough that
 switching providers only requires changing three lines of code, which
 shows how well the industry has converged on OpenAI's API structure.
+
+---
+
+# Day 16 — LangChain Setup & First Chains
+
+## What I Learned
+LangChain is a framework for building LLM applications: it hides raw API
+plumbing behind reusable components — Models, Prompts, Chains, and Memory. I
+wrapped Groq's `llama-3.3-70b-versatile` with `ChatGroq` and built my first
+chain using **LCEL**, where the `|` operator pipes Runnables into a
+`RunnableSequence` (`prompt | model | parser`). The same pipe gives `.invoke`,
+`.stream`, and `.batch` for free. I practised the four core document loaders —
+`TextLoader`, `PyPDFLoader`, `CSVLoader`, `WebBaseLoader` — and learned they all
+emit the same `Document` shape (`page_content` + `metadata`), which let me write
+one generic `load_any()` dispatcher and a format-agnostic Q&A chain. I also
+added a character budget that truncates oversized documents so I stay inside the
+model's context window.
+
+## Research Sources (consulted 2026-06-14)
+- ChatGPT, Gemini, Claude — concept cross-check (see notebook comparison table)
+- LangChain 1.0 release notes / official docs (release policy, LCEL)
+- A practitioner article on the 1.0 rewrite and package split
+
+**Clearest Explanation:** LCEL is just Unix pipes for LLM steps — each
+component's output becomes the next one's input.
+
+## Personal Insight
+Truncation is a band-aid; the real fix is retrieval (chunk + embed + vector
+store), which is exactly where the roadmap heads next.

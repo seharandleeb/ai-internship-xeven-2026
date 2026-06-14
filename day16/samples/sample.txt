@@ -1,0 +1,3 @@
+LangChain is a framework for building applications powered by large language models.
+It abstracts away raw API complexity behind reusable components: models, prompts, chains and memory.
+Document loaders turn many file formats into a standard Document object so the rest of the pipeline stays format-agnostic.
