@@ -13,7 +13,7 @@ through daily hands-on work.
 | Name       | Sehar Andleeb      |
 | Role       | AI Engineer Intern |
 | Company    | Xeven Solutions    |
-| Duration   | 30 Days            |
+| Duration   | 2 months           |
 | Start Date | June 8, 2026       |
 
 ---
@@ -163,6 +163,22 @@ ai-internship-xeven-2026/
 │   │   ├── task3_entity_extraction.py    # Company→Employee[] + accuracy
 │   │   └── outputs/                       # Auto-generated JSON reports
 │   └── day20.ipynb                        # Theory, research table, demos
+└── day21/                     # Week 3 Review — integrated Document Analyzer
+    ├── day21.ipynb                     # Architecture, live demo, research table
+    ├── architecture.md                 # System diagram + component explanation
+    ├── REFLECTION.md                   # What worked / what I'd do differently
+    ├── FEEDBACK_WEEK3.md               # Feedback received + Week 4 action items
+    ├── LEARNINGS.md                    # ~200-word Day 21 summary
+    └── scripts/
+        ├── document_loader.py          # Load PDF/text + auto-create samples
+        ├── chunker.py                  # RecursiveCharacterTextSplitter (tuned)
+        ├── embeddings_index.py         # MiniLM/offline embeddings + FAISS search
+        ├── entity_extraction.py        # Pydantic v2 + Groq structured output
+        ├── analyzer.py                 # Orchestrates load→chunk→index→search→extract
+        ├── run_demo.py                 # CLI entry point (--live flag)
+        ├── analyze_my_doc.py           # Run the pipeline on your own PDF/text
+        ├── verify_pipeline.py          # 6 offline wiring assertions
+        └── outputs/                    # Auto-generated analysis_report.json
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -201,6 +217,7 @@ executed output.
 | 18 | Text Splitters & Chunking Strategies — fixed vs recursive comparison, optimal chunk-size experiment, smart type-aware processor | `task1_compare_chunking.py`, `task2_chunk_size_experiment.py`, `task3_smart_processor.py`, `day18.ipynb` | ✅ Done |
 | 19 | Prompt Engineering — technique comparison, template library, output control | task1_technique_comparison.py, task2_template_library.py, task3_output_control.py, day19.ipynb | ✅ Done |
 | 20 | Structured Outputs with Pydantic — model suite + validators, LLM→structured pipeline (retry/fallback), nested multi-entity extraction with accuracy scoring | `task1_pydantic_models.py`, `task2_structured_pipeline.py`, `task3_entity_extraction.py`, `day20.ipynb` | ✅ Done |
+| 21 | Week 3 Review — integrated Document Analyzer (load → chunk → FAISS semantic search → Pydantic extraction → report) + technical presentation | `run_demo.py`, `analyzer.py`, `embeddings_index.py`, `entity_extraction.py`, `day21.ipynb` | ✅ Done |
 ---
 
 ## How to Run
@@ -242,6 +259,16 @@ python task1_openai_setup.py
 > Run the scripts from inside `day17/scripts/` (they save plots to `outputs/`
 > relative to that folder). The first run downloads the MiniLM model once
 > (~80 MB), then caches it.
+
+> **Day 21 (integrated Document Analyzer):** use the same Python 3.12 env
+> (`.venv312`). From `day21/scripts/`:
+> `python run_demo.py` runs the pipeline **offline** (deterministic embedder
+> + offline extraction stub, no model download / no API key);
+> `python run_demo.py --live` runs the **real** stack (MiniLM embeddings +
+> Groq `llama-3.3-70b-versatile` structured extraction, needs `GROQ_API_KEY`
+> in a local `.env`); `python verify_pipeline.py` runs the six offline wiring
+> checks; and `python analyze_my_doc.py <file> "<query>"` runs the pipeline
+> on your own PDF/text file. Outputs land in `day21/scripts/outputs/`.
 
 ---
 

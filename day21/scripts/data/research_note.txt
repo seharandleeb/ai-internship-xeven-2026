@@ -1,0 +1,8 @@
+Research Note - Semantic Search Evaluation
+
+Author: Sara Malik
+Organization: Xeven Solutions
+Date: 2026-02-09
+Email: sara.malik@xeven.example.com
+
+We benchmarked the all-MiniLM-L6-v2 embedding model against a larger encoder. The MiniLM model produced 384-dimensional vectors and ran fully offline. Retrieval quality was acceptable for short documents, with a small compute budget of $1,200 spent during the experiment.

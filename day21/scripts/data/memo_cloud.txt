@@ -1,0 +1,10 @@
+Internal Memo - Cloud Migration Initiative
+
+From: Ayesha Khan (Director of Engineering)
+To: Platform Team
+Date: 2026-03-14
+Contact: ayesha.khan@xeven.example.com
+
+The cloud migration project has an approved budget of $250,000 for fiscal year 2026. We will migrate the primary database and the analytics workloads to the new platform.
+
+Vendor evaluation will be led by Bilal Ahmed in coordination with Acme Cloud Services. Please direct billing questions to finance@xeven.example.com before 2026-04-01.

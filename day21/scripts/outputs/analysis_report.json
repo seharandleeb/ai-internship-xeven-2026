@@ -1,0 +1,136 @@
+{
+  "mode": "offline",
+  "corpus": {
+    "num_documents": 3,
+    "total_chars": 1073,
+    "num_chunks": 5,
+    "chunk_size": 400,
+    "chunk_overlap": 60
+  },
+  "semantic_search": {
+    "query": "Who is leading the vendor evaluation?",
+    "top_k": 3,
+    "results": [
+      {
+        "rank": 1,
+        "source": "memo_cloud.txt",
+        "score": 0.2164,
+        "preview": "Internal Memo - Cloud Migration Initiative  From: Ayesha Khan (Director of Engineering) To: Platform Team Date: 2026-03-"
+      },
+      {
+        "rank": 2,
+        "source": "memo_cloud.txt",
+        "score": 0.1571,
+        "preview": "Vendor evaluation will be led by Bilal Ahmed in coordination with Acme Cloud Services. Please direct billing questions t"
+      },
+      {
+        "rank": 3,
+        "source": "research_note.txt",
+        "score": 0.1568,
+        "preview": "We benchmarked the all-MiniLM-L6-v2 embedding model against a larger encoder. The MiniLM model produced 384-dimensional "
+      }
+    ]
+  },
+  "extraction": {
+    "per_document": [
+      {
+        "filename": "memo_cloud.txt",
+        "entities": {
+          "people": [
+            "Ayesha Khan"
+          ],
+          "organizations": [
+            "Acme Cloud Services",
+            "Unverified Holdings"
+          ],
+          "emails": [
+            "ayesha.khan@xeven.example.com",
+            "finance@xeven.example.com"
+          ],
+          "dates": [
+            "2026-03-14",
+            "2026-04-01"
+          ],
+          "monetary_amounts": [
+            "$250,000"
+          ]
+        },
+        "score": {
+          "true_positives": 7,
+          "predicted": 8,
+          "gold": 8,
+          "precision": 0.875,
+          "recall": 0.875,
+          "f1": 0.875
+        }
+      },
+      {
+        "filename": "research_note.txt",
+        "entities": {
+          "people": [
+            "Sara Malik"
+          ],
+          "organizations": [
+            "Xeven Solutions",
+            "Unverified Holdings"
+          ],
+          "emails": [
+            "sara.malik@xeven.example.com"
+          ],
+          "dates": [
+            "2026-02-09"
+          ],
+          "monetary_amounts": [
+            "$1,200"
+          ]
+        },
+        "score": {
+          "true_positives": 5,
+          "predicted": 6,
+          "gold": 5,
+          "precision": 0.8333,
+          "recall": 1.0,
+          "f1": 0.9091
+        }
+      },
+      {
+        "filename": "contract_summary.pdf",
+        "entities": {
+          "people": [
+            "Omar Farooq"
+          ],
+          "organizations": [
+            "Globex Corporation",
+            "Unverified Holdings"
+          ],
+          "emails": [
+            "omar.farooq@globex.example.com"
+          ],
+          "dates": [
+            "2026-01-20"
+          ],
+          "monetary_amounts": [
+            "$48,500"
+          ]
+        },
+        "score": {
+          "true_positives": 5,
+          "predicted": 6,
+          "gold": 5,
+          "precision": 0.8333,
+          "recall": 1.0,
+          "f1": 0.9091
+        }
+      }
+    ],
+    "micro_precision": 0.85,
+    "micro_recall": 0.9444,
+    "micro_f1": 0.8947
+  },
+  "cost_estimate": {
+    "provider": "Groq free tier",
+    "charge_usd": 0.0,
+    "approx_input_tokens": 269,
+    "note": "Approximate; ~4 chars/token. Free tier = no $."
+  }
+}
