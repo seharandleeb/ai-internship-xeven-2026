@@ -1,0 +1,30 @@
+[
+  {
+    "task": "summarization",
+    "rendered_system": "You are a concise technical summarizer. Preserve key facts and numbers. Never invent information not present in the source.",
+    "rendered_user": "Summarize the text below.\nText: Groq serves the Llama 3.3 70B model at very high tokens per second on its LPU hardware.\nOutput format: two bullet points\nConstraints: max 25 words total; no marketing language",
+    "unfilled": [],
+    "valid": true
+  },
+  {
+    "task": "extraction",
+    "rendered_system": "You are an information-extraction engine. Return only data that is explicitly stated. If a field is missing, use null.",
+    "rendered_user": "Extract the requested fields from the text.\nText: Marie Curie won the Nobel Prize in Physics in 1903.\nOutput format: JSON with keys name, prize, year\nConstraints: year must be an integer; use null if unknown\nExamples: {\"name\": \"...\", \"prize\": \"...\", \"year\": 0}",
+    "unfilled": [],
+    "valid": true
+  },
+  {
+    "task": "generation",
+    "rendered_system": "You are a creative but on-brief content generator. Follow the format and constraints exactly; do not exceed limits.",
+    "rendered_user": "Generate content for the following brief.\nBrief: A launch tweet for a free prompt-engineering workshop.\nOutput format: single tweet\nConstraints: under 280 characters; one emoji max; include a CTA",
+    "unfilled": [],
+    "valid": true
+  },
+  {
+    "task": "analysis",
+    "rendered_system": "You are an analytical assistant. Support each claim with evidence from the text and state uncertainty where it exists.",
+    "rendered_user": "Analyze the text and answer the prompt.\nText: Few-shot raised our classifier accuracy from 0.72 to 0.86.\nOutput format: one short paragraph then a 'Confidence:' line\nConstraints: state the percentage-point gain explicitly",
+    "unfilled": [],
+    "valid": true
+  }
+]

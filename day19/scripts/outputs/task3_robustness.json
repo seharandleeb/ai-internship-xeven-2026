@@ -1,0 +1,72 @@
+[
+  {
+    "case": "json_clean",
+    "passed": true,
+    "valid": true,
+    "detail": "ok"
+  },
+  {
+    "case": "json_fenced",
+    "passed": true,
+    "valid": true,
+    "detail": "ok"
+  },
+  {
+    "case": "json_with_prose",
+    "passed": true,
+    "valid": true,
+    "detail": "ok"
+  },
+  {
+    "case": "json_wrong_type",
+    "passed": true,
+    "valid": false,
+    "detail": [
+      "key 'age' should be integer"
+    ]
+  },
+  {
+    "case": "json_missing_key",
+    "passed": true,
+    "valid": false,
+    "detail": [
+      "missing required key: age"
+    ]
+  },
+  {
+    "case": "table_good",
+    "passed": true,
+    "valid": true,
+    "detail": "valid table with 3 columns, 2 rows"
+  },
+  {
+    "case": "table_single_row",
+    "passed": true,
+    "valid": true,
+    "detail": "valid table with 3 columns, 1 rows"
+  },
+  {
+    "case": "table_ragged_row",
+    "passed": true,
+    "valid": false,
+    "detail": "row 3 has wrong column count"
+  },
+  {
+    "case": "table_missing_separator",
+    "passed": true,
+    "valid": false,
+    "detail": "separator row is malformed"
+  },
+  {
+    "case": "code_documented",
+    "passed": true,
+    "valid": true,
+    "detail": "checked def/docstring/hint"
+  },
+  {
+    "case": "code_no_docstring",
+    "passed": true,
+    "valid": false,
+    "detail": "checked def/docstring/hint"
+  }
+]

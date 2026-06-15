@@ -144,6 +144,20 @@ ai-internship-xeven-2026/
 │   │   ├── task2_chunk_size_experiment.py
 │   │   └── task3_smart_processor.py
 │   └── day18.ipynb
+├── day19/
+│   ├── day19.ipynb
+│   ├── LEARNINGS.md
+│   └── scripts/
+│       ├── task1_technique_comparison.py
+│       ├── task2_template_library.py
+│       ├── task3_output_control.py
+│       └── outputs/
+│           ├── task1_results.json
+│           ├── prompt_templates.json
+│           ├── task2_render_report.json
+│           └── task3_robustness.json
+│
+│
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -180,7 +194,7 @@ executed output.
 | 16 | LangChain Setup & First Chains — LCEL, document loaders, Q&A chain | `task1_setup_first_chain.py`, `task2_document_loaders.py`, `task3_document_qa_chain.py`, `day16.ipynb` | ✅ Done |
 | 17 | Text Embeddings & Semantic Search — cosine from scratch, semantic search, clustering & near-duplicate detection | `day17_task1_embeddings_compare.py`, `day17_task2_semantic_search.py`, `day17_task3_document_similarity.py`, `day17.ipynb` | ✅ Done |
 | 18 | Text Splitters & Chunking Strategies — fixed vs recursive comparison, optimal chunk-size experiment, smart type-aware processor | `task1_compare_chunking.py`, `task2_chunk_size_experiment.py`, `task3_smart_processor.py`, `day18.ipynb` | ✅ Done |
-
+| 19 | Prompt Engineering — technique comparison, template library, output control | task1_technique_comparison.py, task2_template_library.py, task3_output_control.py, day19.ipynb | ✅ Done |
 ---
 
 ## How to Run

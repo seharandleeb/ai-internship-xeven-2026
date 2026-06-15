@@ -399,3 +399,36 @@ fit the actual model. A ~0.45 similarity cutoff is "on topic" for
 `all-MiniLM-L6-v2`, where textbook 0.9 returns nothing. Chunking is a
 design choice, not preprocessing — overlap is the cheap insurance that
 keeps an idea alive when it straddles a boundary.
+
+---
+
+# Day 19 — Prompt Engineering Mastery
+
+## What I Learned
+I compared three prompting techniques on a 3-class sentiment task (20
+labeled samples) and measured each on accuracy, latency, and approximate
+token cost. On the live Groq run, zero-shot scored 90%, few-shot 100%, and
+CoT 95% — few-shot gave the biggest lift while CoT cost ~2x the tokens and
+latency for no gain here. **Zero-shot** is the cheapest baseline and enough
+for easy, common tasks. **Few-shot** (3 examples) is the biggest practical lever: it
+locks the output format and lifts consistency on borderline cases.
+**Chain-of-Thought** adds reasoning steps that help ambiguous inputs but
+costs more tokens and latency, so I reserve it for hard cases. I built a
+JSON prompt-template library for summarization, extraction, generation, and
+analysis — each with a system message, a `{text}/{format}/{constraints}/`
+`{examples}` user template, and an output spec — then wrote a renderer that
+only fills known placeholders so JSON braces survive. For output control I
+wrote validators (schema check, markdown-table checker, code-gen check) and
+proved them on 11 good/edge/malformed cases. Everything uses LangChain LCEL
+(`prompt | model | parser`) with `ChatGroq`, key read from `.env`.
+
+## Research Sources (consulted 15 Jun 2026)
+ChatGPT, Gemini, Claude, plus DAIR Prompt Engineering Guide, IBM Think
+(zero-shot), and DigitalOcean prompt-engineering best practices.
+
+**Clearest Explanation:** DigitalOcean — vague asks yield vague output;
+specificity plus format and constraints is most of the battle.
+
+## Personal Insight
+Validators matter more than clever prompts: a strict schema turns a flaky
+model into a dependable component, because bad output is caught, not shipped.

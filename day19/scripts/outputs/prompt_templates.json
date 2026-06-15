@@ -1,0 +1,31 @@
+{
+  "summarization": {
+    "system": "You are a concise technical summarizer. Preserve key facts and numbers. Never invent information not present in the source.",
+    "user": "Summarize the text below.\nText: {text}\nOutput format: {format}\nConstraints: {constraints}",
+    "examples": []
+  },
+  "extraction": {
+    "system": "You are an information-extraction engine. Return only data that is explicitly stated. If a field is missing, use null.",
+    "user": "Extract the requested fields from the text.\nText: {text}\nOutput format: {format}\nConstraints: {constraints}\nExamples: {examples}",
+    "examples": [
+      {
+        "text": "Ada Lovelace, born 1815 in London.",
+        "fields": {
+          "name": "Ada Lovelace",
+          "year": 1815,
+          "city": "London"
+        }
+      }
+    ]
+  },
+  "generation": {
+    "system": "You are a creative but on-brief content generator. Follow the format and constraints exactly; do not exceed limits.",
+    "user": "Generate content for the following brief.\nBrief: {text}\nOutput format: {format}\nConstraints: {constraints}",
+    "examples": []
+  },
+  "analysis": {
+    "system": "You are an analytical assistant. Support each claim with evidence from the text and state uncertainty where it exists.",
+    "user": "Analyze the text and answer the prompt.\nText: {text}\nOutput format: {format}\nConstraints: {constraints}",
+    "examples": []
+  }
+}
