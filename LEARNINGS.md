@@ -364,3 +364,38 @@ also learned thresholds are model-dependent: a loose paraphrase scored 0.62
 (related) while a near-identical rewrite scored 0.966 (duplicate), so clustering
 and de-duplication need different cut-offs, and textbook OpenAI-calibrated
 values don't transfer unchanged to a local 384-dim model.
+
+---
+
+# Day 18 — Text Splitters & Chunking Strategies
+
+## What I Learned
+Chunking is the step that decides how good retrieval can ever be — it
+runs right before the Day 17 embedding + FAISS stage. I learned why we
+chunk (LLM context limits, embedding-model input caps, and retrieval
+precision) and compared four strategies: fixed-size, sentence-based,
+recursive, and semantic. I built three things: a comparison of
+`CharacterTextSplitter` (blunt fixed 500-char cuts) vs
+`RecursiveCharacterTextSplitter` (500/50, structure-aware); a chunk-size
+experiment across 200/500/1000/2000 chars measuring chunk count and
+vector-store footprint; and a smart processor that detects document
+type and routes `.md` to `MarkdownHeaderTextSplitter`, `.py` to
+`PythonCodeTextSplitter`, and prose to the recursive splitter, attaching
+source/section/token metadata to every chunk. Real result: the fixed
+splitter cut 2 of 5 chunks mid-word; recursive cut 0 of 6. Storage fell
+from ~26 KB (200 chars) to ~3 KB (2000 chars) on the same document.
+
+## Research Sources (consulted 15 Jun 2026)
+ChatGPT, Gemini, Claude, plus Firecrawl's 2026 chunking guide and
+Weaviate's RAG chunking guide. Full comparison table is in the notebook.
+
+**Clearest Explanation:** Start with recursive splitting at ~400–512
+tokens and 10–20% overlap; only reach for semantic chunking once you've
+measured that the simple default is the bottleneck. (Firecrawl)
+
+## Personal Insight
+The threshold lesson from Day 17 carried straight over: parameters must
+fit the actual model. A ~0.45 similarity cutoff is "on topic" for
+`all-MiniLM-L6-v2`, where textbook 0.9 returns nothing. Chunking is a
+design choice, not preprocessing — overlap is the cheap insurance that
+keeps an idea alive when it straddles a boundary.

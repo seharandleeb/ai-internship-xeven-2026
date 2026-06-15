@@ -132,12 +132,18 @@ ai-internship-xeven-2026/
 │   ├── day16.ipynb                  # Concepts, research table, task demos
 │   └── samples/                     # Auto-created sample.txt / .csv / .pdf
 └── day17/                     # Text Embeddings & Semantic Search
-    ├── day17.ipynb                             # Concepts, research table, task demos, FAISS bonus
-    └── scripts/
-        ├── day17_task1_embeddings_compare.py   # cosine from scratch + similarity heatmap
-        ├── day17_task2_semantic_search.py      # 60-sentence semantic search engine
-        ├── day17_task3_document_similarity.py  # clustering + near-duplicate finder + t-SNE
-        └── outputs/                            # Auto-generated heatmap + t-SNE plots
+│   ├── day17.ipynb                             # Concepts, research table, task demos, FAISS bonus
+│   └── scripts/
+│      ├── day17_task1_embeddings_compare.py   # cosine from scratch + similarity heatmap
+│      ├── day17_task2_semantic_search.py      # 60-sentence semantic search engine
+│      ├── day17_task3_document_similarity.py  # clustering + near-duplicate finder + t-SNE
+│      └── outputs/                            # Auto-generated heatmap + t-SNE plots
+├── day18/
+│   ├── scripts/
+│   │   ├── task1_compare_chunking.py
+│   │   ├── task2_chunk_size_experiment.py
+│   │   └── task3_smart_processor.py
+│   └── day18.ipynb
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -173,6 +179,7 @@ executed output.
 | 15 | Introduction to LLMs — Transformer architecture, API integration, Chatbot | `task1_openai_setup.py`, `task2_parameter_exploration.py`, `task3_chatbot.py`, `day15.ipynb` | ✅ Done |
 | 16 | LangChain Setup & First Chains — LCEL, document loaders, Q&A chain | `task1_setup_first_chain.py`, `task2_document_loaders.py`, `task3_document_qa_chain.py`, `day16.ipynb` | ✅ Done |
 | 17 | Text Embeddings & Semantic Search — cosine from scratch, semantic search, clustering & near-duplicate detection | `day17_task1_embeddings_compare.py`, `day17_task2_semantic_search.py`, `day17_task3_document_similarity.py`, `day17.ipynb` | ✅ Done |
+| 18 | Text Splitters & Chunking Strategies — fixed vs recursive comparison, optimal chunk-size experiment, smart type-aware processor | `task1_compare_chunking.py`, `task2_chunk_size_experiment.py`, `task3_smart_processor.py`, `day18.ipynb` | ✅ Done |
 
 ---
 
