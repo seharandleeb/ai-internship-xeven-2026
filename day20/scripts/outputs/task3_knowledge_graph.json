@@ -1,0 +1,62 @@
+{
+  "NimbusAI": {
+    "location": "Lahore, PK",
+    "employees": {
+      "Ayesha Tariq": {
+        "title": "ML Engineer",
+        "department": "Research",
+        "skills": [
+          "pytorch",
+          "nlp",
+          "mlops"
+        ]
+      },
+      "Bilal Sheikh": {
+        "title": "Data Engineer",
+        "department": "Platform",
+        "skills": [
+          "spark",
+          "airflow",
+          "sql"
+        ]
+      }
+    }
+  },
+  "Cobalt Robotics": {
+    "location": "Austin, US",
+    "employees": {
+      "Dana Reyes": {
+        "title": "Robotics Lead",
+        "department": "Hardware",
+        "skills": [
+          "ros",
+          "control-systems",
+          "c++"
+        ]
+      },
+      "Evan Park": {
+        "title": "Perception Engineer",
+        "department": "Vision",
+        "skills": [
+          "opencv",
+          "slam",
+          "python"
+        ]
+      }
+    }
+  },
+  "Larkspur Health": {
+    "location": "Berlin, DE",
+    "employees": {
+      "Farah Noor": {
+        "title": "Clinical NLP Scientist",
+        "department": "Research",
+        "skills": [
+          "transformers",
+          "ehr",
+          "python"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "total_cases": 7,
+  "cases_behaving_as_expected": 7,
+  "results": [
+    {
+      "case": "Person: valid",
+      "expected": "pass",
+      "outcome": "constructed",
+      "behaved_as_expected": true,
+      "detail": {
+        "name": "Sehar",
+        "age": 22,
+        "email": "sehar@example.com",
+        "hobbies": [
+          "reading",
+          "coding"
+        ]
+      }
+    },
+    {
+      "case": "Person: bad email format",
+      "expected": "fail",
+      "outcome": "ValidationError",
+      "behaved_as_expected": true,
+      "detail": "Value error, email is not a valid address"
+    },
+    {
+      "case": "Person: age == 0",
+      "expected": "fail",
+      "outcome": "ValidationError",
+      "behaved_as_expected": true,
+      "detail": "Value error, age must be greater than 0"
+    },
+    {
+      "case": "Person: negative age",
+      "expected": "fail",
+      "outcome": "ValidationError",
+      "behaved_as_expected": true,
+      "detail": "Value error, age must be greater than 0"
+    },
+    {
+      "case": "Product: valid",
+      "expected": "pass",
+      "outcome": "constructed",
+      "behaved_as_expected": true,
+      "detail": {
+        "id": 1,
+        "name": "Keyboard",
+        "price": 49.99,
+        "in_stock": true,
+        "tags": [
+          "peripherals"
+        ]
+      }
+    },
+    {
+      "case": "Product: price == 0 (boundary, allowed)",
+      "expected": "pass",
+      "outcome": "constructed",
+      "behaved_as_expected": true,
+      "detail": {
+        "id": 2,
+        "name": "Free sample",
+        "price": 0.0,
+        "in_stock": true,
+        "tags": []
+      }
+    },
+    {
+      "case": "Product: negative price",
+      "expected": "fail",
+      "outcome": "ValidationError",
+      "behaved_as_expected": true,
+      "detail": "Value error, price must be >= 0"
+    }
+  ]
+}

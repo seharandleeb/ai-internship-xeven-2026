@@ -432,3 +432,45 @@ specificity plus format and constraints is most of the battle.
 ## Personal Insight
 Validators matter more than clever prompts: a strict schema turns a flaky
 model into a dependable component, because bad output is caught, not shipped.
+
+---
+
+# Day 20 — Structured Outputs with Pydantic
+
+## What I Learned
+Pydantic is the bridge between an LLM's free text and my code. A model
+always returns a string — even when I ask for JSON — so I need something
+that validates that string against a schema and fails loudly when it
+doesn't fit. I built two `BaseModel` classes (`Person`, `Product`) and
+added Pydantic v2 `@field_validator`s for email format (a regex, to
+avoid the extra `email-validator` dependency), age > 0, and price >= 0.
+Valid data constructs cleanly; bad data raises `ValidationError` with a
+clear message. I then wired a real pipeline using
+`ChatGroq(...).with_structured_output(Article)` (LangChain 1.x), and
+learned that the hard part isn't the happy path — it's handling failure:
+retry on a validation error, then fall back to a default object and log
+it. Finally I did nested extraction (`Company` → `Employee[]`), built a
+small knowledge graph, and scored it against gold labels with
+precision / recall / F1, which forced me to think about over- vs
+under-extraction, not just "did it work".
+
+## Research Sources (consulted 2026-06-15)
+ChatGPT, Gemini, Claude, plus two articles: *The Complete Guide to Using
+Pydantic for Validating LLM Outputs* (MachineLearningMastery, Dec 2025)
+and *Validations in Pydantic V2* (Towards Data Science). Full comparison
+table is in `day20.ipynb`.
+
+**Clearest Explanation:** An LLM always hands you a string; Pydantic is
+the gate that turns that string into a typed, trusted object — or tells
+you exactly why it can't.
+
+## Personal Insight
+The bit that clicked: `with_structured_output()` doesn't *guarantee*
+perfect data, it just *shapes* it. On my live Groq run the model parsed
+the clean sample data perfectly (Task 2: 12/12, Task 3: 100%, 25/25), so
+the retry and fallback never fired — but that reliability only holds
+because those safeguards exist around the call. To prove they actually
+work, I built an offline version that injects known failures, so I could
+watch a retry recover, a fallback kick in, and the accuracy metric run
+on imperfect data instead of a clean 100%. Building the failure cases
+myself taught me more than the successful run did.

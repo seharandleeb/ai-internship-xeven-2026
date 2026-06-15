@@ -156,8 +156,13 @@ ai-internship-xeven-2026/
 │           ├── prompt_templates.json
 │           ├── task2_render_report.json
 │           └── task3_robustness.json
-│
-│
+├── day20/                     # Structured Outputs with Pydantic
+│   ├── scripts/
+│   │   ├── task1_pydantic_models.py      # Person/Product + validators
+│   │   ├── task2_structured_pipeline.py  # Article pipeline (retry/fallback)
+│   │   ├── task3_entity_extraction.py    # Company→Employee[] + accuracy
+│   │   └── outputs/                       # Auto-generated JSON reports
+│   └── day20.ipynb                        # Theory, research table, demos
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -195,6 +200,7 @@ executed output.
 | 17 | Text Embeddings & Semantic Search — cosine from scratch, semantic search, clustering & near-duplicate detection | `day17_task1_embeddings_compare.py`, `day17_task2_semantic_search.py`, `day17_task3_document_similarity.py`, `day17.ipynb` | ✅ Done |
 | 18 | Text Splitters & Chunking Strategies — fixed vs recursive comparison, optimal chunk-size experiment, smart type-aware processor | `task1_compare_chunking.py`, `task2_chunk_size_experiment.py`, `task3_smart_processor.py`, `day18.ipynb` | ✅ Done |
 | 19 | Prompt Engineering — technique comparison, template library, output control | task1_technique_comparison.py, task2_template_library.py, task3_output_control.py, day19.ipynb | ✅ Done |
+| 20 | Structured Outputs with Pydantic — model suite + validators, LLM→structured pipeline (retry/fallback), nested multi-entity extraction with accuracy scoring | `task1_pydantic_models.py`, `task2_structured_pipeline.py`, `task3_entity_extraction.py`, `day20.ipynb` | ✅ Done |
 ---
 
 ## How to Run

@@ -1,0 +1,194 @@
+[
+  {
+    "index": 0,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Groq Posts Record Low-Latency Inference",
+      "author": "A. Khan",
+      "published_date": "2026-02-10",
+      "summary": "Groq reported a new throughput record for its LPU stack.",
+      "tags": [
+        "hardware",
+        "inference",
+        "llm"
+      ]
+    }
+  },
+  {
+    "index": 1,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "LangChain 1.x Lands Structured Output",
+      "author": "M. Rivera",
+      "published_date": "2026-01-22",
+      "summary": "The 1.x line stabilises with_structured_output across models.",
+      "tags": [
+        "langchain",
+        "tooling",
+        "llm"
+      ]
+    }
+  },
+  {
+    "index": 2,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Pydantic v2 Speeds Validation",
+      "author": "T. Osei",
+      "published_date": "2025-11-30",
+      "summary": "The Rust core keeps Python ergonomics while cutting overhead.",
+      "tags": [
+        "python",
+        "validation",
+        "pydantic"
+      ]
+    }
+  },
+  {
+    "index": 3,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Small Models Close the Gap",
+      "author": "L. Conti",
+      "published_date": "2026-03-05",
+      "summary": "Distilled models rival larger ones on narrow tasks.",
+      "tags": [
+        "llm",
+        "benchmarks",
+        "efficiency"
+      ]
+    }
+  },
+  {
+    "index": 4,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Vector Stores Go Mainstream",
+      "author": "R. Patel",
+      "published_date": "2026-02-18",
+      "summary": "Teams adopt managed vector stores for retrieval pipelines.",
+      "tags": [
+        "rag",
+        "vector-db",
+        "retrieval"
+      ]
+    }
+  },
+  {
+    "index": 5,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Eval Harnesses Get Serious",
+      "author": "S. Nguyen",
+      "published_date": "2026-01-09",
+      "summary": "Reproducible eval suites become a release gate.",
+      "tags": [
+        "evaluation",
+        "llm",
+        "quality"
+      ]
+    }
+  },
+  {
+    "index": 6,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Function Calling Standardises",
+      "author": "D. Mwangi",
+      "published_date": "2025-12-14",
+      "summary": "Tool schemas converge across major providers.",
+      "tags": [
+        "tooling",
+        "api",
+        "llm"
+      ]
+    }
+  },
+  {
+    "index": 7,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "On-Device Inference Matures",
+      "author": "K. Larsson",
+      "published_date": "2026-03-21",
+      "summary": "Quantised models run comfortably on consumer hardware.",
+      "tags": [
+        "edge",
+        "inference",
+        "mobile"
+      ]
+    }
+  },
+  {
+    "index": 8,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Data Contracts Reach LLM Apps",
+      "author": "P. Haddad",
+      "published_date": "2026-02-02",
+      "summary": "Typed contracts cut silent failures in production apps.",
+      "tags": [
+        "data",
+        "schema",
+        "reliability"
+      ]
+    }
+  },
+  {
+    "index": 9,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Observability for LLM Pipelines",
+      "author": "J. Fischer",
+      "published_date": "2026-01-27",
+      "summary": "Tracing spans now cover prompt, tool, and parse stages.",
+      "tags": [
+        "observability",
+        "ops",
+        "llm"
+      ]
+    }
+  },
+  {
+    "index": 10,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Prompt Templating Best Practice",
+      "author": "N. Abebe",
+      "published_date": "2026-03-11",
+      "summary": "Reusable templates reduce drift across a codebase.",
+      "tags": [
+        "prompting",
+        "langchain",
+        "llm"
+      ]
+    }
+  },
+  {
+    "index": 11,
+    "used_default": false,
+    "attempts": 1,
+    "article": {
+      "title": "Structured Logs Aid Debugging",
+      "author": "C. Romero",
+      "published_date": "2026-02-25",
+      "summary": "Structured logs make extraction failures easy to trace.",
+      "tags": [
+        "logging",
+        "ops",
+        "python"
+      ]
+    }
+  }
+]

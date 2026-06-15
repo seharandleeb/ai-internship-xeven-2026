@@ -1,0 +1,8 @@
+{
+  "field_accuracy": 1.0,
+  "correct_facts": 25,
+  "total_facts": 25,
+  "skill_precision": 1.0,
+  "skill_recall": 1.0,
+  "skill_f1": 1.0
+}
