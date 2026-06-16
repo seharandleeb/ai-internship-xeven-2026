@@ -1,0 +1,27 @@
+Day 18 - Task 1: Chunking Method Comparison
+================================================
+Source length: 2314 characters
+
+[CharacterTextSplitter (fixed 500, no overlap)]
+  chunks .............. 5
+  avg chunk length .... 462.0 chars
+  min / max length .... 312 / 500
+  broken boundaries ... 2 (chunks ending mid-word)
+
+[RecursiveCharacterTextSplitter (500, 50 overlap)]
+  chunks .............. 6
+  avg chunk length .... 383.8 chars
+  min / max length .... 285 / 446
+  broken boundaries ... 0 (chunks ending mid-word)
+
+First chunk - CharacterTextSplitter (fixed 500, no overlap):
+  ...'dware.\n\nSelf-attention works by projecting each token into t'...
+First chunk - RecursiveCharacterTextSplitter (500/50):
+  ...'t makes the\narchitecture scale so well on parallel hardware.'...
+
+Finding:
+  The fixed-size splitter cuts at exactly 500 characters, so it
+  slices through words wherever they happen to fall. The
+  recursive splitter prefers paragraph/line/word breaks, so
+  no chunk is cut mid-word and meaning is preserved. The
+  50-char overlap also carries context across boundaries.

@@ -474,3 +474,32 @@ work, I built an offline version that injects known failures, so I could
 watch a retry recover, a fallback kick in, and the accuracy metric run
 on imperfect data instead of a clean 100%. Building the failure cases
 myself taught me more than the successful run did.
+
+---
+
+# Day 21 — Week 3 Review: Integrated Document Analyzer
+
+## What I Learned
+Today was about integration, not new theory. I combined Day 17
+embeddings, Day 18 chunking, and Day 20 Pydantic extraction into one
+pipeline split across small modules, each owning a single concern. The
+biggest practical lesson was tuning to my own data: I swept chunk sizes
+256/400/512 instead of copying a textbook number, and found that smaller
+chunks scored higher but fragmented more, so 400/60 was the balance. I
+also learned to make accuracy honest — injecting known errors so the
+micro-F1 (0.8947) actually means something instead of a fake 100%.
+
+## Research Sources (consulted 2026-06-15)
+ChatGPT, Gemini, Claude, and Firecrawl's "Best Chunking Strategies for
+RAG (and LLMs) in 2026."
+
+**Clearest Explanation:** Firecrawl's benchmark — recursive 512-token
+splitting ranked first, and metadata enrichment lifted QA accuracy 15–25
+points with no architecture change — reframed chunking as the
+highest-ROI lever, not an afterthought.
+
+## Personal Insight
+The clearest moment was when my query "who is leading…" ranked the right
+chunk second under the offline lexical embedder — it matched words, not
+meaning. That one result taught me why semantic embeddings exist better
+than any reading could.

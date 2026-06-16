@@ -1,0 +1,20 @@
+Day 18 - Task 2: Optimal Chunk Size Experiment
+================================================
+Source length: 2206 characters
+Embedding model: all-MiniLM-L6-v2 (384-dim float32)
+
+size   overlap  n_chunks  avg_len    storage      retr_score
+------------------------------------------------------------
+200    20       17        128.4      26112 B      0.458
+500    50       6         365.8      9216 B       0.484
+1000   100      3         733.7      4608 B       0.355
+2000   200      2         1101.5     3072 B       0.230
+
+Recommendation: chunk_size=500 -- highest mean top-1 similarity (0.484), above the tuned 0.45 relevance line.
+
+Reading the trade-off:
+  Smaller sizes make more, tighter chunks (more storage,
+  higher precision, less context per hit). Larger sizes
+  make fewer, broader chunks (less storage, more context,
+  lower precision). 500 chars is the usual sweet spot for
+  short articles like this one.

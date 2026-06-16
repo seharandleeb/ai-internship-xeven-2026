@@ -1,0 +1,41 @@
+Attention Is All You Need: A Plain-Language Overview
+
+Transformer models replaced recurrent networks as the backbone of
+modern natural language processing. Instead of reading a sequence one
+token at a time, a transformer looks at every token at once and learns
+which other tokens each position should pay attention to. This is the
+self-attention mechanism, and it is the single idea that makes the
+architecture scale so well on parallel hardware.
+
+Self-attention works by projecting each token into three vectors: a
+query, a key, and a value. The query of one token is compared against
+the keys of every token to produce a set of weights. Those weights are
+used to take a weighted average of the value vectors. Tokens that are
+relevant to each other end up with high weights, so information flows
+directly between distant words without passing through many
+intermediate steps.
+
+Positional encodings are added because attention itself is
+order-agnostic. Without them the sentence order would be lost.
+Sinusoidal or learned position vectors give the model a sense of
+sequence so word order is preserved across the whole input.
+
+Large language models have a fixed context window, so you cannot paste
+an entire book into a single prompt. Retrieval-augmented generation
+solves this by storing document chunks as embeddings, searching for the
+chunks most relevant to a question, and feeding only those chunks to
+the model. The quality of that pipeline depends heavily on how the
+document was split in the first place.
+
+If chunks are too large, a single chunk mixes several topics and the
+embedding becomes a blurry average that matches nothing precisely. If
+chunks are too small, each chunk is precise but loses the surrounding
+context needed to answer real questions. Overlap between consecutive
+chunks softens this trade-off by repeating a few sentences at every
+boundary, so an idea that straddles two chunks survives in at least one
+of them.
+
+The practical takeaway is that chunking is a design decision. A blunt
+fixed-size cut is fast but slices sentences in half, while a recursive
+splitter that prefers paragraph and sentence boundaries keeps ideas
+intact and is the pragmatic default for most documents.

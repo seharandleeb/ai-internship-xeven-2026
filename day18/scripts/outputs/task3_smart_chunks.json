@@ -1,0 +1,58 @@
+[
+  {
+    "text": "Morning Routines That Actually Stick\n\nMost advice about morning routines fails because it asks for too much\nchange at once. The trick is to anchor one tiny new habit to something\nyou already do without thinking. If you always make coffee, stretch\nwhile it brews. The existing habit becomes the trigger for the new one.",
+    "source": "sample_note.txt",
+    "type": "text",
+    "section": "(none)",
+    "est_tokens": 80
+  },
+  {
+    "text": "Consistency beats intensity. A two-minute routine you keep every day\nshapes your behaviour more than an hour-long routine you abandon after\na week. Start small enough that skipping feels harder than doing it.",
+    "source": "sample_note.txt",
+    "type": "text",
+    "section": "(none)",
+    "est_tokens": 52
+  },
+  {
+    "text": "Welcome to the project. This guide gets you running locally.",
+    "source": "sample_guide.md",
+    "type": "markdown",
+    "section": "Project Setup Guide",
+    "est_tokens": 15
+  },
+  {
+    "text": "Create a virtual environment and install the dependencies. The project\nuses UV for fast, reproducible installs.",
+    "source": "sample_guide.md",
+    "type": "markdown",
+    "section": "Project Setup Guide > Installation",
+    "est_tokens": 28
+  },
+  {
+    "text": "You need Python 3.12 and a Groq API key in a local .env file.",
+    "source": "sample_guide.md",
+    "type": "markdown",
+    "section": "Project Setup Guide > Installation > Requirements",
+    "est_tokens": 15
+  },
+  {
+    "text": "Run the main script from the project root. Outputs are written to the\noutputs folder, which is created automatically on first run.",
+    "source": "sample_guide.md",
+    "type": "markdown",
+    "section": "Project Setup Guide > Usage",
+    "est_tokens": 32
+  },
+  {
+    "text": "\"\"\"A tiny utility module used as a code-splitting sample.\"\"\"\n\n\ndef greet(name):\n    \"\"\"Return a friendly greeting for the given name.\"\"\"\n    return \"Hello, %s!\" % name\n\n\ndef add(a, b):\n    \"\"\"Return the sum of two numbers.\"\"\"\n    return a + b",
+    "source": "sample_module.py",
+    "type": "code",
+    "section": "def greet, def add",
+    "est_tokens": 60
+  },
+  {
+    "text": "class Counter:\n    \"\"\"A minimal counter with increment and reset.\"\"\"\n\n    def __init__(self):\n        self.value = 0\n\n    def increment(self):\n        \"\"\"Add one to the current value.\"\"\"\n        self.value += 1\n        return self.value\n\n    def reset(self):\n        \"\"\"Reset the counter back to zero.\"\"\"\n        self.value = 0",
+    "source": "sample_module.py",
+    "type": "code",
+    "section": "class Counter, def __init__, def increment, def reset",
+    "est_tokens": 82
+  }
+]
