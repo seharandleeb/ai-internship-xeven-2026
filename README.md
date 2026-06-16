@@ -180,6 +180,17 @@ ai-internship-xeven-2026/
         ├── analyze_my_doc.py           # Run the pipeline on your own PDF/text
         ├── verify_pipeline.py          # 6 offline wiring assertions
         └── outputs/                    # Auto-generated analysis_report.json
+├── day22/
+│   ├── scripts/
+│   │   ├── task1_faiss_operations.py
+│   │   ├── task2_document_library.py
+│   │   ├── task3_vector_store_comparison.py
+│   │   └── outputs/
+│   │       ├── task1/faiss_index/
+│   │       ├── task2/stats.json
+│   │       └── task3/comparison_report.json
+│   ├── day22.ipynb
+
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -219,6 +230,7 @@ executed output.
 | 19 | Prompt Engineering — technique comparison, template library, output control | task1_technique_comparison.py, task2_template_library.py, task3_output_control.py, day19.ipynb | ✅ Done |
 | 20 | Structured Outputs with Pydantic — model suite + validators, LLM→structured pipeline (retry/fallback), nested multi-entity extraction with accuracy scoring | `task1_pydantic_models.py`, `task2_structured_pipeline.py`, `task3_entity_extraction.py`, `day20.ipynb` | ✅ Done |
 | 21 | Week 3 Review — integrated Document Analyzer (load → chunk → FAISS semantic search → Pydantic extraction → report) + technical presentation | `run_demo.py`, `analyzer.py`, `embeddings_index.py`, `entity_extraction.py`, `day21.ipynb` | ✅ Done |
+| 22 | Vector Stores & Databases — FAISS operations, document library with metadata, FAISS vs Chroma comparison | `task1_faiss_operations.py`, `task2_document_library.py`, `task3_vector_store_comparison.py`, `day22.ipynb` | ✅ Done |
 ---
 
 ## How to Run

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Internship Dashboard — Sehar Andleeb</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- ── SIDEBAR ─────────────────────────────────────── -->
+<aside class="sidebar">
+<div class="sidebar-header">
+    <div class="avatar">SA</div>
+    <div>
+    <p class="name">Sehar Andleeb</p>
+    <p class="role">AI Engineer Intern</p>
+<p class="company">Xeven Solutions</p>
+    </div>
+</div>
+<nav class="sidebar-nav">
+    <button class="nav-btn active" onclick="showSection('overview')">
+<span class="nav-icon">◈</span> Overview
+    </button>
+    <button class="nav-btn" onclick="showSection('progress')">
+<span class="nav-icon">◉</span> Daily Progress
+    </button>
+    <button class="nav-btn" onclick="showSection('search')">
+<span class="nav-icon">◎</span> Vector Search
+    </button>
+    <button class="nav-btn" onclick="showSection('benchmark')">
+    <span class="nav-icon">◐</span> Benchmarks
+    </button>
+</nav>
+
+<div class="sidebar-footer">
+    <div class="progress-ring-wrap">
+    <svg viewBox="0 0 80 80" width="80" height="80">
+        <circle cx="40" cy="40" r="32" fill="none" stroke="#1e293b" stroke-width="6"/>
+        <circle cx="40" cy="40" r="32" fill="none" stroke="#3B82F6"
+        stroke-width="6" stroke-linecap="round"
+          stroke-dasharray="{{ (done / total * 201.1) | round(1) }} 201.1"
+        transform="rotate(-90 40 40)"/>
+        <text x="40" y="36" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="600">{{ done }}</text>
+        <text x="40" y="50" text-anchor="middle" fill="#64748b" font-size="9">of {{ total }}</text>
+    </svg>
+    <p class="ring-label">Days complete</p>
+    </div>
+</div>
+</aside>
+
+<!-- ── MAIN CONTENT ────────────────────────────────── -->
+<main class="main">
+
+<!-- OVERVIEW SECTION -->
+<section id="section-overview" class="section active">
+    <h1 class="page-title">Overview</h1>
+
+    <div class="stat-grid">
+    <div class="stat-card">
+        <p class="stat-label">Days Done</p>
+        <p class="stat-val">{{ done }}</p>
+        <p class="stat-sub">of {{ total }} total</p>
+    </div>
+    <div class="stat-card">
+        <p class="stat-label">Current Day</p>
+        <p class="stat-val">22</p>
+        <p class="stat-sub">Vector Stores</p>
+    </div>
+    </div>
+    <div class="stat-card">
+        <p class="stat-label">FAISS Latency</p>
+        <p class="stat-val blue">0.10ms</p>
+        <p class="stat-sub">per query</p>
+    </div>
+    <div class="stat-card">
+        <p class="stat-label">Docs Indexed</p>
+        <p class="stat-val">83</p>
+        <p class="stat-sub">chunks from 70 docs</p>
+    </div>
+    </div>
+
+    <h2 class="section-heading">Day 22 — What was built</h2>
+    <div class="task-grid">
+    {% for day in days if day.day == 22 %}
+        {% for task in day.tasks %}
+        <div class="task-card">
+        <span class="task-check">✓</span>
+        <span class="task-text">{{ task }}</span>
+        </div>
+        {% endfor %}
+{% endfor %}
+    </div>
+
+    <h2 class="section-heading" style="margin-top:2rem">Stack used today</h2>
+    <div class="stack-row">
+    <span class="pill pill-blue">Python 3.12</span>
+    <span class="pill pill-blue">Python 3.12</span>
+    <span class="pill pill-blue">FAISS</span>
+    <span class="pill pill-blue">Chroma</span>
+    <span class="pill pill-green">all-MiniLM-L6-v2</span>
+    <span class="pill pill-green">LangChain</span>
+    <span class="pill pill-amber">.venv312</span>
+    <span class="pill pill-amber">uv</span>
+    <span class="pill pill-gray">Flask</span>
+    </div>
+</section>
+
+<!-- DAILY PROGRESS SECTION -->
+<section id="section-progress" class="section">
+    <h1 class="page-title">Daily Progress</h1>
+    <p class="page-sub">Click any day to see its details</p>
+
+    <div class="days-grid">
+{% for day in days %}
+<div class="day-card {{ day.status }}" onclick="showDay({{ day.day }})">
+        <div class="day-num">Day {{ day.day }}</div>
+        <div class="day-topic">{{ day.topic }}</div>
+        <div class="day-badge {{ day.status }}">
+        {% if day.status == 'done' %}✓ Done{% else %}Pending{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Day detail panel -->
+    <div id="day-detail" class="day-detail hidden">
+      <button class="close-btn" onclick="closeDetail()">✕ Close</button>
+      <h2 id="detail-title" class="detail-title"></h2>
+      <p id="detail-highlight" class="detail-highlight"></p>
+      <ul id="detail-tasks" class="detail-tasks"></ul>
+    </div>
+  </section>
+
+  <!-- VECTOR SEARCH SECTION -->
+  <section id="section-search" class="section">
+    <h1 class="page-title">Vector Search</h1>
+    <p class="page-sub">Test the Day 22 document library — 70 docs, 7 topics</p>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput"
+        placeholder="e.g. How does FAISS handle similarity search?"
+        onkeydown="if(event.key==='Enter') runSearch()">
+      <button class="search-btn" onclick="runSearch()">Search</button>
+    </div>
+
+    <div class="filter-row">
+      <span class="filter-label">Filter by topic:</span>
+      <select id="topicSelect" class="topic-select">
+        <option value="all">All topics</option>
+        <option value="Machine Learning">Machine Learning</option>
+        <option value="Deep Learning">Deep Learning</option>
+        <option value="NLP">NLP</option>
+        <option value="Vector Databases">Vector Databases</option>
+        <option value="RAG">RAG</option>
+        <option value="AI Ethics">AI Ethics</option>
+        <option value="AI Tools">AI Tools</option>
+      </select>
+    </div>
+
+    <div id="search-status" class="search-status hidden"></div>
+    <div id="search-results" class="results-list"></div>
+  </section>
+
+  <!-- BENCHMARK SECTION -->
+  <section id="section-benchmark" class="section">
+    <h1 class="page-title">Benchmarks</h1>
+    <p class="page-sub">Real numbers from Day 22 sandbox runs</p>
+
+    <!-- Task 1 -->
+    <div class="bench-card">
+      <div class="bench-header">
+        <span class="bench-title">Task 1 — FAISS Basic Operations</span>
+        <span class="badge-pass">✓ Passed</span>
+      </div>
+      <div class="bench-grid">
+        <div class="bench-stat">
+          <p class="bs-label">Documents</p>
+          <p class="bs-val">12</p>
+        </div>
+        <div class="bench-stat">
+          <p class="bs-label">Index time</p>
+          <p class="bs-val">~0.8ms</p>
+        </div>
+        <div class="bench-stat">
+          <p class="bs-label">Avg latency</p>
+          <p class="bs-val blue">0.13ms</p>
+        </div>
+        <div class="bench-stat">
+          <p class="bs-label">50 queries total</p>
+          <p class="bs-val">6.6ms</p>
+        </div>
+      </div>
+      <div class="bar-section">
+        <div class="bar-row">
+          <span class="bar-label">Search latency</span>
+          <div class="bar-track"><div class="bar-fill" style="width:13%"></div></div>
+          <span class="bar-val">0.13ms</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">50 queries</span>
+          <div class="bar-track"><div class="bar-fill" style="width:66%"></div></div>
+          <span class="bar-val">6.6ms</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task 2 -->
+    <div class="bench-card">
+      <div class="bench-header">
+        <span class="bench-title">Task 2 — Document Library (83 chunks)</span>
+        <span class="badge-pass">✓ Passed</span>
+      </div>
+      <div class="bench-grid">
+        <div class="bench-stat">
+          <p class="bs-label">Documents</p>
+          <p class="bs-val">70</p>
+        </div>
+        <div class="bench-stat">
+          <p class="bs-label">Chunks</p>
+          <p class="bs-val">83</p>
+        </div>
+        <div class="bench-stat">
+          <p class="bs-label">Chunk size</p>
+          <p class="bs-val">800c</p>
+        </div>
+        <div class="bench-stat">
+          <p class="bs-label">Avg latency</p>
+          <p class="bs-val blue">0.08ms</p>
+        </div>
+      </div>
+      <div class="bar-section">
+        <div class="bar-row">
+          <span class="bar-label">Chunking time</span>
+          <div class="bar-track"><div class="bar-fill purple" style="width:90%"></div></div>
+          <span class="bar-val">476ms</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Index time</span>
+          <div class="bar-track"><div class="bar-fill purple" style="width:3%"></div></div>
+          <span class="bar-val">12ms</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Search latency</span>
+          <div class="bar-track"><div class="bar-fill purple" style="width:1%"></div></div>
+          <span class="bar-val">0.08ms</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task 3 -->
+    <div class="bench-card">
+      <div class="bench-header">
+        <span class="bench-title">Task 3 — FAISS vs Chroma (60 docs)</span>
+        <span class="badge-pass">✓ Passed</span>
+      </div>
+      <div class="compare-table">
+        <div class="ct-row header">
+          <div class="ct-cell">Metric</div>
+          <div class="ct-cell blue-text">FAISS</div>
+          <div class="ct-cell amber-text">Chroma</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell">Index time</div>
+          <div class="ct-cell winner">0.21s ✓</div>
+          <div class="ct-cell">0.29s</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell">Peak memory</div>
+          <div class="ct-cell">5.49 MB</div>
+          <div class="ct-cell winner">1.19 MB ✓</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell">Query latency</div>
+          <div class="ct-cell winner">0.10 ms ✓</div>
+          <div class="ct-cell">0.98 ms</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell">Persistence</div>
+          <div class="ct-cell muted">Manual</div>
+          <div class="ct-cell winner">Built-in ✓</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell">Metadata filter</div>
+          <div class="ct-cell muted">External dict</div>
+          <div class="ct-cell winner">Native ✓</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell">Topic overlap</div>
+          <div class="ct-cell" colspan="2" style="text-align:center">
+            Jaccard = 1.00 — identical top-5 topics
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ── Navigation ───────────────────────────────────────
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ── Day detail ───────────────────────────────────────
+function showDay(dayNum) {
+  fetch('/api/day/' + dayNum)
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById('detail-title').textContent =
+        'Day ' + d.day + ' — ' + d.topic;
+      document.getElementById('detail-highlight').textContent =
+        d.highlight;
+      const ul = document.getElementById('detail-tasks');
+      ul.innerHTML = d.tasks.map(t => '<li>' + t + '</li>').join('');
+      document.getElementById('day-detail').classList.remove('hidden');
+    });
+}
+
+function closeDetail() {
+  document.getElementById('day-detail').classList.add('hidden');
+}
+
+// ── Search ───────────────────────────────────────────
+function runSearch() {
+  const query = document.getElementById('searchInput').value.trim();
+  const topic = document.getElementById('topicSelect').value;
+  if (!query) return;
+
+  const status = document.getElementById('search-status');
+  const results = document.getElementById('search-results');
+  status.textContent = 'Searching…';
+  status.classList.remove('hidden');
+  results.innerHTML = '';
+
+  fetch('/api/search', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, topic })
+  })
+  .then(r => r.json())
+  .then(data => {
+    status.textContent =
+      data.results.length + ' results · ' + data.latency_ms + ' ms';
+
+    const topicColors = {
+      'Machine Learning': 'pill-blue',
+      'Deep Learning':    'pill-blue',
+      'NLP':              'pill-green',
+      'Vector Databases': 'pill-amber',
+      'RAG':              'pill-amber',
+      'AI Ethics':        'pill-red',
+      'AI Tools':         'pill-gray',
+    };
+
+    results.innerHTML = data.results.map((r, i) => `
+      <div class="result-item">
+        <div class="result-top">
+          <span class="result-rank">${i + 1}</span>
+          <span class="pill ${topicColors[r.topic] || 'pill-gray'}">
+            ${r.topic}
+          </span>
+          <span class="result-score">score ${r.score.toFixed(4)}</span>
+        </div>
+        <p class="result-text">${r.text}</p>
+      </div>
+    `).join('');
+  })
+  .catch(() => {
+    status.textContent = 'Error — is app.py running?';
+  });
+}
+</script>
+</body>
+</html>

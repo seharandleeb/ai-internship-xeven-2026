@@ -1,0 +1,24 @@
+{
+  "n_docs": 60,
+  "faiss": {
+    "index_time_s": 1.3166,
+    "peak_memory_mb": 5.47,
+    "avg_query_latency_ms": 0.17,
+    "index_type": "IndexFlatIP (cosine via L2 normalisation)",
+    "persistence": "manual (faiss.write_index)",
+    "metadata_support": "external dict / pickle"
+  },
+  "chroma": {
+    "index_time_s": 1.9321,
+    "peak_memory_mb": 1.2,
+    "avg_query_latency_ms": 2.33,
+    "index_type": "HNSW via hnswlib",
+    "persistence": "built-in (SQLite + Parquet)",
+    "metadata_support": "native with MongoDB-style filters"
+  },
+  "topic_overlap_jaccard": 1.0,
+  "findings": {
+    "FAISS": "Lower overhead, no persistent layer by default, best for in-process or research use. Manual index save/load via write_index. No built-in metadata filtering \u2014 requires external lookup map. Extremely fast for exact search on small-medium datasets.",
+    "Chroma": "Full-featured vector database with native persistence, rich metadata filtering ($eq, $in, $gte), and LangChain/LlamaIndex integration out of the box. Uses HNSW for ANN search. Higher overhead than FAISS for pure vector ops but far simpler for RAG pipelines."
+  }
+}

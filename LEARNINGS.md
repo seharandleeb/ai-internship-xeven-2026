@@ -503,3 +503,29 @@ The clearest moment was when my query "who is leading…" ranked the right
 chunk second under the offline lexical embedder — it matched words, not
 meaning. That one result taught me why semantic embeddings exist better
 than any reading could.
+
+---
+
+# Day 22 — Vector Stores & Databases
+
+## What I Learned
+
+Today I worked with FAISS and Chroma hands-on across three tasks, moving from basic index operations all the way to a quantitative benchmark comparison between two real vector store systems.
+
+**Task 1** taught me the full FAISS lifecycle: creating an `IndexFlatIP` store, adding documents with L2 normalisation (so inner-product equals cosine similarity), querying K nearest neighbours with scores, soft-deleting via an external lookup map, and persisting the index to disk with `faiss.write_index` / `faiss.read_index`. The biggest insight was that FAISS has no built-in delete — you maintain an external dictionary and remove entries from it. The actual vectors stay in the index but become unreachable.
+
+**Task 2** scaled this to a real document library: 70 documents across 7 topics (ML, DL, NLP, Vector DBs, RAG, AI Tools, AI Ethics), chunked with `RecursiveCharacterTextSplitter` at 800 chars / 100 overlap → 83 chunks. I implemented metadata filtering by over-fetching k×10 results from FAISS then post-filtering by topic or source in Python. Indexing took 0.012s and average query latency was 0.08 ms.
+
+**Task 3** was the most eye-opening: running the exact same 60 documents through both FAISS and Chroma and measuring everything. FAISS indexed in 0.21s vs Chroma's 0.29s. FAISS averaged 0.10 ms/query vs Chroma's 0.98 ms — nearly 10× faster. But Chroma wins on developer experience: built-in persistence, native metadata filtering with `$eq` and `$in`, and LangChain integration out of the box. Topic overlap Jaccard was 1.0 — both systems returned the same top-5 topics, just in slightly different order.
+
+**Clearest Explanation:** FAISS is a C++ library you wire up yourself — maximum speed, zero extras. Chroma is a full vector database — slightly slower but handles storage, filtering, and retrieval together. Use FAISS for speed and research; use Chroma when building a production RAG pipeline.
+
+## Research Sources
+
+- Johnson et al., "Billion-scale similarity search with GPUs" — FAISS original paper (consulted June 2026)
+- Chroma documentation — docs.trychroma.com (consulted June 2026)
+- ChatGPT, Gemini, Claude — cross-referenced explanations of ANN algorithms (June 2026)
+
+## Personal Insight
+
+The deletion problem in FAISS was the most interesting edge case of the day. `IndexFlatIP` has no remove operation — you either rebuild the entire index or accept ghost entries. In a production RAG system where documents get updated or deleted frequently, this is a real problem. Chroma's native delete (backed by SQLite) handles this cleanly. This single difference — more than query speed — is why I would choose Chroma for any real application and FAISS only for research or benchmarking.
