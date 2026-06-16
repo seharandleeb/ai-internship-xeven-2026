@@ -170,6 +170,7 @@ ai-internship-xeven-2026/
     ├── FEEDBACK_WEEK3.md               # Feedback received + Week 4 action items
     ├── LEARNINGS.md                    # ~200-word Day 21 summary
     └── scripts/
+│       ├── app.py                  ← Streamlit UI (what you run)    
         ├── document_loader.py          # Load PDF/text + auto-create samples
         ├── chunker.py                  # RecursiveCharacterTextSplitter (tuned)
         ├── embeddings_index.py         # MiniLM/offline embeddings + FAISS search
