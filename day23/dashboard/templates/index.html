@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Day 23 — RAG Pipeline Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-title">Day 23<br/><small>RAG Dashboard</small></div>
+  <button class="tab-btn active" onclick="showTab('task1')">
+    Task 1<br/><small>Simple RAG</small>
+  </button>
+  <button class="tab-btn" onclick="showTab('task2')">
+    Task 2<br/><small>Enhanced RAG</small>
+  </button>
+  <button class="tab-btn" onclick="showTab('task3')">
+    Task 3<br/><small>Multi-Doc RAG</small>
+  </button>
+  <div class="sidebar-footer">Xeven Solutions<br/>AI Internship 2026</div>
+</div>
+
+<div class="main">
+
+  <!-- TASK 1 -->
+  <div id="task1" class="tab-content active">
+    <div class="card-header">
+      <h2>Task 1 — Simple RAG Pipeline</h2>
+      <p>Ask a question. The pipeline retrieves relevant document chunks
+         and generates a grounded answer.</p>
+    </div>
+    <div class="card">
+      <label>Your Question</label>
+      <input type="text" id="t1-query"
+        placeholder="e.g. What is Retrieval-Augmented Generation?"
+        onkeydown="if(event.key==='Enter') runTask1()"/>
+      <button class="btn" onclick="runTask1()">Ask</button>
+    </div>
+    <div id="t1-result" class="result hidden">
+      <div class="answer-box">
+        <h3>Answer</h3>
+        <p id="t1-answer"></p>
+      </div>
+      <div class="meta-row">
+        <span class="badge" id="t1-latency"></span>
+        <span class="badge" id="t1-chunks"></span>
+      </div>
+      <h3>Source Chunks Used</h3>
+      <div id="t1-sources"></div>
+    </div>
+    <div id="t1-error" class="error hidden"></div>
+    <div id="t1-loader" class="loader hidden">Querying RAG pipeline...</div>
+  </div>
+
+  <!-- TASK 2 -->
+  <div id="task2" class="tab-content hidden">
+    <div class="card-header">
+      <h2>Task 2 — Enhanced RAG with Custom Prompts</h2>
+      <p>Test strict mode (refuses out-of-context) vs detailed mode
+         (cites sources explicitly).</p>
+    </div>
+    <div class="card">
+      <label>Your Question</label>
+      <input type="text" id="t2-query"
+        placeholder="e.g. What is the capital of France?"
+        onkeydown="if(event.key==='Enter') runTask2()"/>
+      <label>Prompt Mode</label>
+      <select id="t2-mode">
+        <option value="strict">
+          Strict — Refuse if not in context
+        </option>
+        <option value="detailed">
+          Detailed — Cite sources explicitly
+        </option>
+      </select>
+      <button class="btn" onclick="runTask2()">Ask</button>
+    </div>
+    <div id="t2-result" class="result hidden">
+      <div class="answer-box">
+        <h3>Answer</h3>
+        <p id="t2-answer"></p>
+      </div>
+      <div class="meta-row">
+        <span class="badge" id="t2-latency"></span>
+        <span class="badge" id="t2-mode-badge"></span>
+        <span class="badge" id="t2-ctx-badge"></span>
+      </div>
+      <h3>Sources Retrieved</h3>
+      <div id="t2-sources"></div>
+    </div>
+    <div id="t2-error" class="error hidden"></div>
+    <div id="t2-loader" class="loader hidden">
+      Querying enhanced RAG...
+    </div>
+  </div>
+
+  <!-- TASK 3 -->
+  <div id="task3" class="tab-content hidden">
+    <div class="card-header">
+      <h2>Task 3 — Multi-Document RAG System</h2>
+      <p>Query across PDF, website, and text sources.
+         Filter by source type or search all.</p>
+    </div>
+    <div class="card">
+      <label>Your Question</label>
+      <input type="text" id="t3-query"
+        placeholder="e.g. How do neural networks relate to Python?"
+        onkeydown="if(event.key==='Enter') runTask3()"/>
+      <label>Source Filter</label>
+      <select id="t3-filter">
+        <option value="all">All Sources</option>
+        <option value="pdf">PDF only</option>
+        <option value="website">Website only</option>
+        <option value="text">Text only</option>
+      </select>
+      <button class="btn" onclick="runTask3()">Ask</button>
+    </div>
+    <div id="t3-result" class="result hidden">
+      <div class="answer-box">
+        <h3>Answer</h3>
+        <p id="t3-answer"></p>
+      </div>
+      <div class="meta-row">
+        <span class="badge" id="t3-latency"></span>
+        <span class="badge" id="t3-filter-badge"></span>
+        <span class="badge" id="t3-chunks"></span>
+      </div>
+      <h3>Sources with Relevance Scores</h3>
+      <div id="t3-sources"></div>
+    </div>
+    <div id="t3-error" class="error hidden"></div>
+    <div id="t3-loader" class="loader hidden">
+      Querying multi-doc RAG...
+    </div>
+  </div>
+
+</div><!-- end main -->
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => {
+    el.classList.add('hidden');
+    el.classList.remove('active');
+  });
+  document.querySelectorAll('.tab-btn').forEach(el => {
+    el.classList.remove('active');
+  });
+  document.getElementById(name).classList.remove('hidden');
+  document.getElementById(name).classList.add('active');
+  event.target.closest('.tab-btn').classList.add('active');
+}
+
+function setLoading(task, on) {
+  document.getElementById('t'+task+'-loader').classList
+    .toggle('hidden', !on);
+  if (on) {
+    document.getElementById('t'+task+'-result').classList
+      .add('hidden');
+    document.getElementById('t'+task+'-error').classList
+      .add('hidden');
+  }
+}
+
+function showError(task, msg) {
+  const el = document.getElementById('t'+task+'-error');
+  el.textContent = 'Error: ' + msg;
+  el.classList.remove('hidden');
+}
+
+async function runTask1() {
+  const query = document.getElementById('t1-query').value.trim();
+  if (!query) return;
+  setLoading(1, true);
+  try {
+    const res = await fetch('/api/task1', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({query})
+    });
+    const data = await res.json();
+    if (data.error) { showError(1, data.error); return; }
+
+    document.getElementById('t1-answer').textContent = data.answer;
+    document.getElementById('t1-latency').textContent =
+      'Latency: ' + data.latency_ms + ' ms';
+    document.getElementById('t1-chunks').textContent =
+      'Chunks: ' + data.chunk_count;
+
+    const srcDiv = document.getElementById('t1-sources');
+    srcDiv.innerHTML = data.sources.map(s =>
+      `<div class="source-card">
+        <strong>${s.source}</strong>
+        <p>${s.snippet}</p>
+      </div>`
+    ).join('');
+
+    document.getElementById('t1-result').classList.remove('hidden');
+  } catch(e) {
+    showError(1, e.message);
+  } finally {
+    setLoading(1, false);
+  }
+}
+
+async function runTask2() {
+  const query = document.getElementById('t2-query').value.trim();
+  const mode = document.getElementById('t2-mode').value;
+  if (!query) return;
+  setLoading(2, true);
+  try {
+    const res = await fetch('/api/task2', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({query, mode})
+    });
+    const data = await res.json();
+    if (data.error) { showError(2, data.error); return; }
+
+    document.getElementById('t2-answer').textContent = data.answer;
+    document.getElementById('t2-latency').textContent =
+      'Latency: ' + data.latency_ms + ' ms';
+    document.getElementById('t2-mode-badge').textContent =
+      'Mode: ' + data.mode;
+    document.getElementById('t2-ctx-badge').textContent =
+      data.not_in_context ? 'REFUSED (out of context)' : 'Answered';
+    document.getElementById('t2-ctx-badge').style.background =
+      data.not_in_context ? '#e74c3c' : '#27ae60';
+
+    const srcDiv = document.getElementById('t2-sources');
+    srcDiv.innerHTML = data.sources.map(s =>
+      `<div class="source-card"><strong>${s}</strong></div>`
+    ).join('');
+
+    document.getElementById('t2-result').classList.remove('hidden');
+  } catch(e) {
+    showError(2, e.message);
+  } finally {
+    setLoading(2, false);
+  }
+}
+
+async function runTask3() {
+  const query = document.getElementById('t3-query').value.trim();
+  const source_filter = document.getElementById('t3-filter').value;
+  if (!query) return;
+  setLoading(3, true);
+  try {
+    const res = await fetch('/api/task3', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({query, source_filter})
+    });
+    const data = await res.json();
+    if (data.error) { showError(3, data.error); return; }
+
+    document.getElementById('t3-answer').textContent = data.answer;
+    document.getElementById('t3-latency').textContent =
+      'Latency: ' + data.latency_ms + ' ms';
+    document.getElementById('t3-filter-badge').textContent =
+      'Filter: ' + data.source_filter;
+    document.getElementById('t3-chunks').textContent =
+      'Chunks searched: ' + data.chunk_count;
+
+    const srcDiv = document.getElementById('t3-sources');
+    srcDiv.innerHTML = data.sources.map(s =>
+      `<div class="source-card">
+        <div class="source-meta">
+          <span class="type-badge ${s.source_type}">
+            ${s.source_type.toUpperCase()}
+          </span>
+          <strong>${s.source}</strong>
+          <span class="score">Score: ${s.relevance_score}</span>
+        </div>
+        <p>${s.snippet}</p>
+      </div>`
+    ).join('');
+
+    document.getElementById('t3-result').classList.remove('hidden');
+  } catch(e) {
+    showError(3, e.message);
+  } finally {
+    setLoading(3, false);
+  }
+}
+</script>
+</body>
+</html>

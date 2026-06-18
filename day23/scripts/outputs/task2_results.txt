@@ -1,0 +1,37 @@
+Day 23 - Task 2: Enhanced RAG Results
+============================================================
+
+NORMAL QUERIES
+----------------------------------------
+Q: What is RAG and how does it reduce hallucinations?
+A: According to the context provided, RAG reduces hallucinations by grounding the Large Language Model (LLM) in retrieved context. Unfortunately, the context does not provide a detailed explanation of what RAG stands for or its inner workings. However, based on external knowledge, RAG is likely an acronym for "Retrieval-Augmented Generation," a technique used in natural language processing to improve the performance of language models (this information is not from the provided context, but it can be found in various external documents and research papers on the topic of artificial intelligence and natural language processing).
+
+As stated in the context, RAG's primary function is to reduce hallucinations by grounding the LLM in retrieved context (information from the context). Hallucinations, in this context, refer to instances where a language model generates text that is not based on any actual input or context, but rather on the model's own biases or inaccuracies. By retrieving relevant context and using it to inform the generation of text, RAG helps to mitigate this issue and produce more accurate and reliable output (this explanation is based on general knowledge of the topic and not explicitly stated in the provided context).
+
+It's worth noting that the provided context does not offer a detailed explanation of RAG or its mechanisms. For more information on RAG and its applications, it would be necessary to consult external documents or research papers on the subject (information from the context).
+Sources: rag_overview.txt, ai_basics.txt, python_guide.txt
+Latency: 1582.1 ms
+
+Q: What programming paradigms does Python support?
+A: According to the provided context from the document, Python supports multiple programming paradigms, including procedural, object-oriented, and functional programming (as stated in the document). This information came from the document that describes Python as a high-level, interpreted programming language. 
+
+To elaborate, procedural programming is a paradigm that focuses on procedures or steps that a program should take to achieve a specific goal. Object-oriented programming, on the other hand, organizes software design around data, or objects, rather than functions and logic. Functional programming is a paradigm that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data.
+
+This versatility in programming paradigms is one of the reasons why Python is a popular choice among developers, as it allows them to choose the best approach for their specific problem or project. The document highlights Python's simplicity and readability, as well as its rich ecosystem of libraries, which further contributes to its widespread adoption.
+Sources: rag_overview.txt, ai_basics.txt, python_guide.txt
+Latency: 1064.3 ms
+
+EDGE CASE QUERIES
+----------------------------------------
+Q: What is the capital city of France?
+A: I don't have that information in the provided context.
+Correctly refused: True | Latency: 382.4 ms
+
+Q: Who invented the telephone?
+A: I don't have that information in the provided context.
+Correctly refused: True | Latency: 364.9 ms
+
+Q: What is the price of Bitcoin today?
+A: I don't have that information in the provided context.
+Correctly refused: True | Latency: 472.7 ms
+

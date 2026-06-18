@@ -1,0 +1,21 @@
+Day 23 - Task 1: Simple RAG Pipeline Results
+============================================================
+
+Query 1: What is Retrieval-Augmented Generation?
+Answer: Retrieval-Augmented Generation (RAG) combines document retrieval with language model generation, where it indexes documents, retrieves relevant chunks for a query, and passes them to a language model to generate an answer, reducing hallucinations by grounding the model in retrieved context.
+Sources: rag_overview.txt, ai_basics.txt, python_guide.txt
+Latency: 659.3 ms
+----------------------------------------
+
+Query 2: What is PEP 8 in Python?
+Answer: PEP 8 is the style guide for Python code.
+Sources: rag_overview.txt, ai_basics.txt, python_guide.txt
+Latency: 593.9 ms
+----------------------------------------
+
+Query 3: How does deep learning work?
+Answer: Deep learning uses neural networks with many layers to model complex patterns.
+Sources: rag_overview.txt, ai_basics.txt, python_guide.txt
+Latency: 338.8 ms
+----------------------------------------
+
