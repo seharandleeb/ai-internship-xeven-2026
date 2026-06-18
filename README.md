@@ -28,6 +28,7 @@ through daily hands-on work.
 - Groq API (free tier) — Llama 3.3
 - LangChain (LCEL) — chains, document loaders
 - Hugging Face `sentence-transformers` & FAISS — embeddings + semantic search (Day 17)
+- FastAPI + Uvicorn — REST APIs, Pydantic validation, Swagger docs (Day 24)
 
 ---
 
@@ -163,23 +164,23 @@ ai-internship-xeven-2026/
 │   │   ├── task3_entity_extraction.py    # Company→Employee[] + accuracy
 │   │   └── outputs/                       # Auto-generated JSON reports
 │   └── day20.ipynb                        # Theory, research table, demos
-└── day21/                     # Week 3 Review — integrated Document Analyzer
-    ├── day21.ipynb                     # Architecture, live demo, research table
-    ├── architecture.md                 # System diagram + component explanation
-    ├── REFLECTION.md                   # What worked / what I'd do differently
-    ├── FEEDBACK_WEEK3.md               # Feedback received + Week 4 action items
-    ├── LEARNINGS.md                    # ~200-word Day 21 summary
-    └── scripts/
-│       ├── app.py                  ← Streamlit UI (what you run)    
-        ├── document_loader.py          # Load PDF/text + auto-create samples
-        ├── chunker.py                  # RecursiveCharacterTextSplitter (tuned)
-        ├── embeddings_index.py         # MiniLM/offline embeddings + FAISS search
-        ├── entity_extraction.py        # Pydantic v2 + Groq structured output
-        ├── analyzer.py                 # Orchestrates load→chunk→index→search→extract
-        ├── run_demo.py                 # CLI entry point (--live flag)
-        ├── analyze_my_doc.py           # Run the pipeline on your own PDF/text
-        ├── verify_pipeline.py          # 6 offline wiring assertions
-        └── outputs/                    # Auto-generated analysis_report.json
+├── day21/                     # Week 3 Review — integrated Document Analyzer
+│   ├── day21.ipynb                     # Architecture, live demo, research table
+│   ├── architecture.md                 # System diagram + component explanation
+│   ├── REFLECTION.md                   # What worked / what I'd do differently
+│   ├── FEEDBACK_WEEK3.md               # Feedback received + Week 4 action items
+│   ├── LEARNINGS.md                    # ~200-word Day 21 summary
+│   └── scripts/
+│       ├── app.py                  ← Streamlit UI (what you run)
+│       ├── document_loader.py          # Load PDF/text + auto-create samples
+│       ├── chunker.py                  # RecursiveCharacterTextSplitter (tuned)
+│       ├── embeddings_index.py         # MiniLM/offline embeddings + FAISS search
+│       ├── entity_extraction.py        # Pydantic v2 + Groq structured output
+│       ├── analyzer.py                 # Orchestrates load→chunk→index→search→extract
+│       ├── run_demo.py                 # CLI entry point (--live flag)
+│       ├── analyze_my_doc.py           # Run the pipeline on your own PDF/text
+│       ├── verify_pipeline.py          # 6 offline wiring assertions
+│       └── outputs/                    # Auto-generated analysis_report.json
 ├── day22/
 │   ├── scripts/
 │   │   ├── task1_faiss_operations.py
@@ -190,7 +191,28 @@ ai-internship-xeven-2026/
 │   │       ├── task2/stats.json
 │   │       └── task3/comparison_report.json
 │   ├── day22.ipynb
-
+├── day23/
+│   ├── scripts/
+│   │   ├── task1_simple_rag.py
+│   │   ├── task2_enhanced_rag.py
+│   │   ├── task3_multi_doc_rag.py
+│   │   └── outputs/
+│   ├── dashboard/
+│   │   ├── app.py
+│   │   ├── templates/index.html
+│   │   └── static/style.css
+│   └── day23.ipynb
+├── day24/                     # Advanced Context Management & FastAPI
+│   ├── api/
+│   │   ├── main.py                 # Task 2: first FastAPI app (health, items, Pydantic body)
+│   │   └── rag_api.py              # Task 3: RAG wrapped in POST /ask (lifespan startup)
+│   ├── scripts/
+│   │   ├── rag_core.py             # Offline embedder + FAISS store + retrieval
+│   │   ├── rag_chain.py            # Retrieval + Groq answer layer
+│   │   ├── conversation_memory.py  # Message-list memory (recent verbatim + summary)
+│   │   ├── conversational_rag.py   # Task 1: conversational RAG with memory
+│   │   └── outputs/
+│   └── day24.ipynb                 # Concepts, two research tables, documented runs
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -231,6 +253,8 @@ executed output.
 | 20 | Structured Outputs with Pydantic — model suite + validators, LLM→structured pipeline (retry/fallback), nested multi-entity extraction with accuracy scoring | `task1_pydantic_models.py`, `task2_structured_pipeline.py`, `task3_entity_extraction.py`, `day20.ipynb` | ✅ Done |
 | 21 | Week 3 Review — integrated Document Analyzer (load → chunk → FAISS semantic search → Pydantic extraction → report) + technical presentation | `run_demo.py`, `analyzer.py`, `embeddings_index.py`, `entity_extraction.py`, `day21.ipynb` | ✅ Done |
 | 22 | Vector Stores & Databases — FAISS operations, document library with metadata, FAISS vs Chroma comparison | `task1_faiss_operations.py`, `task2_document_library.py`, `task3_vector_store_comparison.py`, `day22.ipynb` | ✅ Done |
+| 23 | RAG Pipeline Development — simple RAG, enhanced RAG with custom prompts, multi-document RAG | `task1_simple_rag.py`, `task2_enhanced_rag.py`, `task3_multi_doc_rag.py`, `day23.ipynb` | ✅ Done |
+| 24 | Advanced Context Management & FastAPI — conversational RAG with memory (recent-verbatim + summarized-older pruning), FastAPI fundamentals (path/query params, Pydantic validation, Swagger docs), RAG wrapped in `POST /ask` with lifespan startup + HTTP error handling | `rag_core.py`, `conversation_memory.py`, `conversational_rag.py`, `main.py`, `rag_api.py`, `day24.ipynb` | ✅ Done |
 ---
 
 ## How to Run
@@ -282,6 +306,19 @@ python task1_openai_setup.py
 > in a local `.env`); `python verify_pipeline.py` runs the six offline wiring
 > checks; and `python analyze_my_doc.py <file> "<query>"` runs the pipeline
 > on your own PDF/text file. Outputs land in `day21/scripts/outputs/`.
+
+> **Day 24 (Context Management & FastAPI):** the RAG scripts use FAISS, so run
+> them in the Python 3.12 env (`.venv312`); the Task 2 FastAPI basics use no
+> FAISS and run in the default `.venv` (3.13). Install per env with
+> `uv pip install fastapi uvicorn`.
+> **Morning** — from `day24/scripts/` in `.venv312`:
+> `python conversational_rag.py` runs the conversational RAG with memory
+> (recent-verbatim + summarized-older pruning; needs `GROQ_API_KEY` in a local
+> `.env`).
+> **Afternoon** — from `day24/api/`: `python -m uvicorn main:app --reload`
+> (in `.venv`) serves the basics API, and `python -m uvicorn rag_api:app --reload`
+> (in `.venv312`) serves the RAG `POST /ask` endpoint. Visit
+> `http://127.0.0.1:8000/docs` for the interactive Swagger UI.
 
 ---
 

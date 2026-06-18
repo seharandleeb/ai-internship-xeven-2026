@@ -529,3 +529,89 @@ Today I worked with FAISS and Chroma hands-on across three tasks, moving from ba
 ## Personal Insight
 
 The deletion problem in FAISS was the most interesting edge case of the day. `IndexFlatIP` has no remove operation — you either rebuild the entire index or accept ghost entries. In a production RAG system where documents get updated or deleted frequently, this is a real problem. Chroma's native delete (backed by SQLite) handles this cleanly. This single difference — more than query speed — is why I would choose Chroma for any real application and FAISS only for research or benchmarking.
+
+---
+
+# Day 23 — RAG Pipeline Development
+
+## What I Learned
+
+Today I built three RAG pipelines from scratch using LangChain, FAISS,
+and Groq's llama-3.3-70b-versatile model. The core idea behind RAG is
+simple but powerful — instead of relying on the LLM's training data
+alone, you retrieve relevant document chunks first and pass them as
+context. This grounds the answer in actual documents and reduces
+hallucinations significantly.
+
+Task 1 taught me the basic wiring: load documents, chunk with
+RecursiveCharacterTextSplitter (400/60), embed with MiniLM, index in
+FAISS, then build a RetrievalQA chain with as_retriever(k=4). Task 2
+showed me how much prompt design matters — a strict prompt template
+that says "Answer ONLY from context" made the LLM correctly refuse all
+3 out-of-context queries (France capital, telephone inventor, Bitcoin
+price) instead of hallucinating. Task 3 introduced metadata tagging
+where each document gets a source_type (pdf/website/text), enabling
+filtered retrieval from specific source subsets and multi-source
+synthesis.
+
+I also hit a real-world debugging challenge — PyTorch's c10.dll failed
+to load on Windows due to a missing Visual C++ Redistributable.
+Uninstalling sentence-transformers and torch completely resolved it
+since I was using the offline DeterministicEmbedder anyway.
+
+## Research Sources (consulted 2026-06-16)
+
+- GeeksforGeeks — RAG with LangChain (2025):
+  https://www.geeksforgeeks.org/artificial-intelligence/rag-with-langchain/
+- Medium — Build a RAG Chatbot with LangChain & FAISS (Siddharth
+  Kharche, 2026):
+  https://medium.com/@siddharthkharche/build-a-rag-chatbot-in-20-minutes-with-langchain-faiss
+- Medium — RAG with LangChain and FAISS (Alex Rodrigues, 2024):
+  https://medium.com/@alexrodriguesj/retrieval-augmented-generation-rag-with-langchain-and-faiss
+
+**Clearest Explanation:** The GeeksforGeeks article explained
+RetrievalQA.from_chain_type() most clearly — it showed exactly how the
+retriever, LLM, and prompt template connect together and why
+return_source_documents=True is needed for source attribution.
+
+## Personal Insight
+
+Prompt engineering inside RAG is just as important as the retrieval
+itself. The same retrieved chunks gave completely different behavior
+depending on whether I used a strict or detailed prompt. A strict
+prompt turned the LLM into a reliable refuser; a detailed prompt made
+it cite sources explicitly. This means RAG is not just about what you
+retrieve — it's about how you instruct the LLM to use what it
+retrieved.
+
+---
+
+# Day 24 — Advanced Context Management & FastAPI
+
+## What I Learned
+Built conversational RAG with memory. Memory is just a list of
+(question, answer) pairs: keep the last 10 verbatim, summarize older
+ones into a running paragraph via Groq, so a long chat stays inside the
+context window. Proved a follow-up like "How do I prevent it?" resolves
+correctly because the prior turn is carried forward. Then learned
+FastAPI from scratch — routes, path/query parameters, Pydantic request
+bodies, and automatic validation (a non-integer id returns a 422 with
+zero code written by me). Finished by wrapping the RAG system in a
+POST /ask endpoint that builds FAISS and Groq once at startup via
+lifespan and returns {answer, sources, confidence}.
+
+## Research Sources (consulted 18 June 2026)
+ChatGPT, Gemini, Claude; Soni, "The Ultimate Guide to LLM Memory"
+(Medium, 2025); Agenta, "Top 6 Techniques to Manage Context Length";
+official FastAPI Request Body docs; gpttutorpro FastAPI Basics.
+
+**Clearest Explanation:** Karpathy's framing — the LLM is the CPU, the
+context window is RAM. Everything else (history, documents) is disk you
+must explicitly load in.
+
+## Personal Insight
+Two real lessons. Implementing the deprecated ConversationSummaryBuffer
+strategy by hand taught me more than calling the class would have — I
+now understand the pruning, not just the import. And memory rescued the
+vague follow-up even when retrieval scored it weakly, which showed me
+memory and retrieval solve different problems.
