@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is self-attention?",
+    "sections": ["2 Background", "4 Why Self-Attention"]
+  },
+  {
+    "question": "What is multi-head attention and why is it used?",
+    "sections": ["3 Model Architecture"]
+  },
+  {
+    "question": "What optimizer and learning rate schedule were used to train the model?",
+    "sections": ["5 Training"]
+  },
+  {
+    "question": "What BLEU scores did the model achieve on English-to-German and English-to-French translation?",
+    "sections": ["6 Results"]
+  },
+  {
+    "question": "Why did the authors choose self-attention over recurrent and convolutional layers?",
+    "sections": ["4 Why Self-Attention"]
+  },
+  {
+    "question": "What problem with sequential computation does this architecture solve?",
+    "sections": ["1 Introduction"]
+  },
+  {
+    "question": "What is positional encoding and why is it needed?",
+    "sections": ["3 Model Architecture"]
+  },
+  {
+    "question": "What regularization techniques were used during training?",
+    "sections": ["5 Training"]
+  },
+  {
+    "question": "What future work do the authors suggest?",
+    "sections": ["7 Conclusion"]
+  },
+  {
+    "question": "How does the model's training time compare to previous best models?",
+    "sections": ["Abstract"]
+  }
+]

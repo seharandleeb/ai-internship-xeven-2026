@@ -29,6 +29,7 @@ through daily hands-on work.
 - LangChain (LCEL) — chains, document loaders
 - Hugging Face `sentence-transformers` & FAISS — embeddings + semantic search (Day 17)
 - FastAPI + Uvicorn — REST APIs, Pydantic validation, Swagger docs (Day 24)
+- Google Gemini Embedding API, BM25 hybrid retrieval, single-call LLM reranking, ar5iv/PyMuPDF ingestion — full RAG application (Day 25)
 
 ---
 
@@ -213,6 +214,26 @@ ai-internship-xeven-2026/
 │   │   ├── conversational_rag.py   # Task 1: conversational RAG with memory
 │   │   └── outputs/
 │   └── day24.ipynb                 # Concepts, two research tables, documented runs
+└── day25/                     # Advanced RAG Techniques — ScholarRAG (full project)
+    ├── README.md                       # Full writeup: architecture, screenshots, eval results
+    ├── app/
+    │   ├── ingestion.py                # ar5iv fetch + parse, PDF fallback, section-aware chunking
+    │   ├── embeddings.py               # Gemini embeddings, task-type-aware, L2-normalized
+    │   ├── vector_store.py             # FAISS IndexFlatIP wrapper
+    │   ├── bm25_index.py               # BM25 keyword index
+    │   ├── hybrid_search.py            # 70/30 normalized semantic+keyword blend
+    │   ├── reranker.py                 # Groq LLM rerank, single batched JSON call
+    │   ├── rag_service.py              # Orchestration: add/search/ask, per-paper vector caching
+    │   └── main.py                     # FastAPI: API-key auth, CORS, logging, lifespan startup
+    ├── ui/
+    │   └── index.html                  # Dependency-free HTML/CSS/JS chat console
+    ├── eval/
+    │   ├── evaluate_retrieval.py       # recall@k: semantic-only vs hybrid
+    │   └── eval_questions.json
+    ├── screenshots/
+    │   ├── chat-ui.png
+    │   └── api-docs.png
+    └── day25.ipynb                     # Concepts, research table, executed results
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -224,6 +245,10 @@ executed output.
 > endpoint. Run it inside a **Python 3.12** environment — `faiss-cpu` does not
 > yet ship a wheel for Python 3.13. Extra packages: `langchain-huggingface`,
 > `sentence-transformers`, `faiss-cpu`, `scikit-learn`, `matplotlib`.
+
+> **Day 25 note:** ScholarRAG is a full RAG application, not just task
+> scripts — see **[`day25/README.md`](day25/README.md)** for the complete
+> architecture, screenshots, and evaluation results.
 
 ---
 
@@ -255,6 +280,7 @@ executed output.
 | 22 | Vector Stores & Databases — FAISS operations, document library with metadata, FAISS vs Chroma comparison | `task1_faiss_operations.py`, `task2_document_library.py`, `task3_vector_store_comparison.py`, `day22.ipynb` | ✅ Done |
 | 23 | RAG Pipeline Development — simple RAG, enhanced RAG with custom prompts, multi-document RAG | `task1_simple_rag.py`, `task2_enhanced_rag.py`, `task3_multi_doc_rag.py`, `day23.ipynb` | ✅ Done |
 | 24 | Advanced Context Management & FastAPI — conversational RAG with memory (recent-verbatim + summarized-older pruning), FastAPI fundamentals (path/query params, Pydantic validation, Swagger docs), RAG wrapped in `POST /ask` with lifespan startup + HTTP error handling | `rag_core.py`, `conversation_memory.py`, `conversational_rag.py`, `main.py`, `rag_api.py`, `day24.ipynb` | ✅ Done |
+| 25 | Advanced RAG Techniques — ScholarRAG, a full RAG application: ar5iv/PDF ingestion with section-aware chunking, hybrid (FAISS + BM25) retrieval, single-call LLM reranking, a FastAPI service with API-key auth, a dependency-free UI, and a recall@k evaluation | `ingestion.py`, `hybrid_search.py`, `reranker.py`, `rag_service.py`, `main.py`, `day25.ipynb` | ✅ Done |
 ---
 
 ## How to Run
@@ -319,6 +345,17 @@ python task1_openai_setup.py
 > (in `.venv`) serves the basics API, and `python -m uvicorn rag_api:app --reload`
 > (in `.venv312`) serves the RAG `POST /ask` endpoint. Visit
 > `http://127.0.0.1:8000/docs` for the interactive Swagger UI.
+
+> **Day 25 (ScholarRAG — full RAG application):** uses the same Python 3.12
+> env as Days 17/21/24 (`.venv312`), plus `requests`, `beautifulsoup4`, `lxml`,
+> `pymupdf`, `rank-bm25`, `google-genai`, and `fastapi`/`uvicorn`. Needs three
+> keys in the root `.env`: `GROQ_API_KEY`, `GEMINI_API_KEY`, and
+> `SCHOLARRAG_API_KEY` (the last one is just a self-chosen secret for the
+> demo's own API auth). From `day25/app/`: `python -m uvicorn main:app --reload`
+> starts the API at `http://127.0.0.1:8000/docs`. In a second terminal, from
+> `day25/ui/`: `python -m http.server 5500 --bind 127.0.0.1`, then open
+> `http://127.0.0.1:5500`. Full architecture, screenshots, and evaluation
+> results are in **[`day25/README.md`](day25/README.md)**.
 
 ---
 

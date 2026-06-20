@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScholarRAG</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --panel-light: #273449;
+    --border: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-dim: #0ea5e9;
+    --error: #f87171;
+    --user-bubble: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header h1 {
+    font-size: 18px;
+    margin: 0;
+    letter-spacing: 0.3px;
+  }
+  header h1 span { color: var(--accent); }
+  #settings-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  #settings-toggle:hover { color: var(--text); border-color: var(--accent); }
+  #settings-panel {
+    display: none;
+    padding: 12px 20px;
+    background: var(--panel-light);
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  #settings-panel.open { display: flex; }
+  #settings-panel input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  #settings-panel input[name="apiBase"] { width: 220px; }
+  #settings-panel input[name="apiKey"] { width: 260px; }
+  #settings-panel button {
+    background: var(--accent-dim);
+    border: none;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+  #sidebar {
+    width: 280px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    overflow-y: auto;
+  }
+  #sidebar h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+  #add-paper-form {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  #add-paper-form input {
+    flex: 1;
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    min-width: 0;
+  }
+  #add-paper-form button {
+    background: var(--accent);
+    border: none;
+    color: #0f172a;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  #add-paper-form button:disabled { opacity: 0.5; cursor: wait; }
+  .paper-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+  }
+  .paper-card .title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .paper-card .meta {
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .paper-card .remove-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0 4px;
+  }
+  .paper-card .remove-btn:hover { color: var(--error); }
+  #empty-papers {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  #chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  #messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .msg-row { display: flex; }
+  .msg-row.user { justify-content: flex-end; }
+  .bubble {
+    max-width: 70%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bubble.user { background: var(--user-bubble); color: white; }
+  .bubble.assistant { background: var(--panel); border: 1px solid var(--border); }
+  .bubble.error { background: #3f1d1d; border: 1px solid var(--error); color: #fecaca; }
+  .sources {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .source-pill {
+    font-size: 11px;
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  #placeholder {
+    margin: auto;
+    text-align: center;
+    color: var(--muted);
+    max-width: 360px;
+    line-height: 1.6;
+  }
+  #input-bar {
+    border-top: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    gap: 10px;
+  }
+  #input-bar input {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  #input-bar button {
+    background: var(--accent);
+    border: none;
+    color: #0f172a;
+    font-weight: 600;
+    padding: 0 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  #input-bar button:disabled { opacity: 0.5; cursor: wait; }
+  .spinner {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Scholar<span>RAG</span></h1>
+  <button id="settings-toggle" type="button">Settings</button>
+</header>
+
+<div id="settings-panel">
+  <input type="text" name="apiBase" placeholder="API base URL">
+  <input type="password" name="apiKey" placeholder="X-API-Key">
+  <button id="save-settings" type="button">Save</button>
+  <span id="settings-saved" style="font-size:12px;color:var(--muted);"></span>
+</div>
+
+<main>
+  <aside id="sidebar">
+    <h2>Papers</h2>
+    <form id="add-paper-form">
+      <input type="text" id="paper-input" placeholder="arXiv ID or URL">
+      <button type="submit" id="add-paper-btn">Add</button>
+    </form>
+    <div id="papers-list">
+      <div id="empty-papers">No papers loaded yet. Add one above by arXiv ID (e.g. 1706.03762) or URL.</div>
+    </div>
+  </aside>
+
+  <section id="chat-area">
+    <div id="messages">
+      <div id="placeholder">
+        Add a paper on the left, then ask a question about it here.
+        Add a second paper to ask comparison questions across both.
+      </div>
+    </div>
+    <div id="input-bar">
+      <input type="text" id="question-input" placeholder="Ask a question about your papers...">
+      <button id="ask-btn" type="button">Ask</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  const state = {
+    apiBase: localStorage.getItem("scholarrag_api_base") || "http://127.0.0.1:8000",
+    apiKey: localStorage.getItem("scholarrag_api_key") || "",
+    papers: [],
+  };
+
+  const el = (id) => document.getElementById(id);
+  const papersListEl = el("papers-list");
+  const messagesEl = el("messages");
+
+  function applySettingsToInputs() {
+    document.querySelector('input[name="apiBase"]').value = state.apiBase;
+    document.querySelector('input[name="apiKey"]').value = state.apiKey;
+  }
+
+  el("settings-toggle").addEventListener("click", () => {
+    el("settings-panel").classList.toggle("open");
+  });
+
+  el("save-settings").addEventListener("click", () => {
+    state.apiBase = document.querySelector('input[name="apiBase"]').value.trim();
+    state.apiKey = document.querySelector('input[name="apiKey"]').value.trim();
+    localStorage.setItem("scholarrag_api_base", state.apiBase);
+    localStorage.setItem("scholarrag_api_key", state.apiKey);
+    const savedLabel = el("settings-saved");
+    savedLabel.textContent = "Saved.";
+    setTimeout(() => { savedLabel.textContent = ""; }, 2000);
+    refreshPapers();
+  });
+
+  async function apiFetch(path, options) {
+    const opts = options || {};
+    const headers = Object.assign(
+      { "Content-Type": "application/json", "X-API-Key": state.apiKey },
+      opts.headers || {}
+    );
+    const response = await fetch(state.apiBase + path, {
+      method: opts.method || "GET",
+      headers: headers,
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const detail = data && data.detail ? data.detail : response.statusText;
+      throw new Error(detail);
+    }
+    return data;
+  }
+
+  function renderPapers() {
+    if (state.papers.length === 0) {
+      papersListEl.innerHTML =
+        '<div id="empty-papers">No papers loaded yet. Add one above by ' +
+        "arXiv ID (e.g. 1706.03762) or URL.</div>";
+      return;
+    }
+    papersListEl.innerHTML = state.papers
+      .map((paper) => {
+        return (
+          '<div class="paper-card">' +
+          '<div class="title">' + escapeHtml(paper.title) + "</div>" +
+          '<div class="meta"><span>' + paper.chunk_count + " chunks &middot; " +
+          paper.source + "</span>" +
+          '<button class="remove-btn" data-id="' + paper.arxiv_id + '">remove</button>' +
+          "</div></div>"
+        );
+      })
+      .join("");
+
+    papersListEl.querySelectorAll(".remove-btn").forEach((btn) => {
+      btn.addEventListener("click", () => removePaper(btn.dataset.id));
+    });
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  async function refreshPapers() {
+    try {
+      state.papers = await apiFetch("/papers");
+      renderPapers();
+    } catch (err) {
+      console.error("Failed to load papers:", err.message);
+    }
+  }
+
+  async function addPaper(event) {
+    event.preventDefault();
+    const input = el("paper-input");
+    const reference = input.value.trim();
+    if (!reference) return;
+
+    const btn = el("add-paper-btn");
+    btn.disabled = true;
+    btn.textContent = "Adding...";
+    try {
+      await apiFetch("/papers", { method: "POST", body: { reference: reference } });
+      input.value = "";
+      await refreshPapers();
+    } catch (err) {
+      alert("Could not add paper: " + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Add";
+    }
+  }
+
+  async function removePaper(arxivId) {
+    try {
+      await apiFetch("/papers/" + encodeURIComponent(arxivId), { method: "DELETE" });
+      await refreshPapers();
+    } catch (err) {
+      alert("Could not remove paper: " + err.message);
+    }
+  }
+
+  function addMessage(role, html) {
+    const placeholder = el("placeholder");
+    if (placeholder) placeholder.remove();
+
+    const row = document.createElement("div");
+    row.className = "msg-row " + role;
+    const bubble = document.createElement("div");
+    bubble.className = "bubble " + role;
+    bubble.innerHTML = html;
+    row.appendChild(bubble);
+    messagesEl.appendChild(row);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return bubble;
+  }
+
+  async function askQuestion() {
+    const input = el("question-input");
+    const query = input.value.trim();
+    if (!query) return;
+
+    addMessage("user", escapeHtml(query));
+    input.value = "";
+
+    const btn = el("ask-btn");
+    btn.disabled = true;
+    const thinkingBubble = addMessage(
+      "assistant",
+      '<span class="spinner"></span>Thinking...'
+    );
+
+    try {
+      const result = await apiFetch("/ask", { method: "POST", body: { query: query, top_k: 5 } });
+      let html = escapeHtml(result.answer);
+      if (result.sources && result.sources.length > 0) {
+        const pills = result.sources
+          .map((s) => '<span class="source-pill">' + escapeHtml(s.title) + " &middot; " + escapeHtml(s.section) + "</span>")
+          .join("");
+        html += '<div class="sources">' + pills + "</div>";
+      }
+      thinkingBubble.innerHTML = html;
+      thinkingBubble.className = "bubble assistant";
+    } catch (err) {
+      thinkingBubble.innerHTML = "Error: " + escapeHtml(err.message);
+      thinkingBubble.className = "bubble error";
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  el("add-paper-form").addEventListener("submit", addPaper);
+  el("ask-btn").addEventListener("click", askQuestion);
+  el("question-input").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") askQuestion();
+  });
+
+  applySettingsToInputs();
+  refreshPapers();
+})();
+</script>
+
+</body>
+</html>

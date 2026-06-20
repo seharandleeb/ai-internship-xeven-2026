@@ -615,3 +615,9 @@ strategy by hand taught me more than calling the class would have — I
 now understand the pruning, not just the import. And memory rescued the
 vague follow-up even when retrieval scored it weakly, which showed me
 memory and retrieval solve different problems.
+
+---
+
+## Day 25 — Advanced RAG Techniques: ScholarRAG
+
+Today I went beyond the planned exercises and built ScholarRAG, a full RAG application that lets you chat with any arXiv paper, complete with a live API, a UI, and an evaluation suite. I fetch papers through arXiv's ar5iv HTML mirror instead of raw PDF parsing, since multi-column academic PDFs often extract as garbled text; ar5iv preserves real section headings, so every answer cites the exact section. Retrieval combines FAISS semantic search with BM25 keyword search, min-max normalizing both score scales before a 70/30 weighted blend, since combining raw cosine and BM25 scores directly lets one method dominate arbitrarily. Reranking sends the whole candidate pool to Groq in one JSON call instead of one call per candidate, with a defensive parser I stress-tested against five messy output formats. The service layer caches each paper's embeddings, so adding a second paper never re-embeds the first. I wrapped everything in a FastAPI service with API-key auth and layered error codes, and built a dependency-free HTML/JS UI. My recall@k evaluation showed hybrid retrieval matching semantic-only at k=3 and beating it by ten points at k=5. I also recovered my whole environment from scratch after a laptop crash mid-internship, which taught me more about uv, .env encoding, and PowerShell than I expected.
