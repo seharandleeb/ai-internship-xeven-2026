@@ -1,5 +1,10 @@
 # AI Engineer Internship — Xeven Solutions 2026
 
+![Python](https://img.shields.io/badge/Python-3.12%2F3.13-blue)
+![LangChain](https://img.shields.io/badge/LangChain-LCEL-green)
+![FastAPI](https://img.shields.io/badge/FastAPI-REST-teal)
+![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
+
 A 30-day internship program at Xeven Solutions focused on building
 practical skills in Python, Machine Learning, and AI development
 through daily hands-on work.
@@ -17,6 +22,10 @@ through daily hands-on work.
 | Start Date | June 8, 2026       |
 
 ---
+## Highlights
+- 🔍 **ScholarRAG** (Day 25) — hybrid retrieval + LLM reranking RAG app, chat with any arXiv paper
+- 🤖 **ReAct Agent** (Day 26) — multi-tool agent (calculator, web search, RAG) with a live chat UI
+- ⚡ **FastAPI services** (Days 24–26) — three working REST APIs with Pydantic validation and Swagger docs
 
 ## Tools and Technologies
 
@@ -213,8 +222,7 @@ ai-internship-xeven-2026/
 │   │   ├── conversation_memory.py  # Message-list memory (recent verbatim + summary)
 │   │   ├── conversational_rag.py   # Task 1: conversational RAG with memory
 │   │   └── outputs/
-│   └── day24.ipynb                 # Concepts, two research tables, documented runs
-└── day25/                     # Advanced RAG Techniques — ScholarRAG (full project)
+│   └── day24.ipynb                 # Concepts, two research tables, documented runs                ├── day25/                     # Advanced RAG Techniques — ScholarRAG (full project)
     ├── README.md                       # Full writeup: architecture, screenshots, eval results
     ├── app/
     │   ├── ingestion.py                # ar5iv fetch + parse, PDF fallback, section-aware chunking
@@ -234,6 +242,19 @@ ai-internship-xeven-2026/
     │   ├── chat-ui.png
     │   └── api-docs.png
     └── day25.ipynb                     # Concepts, research table, executed results
+└── day26/                     # Tool-Using Agents — ReAct over Calculator, Web Search & RAG
+    ├── tools/
+    │   ├── calculator_tool.py      # ast-based safe expression evaluator (no eval())
+    │   ├── web_search_tool.py      # ddgs (DuckDuckGo) live web search
+    │   └── rag_tool.py             # thin wrapper around Day 25's RagService
+    ├── agent.py                    # LangChain create_react_agent + AgentExecutor (Groq)
+    ├── ui_main.py                  # FastAPI: single POST /ask endpoint, static UI mount
+    ├── ui/
+    │   └── index.html              # Vanilla JS chat UI — bubbles, typing indicator, gradient header
+    ├── screenshots/
+    │   ├── chat-ui.png
+    │   └── chat-ui-full.png
+    └── day26.ipynb                 # Concepts, research table, executed tool + agent demos
 ```
 
 Each `dayXX/` folder contains the day's task scripts and a `dayXX.ipynb`
@@ -281,6 +302,7 @@ executed output.
 | 23 | RAG Pipeline Development — simple RAG, enhanced RAG with custom prompts, multi-document RAG | `task1_simple_rag.py`, `task2_enhanced_rag.py`, `task3_multi_doc_rag.py`, `day23.ipynb` | ✅ Done |
 | 24 | Advanced Context Management & FastAPI — conversational RAG with memory (recent-verbatim + summarized-older pruning), FastAPI fundamentals (path/query params, Pydantic validation, Swagger docs), RAG wrapped in `POST /ask` with lifespan startup + HTTP error handling | `rag_core.py`, `conversation_memory.py`, `conversational_rag.py`, `main.py`, `rag_api.py`, `day24.ipynb` | ✅ Done |
 | 25 | Advanced RAG Techniques — ScholarRAG, a full RAG application: ar5iv/PDF ingestion with section-aware chunking, hybrid (FAISS + BM25) retrieval, single-call LLM reranking, a FastAPI service with API-key auth, a dependency-free UI, and a recall@k evaluation | `ingestion.py`, `hybrid_search.py`, `reranker.py`, `rag_service.py`, `main.py`, `day25.ipynb` | ✅ Done |
+| 26 | Tool-Using Agents — ReAct agent routing between a safe calculator, live web search, and RAG retrieval; FastAPI `/ask` endpoint + custom chat UI | `agent.py`, `calculator_tool.py`, `web_search_tool.py`, `rag_tool.py`, `ui_main.py`, `day26.ipynb` | ✅ Done |
 ---
 
 ## How to Run
@@ -357,6 +379,12 @@ python task1_openai_setup.py
 > `http://127.0.0.1:5500`. Full architecture, screenshots, and evaluation
 > results are in **[`day25/README.md`](day25/README.md)**.
 
+> **Day 26 (Tool-Using Agents):** uses the same Python 3.12 env (`.venv312`),
+> plus `langchain`, `langchain-groq`, and `ddgs`. Needs `GROQ_API_KEY` in the
+> root `.env`. From `day26/`: `python agent.py` runs the agent standalone
+> against three test questions in the terminal. To use the chat UI instead:
+> `uvicorn ui_main:app --reload`, then open `http://127.0.0.1:8000/` in your
+> browser.
 ---
 
 ## Goals

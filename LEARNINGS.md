@@ -621,3 +621,38 @@ memory and retrieval solve different problems.
 ## Day 25 — Advanced RAG Techniques: ScholarRAG
 
 Today I went beyond the planned exercises and built ScholarRAG, a full RAG application that lets you chat with any arXiv paper, complete with a live API, a UI, and an evaluation suite. I fetch papers through arXiv's ar5iv HTML mirror instead of raw PDF parsing, since multi-column academic PDFs often extract as garbled text; ar5iv preserves real section headings, so every answer cites the exact section. Retrieval combines FAISS semantic search with BM25 keyword search, min-max normalizing both score scales before a 70/30 weighted blend, since combining raw cosine and BM25 scores directly lets one method dominate arbitrarily. Reranking sends the whole candidate pool to Groq in one JSON call instead of one call per candidate, with a defensive parser I stress-tested against five messy output formats. The service layer caches each paper's embeddings, so adding a second paper never re-embeds the first. I wrapped everything in a FastAPI service with API-key auth and layered error codes, and built a dependency-free HTML/JS UI. My recall@k evaluation showed hybrid retrieval matching semantic-only at k=3 and beating it by ten points at k=5. I also recovered my whole environment from scratch after a laptop crash mid-internship, which taught me more about uv, .env encoding, and PowerShell than I expected.
+
+---
+
+# Day 26 — Tool-Using Agents: ReAct over Calculator, Web Search & RAG
+
+## What I Learned
+Built a ReAct agent that reasons and acts in a loop: Thought → Action →
+Observation, repeating until it has enough to give a Final Answer.
+Wrapped three tools with LangChain's `@tool` decorator — a safe
+calculator, a DuckDuckGo (`ddgs`) web search, and a RAG tool reusing
+Day 25's hybrid retrieval service — and let `create_react_agent` pick
+the right one per question instead of hand-coding routing logic. Saw
+the agent self-correct live: a quoted calculator input ("23 * 45")
+failed, and it retried unquoted on its own without help. Learned that
+`@tool`-wrapped functions are `BaseTool` objects, not plain callables,
+so composing one tool inside another requires `.invoke()`, not a direct
+call — calling them directly is deprecated. Also learned the calculator
+needed `ast`-based parsing rather than raw `eval()`, since an unguarded
+`eval` is a code-execution hole. Finished by serving the agent through
+a FastAPI `/ask` endpoint, built once at startup via `lifespan`, with a
+small vanilla JS chat UI.
+
+## Research Sources (consulted 21 June 2026)
+Claude; LangChain docs (`create_react_agent`, ReAct reference);
+`ddgs` PyPI page; LangChain January/June 2026 changelogs.
+
+**Clearest Explanation:** treating the ReAct loop as the model
+"thinking out loud" before each tool call, rather than a black box —
+the Thought/Action/Observation trace is literally readable.
+
+## Personal Insight
+The most useful bug was the calculator's quote-mangling failure — it
+proved the agent isn't just calling tools blindly, it's reasoning about
+*why* a call failed and adjusting. That made the difference between an
+agent and a router click for me.
