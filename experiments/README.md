@@ -1,8 +1,45 @@
 # Experiments
 
-This directory contains all practical experiments conducted during the AI Engineer Internship. Each experiment focuses on evaluating different components of a production-level Retrieval-Augmented Generation (RAG) pipeline using implementation, benchmarking, and comparative analysis.
+This directory contains practical experiments conducted during the AI Engineer Internship to evaluate different components of a production-level Retrieval-Augmented Generation (RAG) pipeline.
 
-The goal of these experiments is to make evidence-based engineering decisions instead of selecting technologies based solely on documentation or assumptions.
+Each experiment focuses on benchmarking multiple approaches, measuring their performance, and selecting the most suitable technology based on practical implementation instead of theoretical assumptions.
+
+---
+
+# Repository Structure
+
+```text
+experiments/
+│
+├── README.md
+│
+├── Experiment_01/
+│   ├── compare.py
+│   ├── pymupdf_loader.py
+│   ├── pdfplumber_loader.py
+│   └── Experiment_01_PDF_Loader_Comparison.ipynb
+│
+├── Experiment_02/
+│   ├── compare.py
+│   ├── recursive_chunking.py
+│   ├── token_chunking.py
+│   └── Experiment_02_Chunking_Comparison.ipynb
+│
+└── ...
+```
+
+---
+
+# Experiment Status
+
+| Experiment | Component | Status |
+|------------|-----------|--------|
+| Experiment 01 | PDF Loader Comparison | ✅ Completed |
+| Experiment 02 | Chunking Strategy Comparison | ✅ Completed |
+| Experiment 03 | Embedding Models Comparison | ⏳ Planned |
+| Experiment 04 | Vector Database Comparison | ⏳ Planned |
+| Experiment 05 | Retrieval Strategy Comparison | ⏳ Planned |
+| Experiment 06 | Reranker Comparison | ⏳ Planned |
 
 ---
 
@@ -12,24 +49,14 @@ The goal of these experiments is to make evidence-based engineering decisions in
 
 Compare two widely used PDF processing libraries to determine the most suitable PDF loader for a production-level RAG pipeline.
 
-Libraries evaluated:
+### Libraries Evaluated
 
 - PyMuPDF
 - pdfplumber
 
 ---
 
-## Dataset
-
-- **Document:** `SBP-Act.pdf`
-- **Type:** Regulatory PDF
-- **Pages:** 63
-
----
-
 ## Evaluation Metrics
-
-The comparison was performed using the following metrics:
 
 - PDF Loading Time
 - Text Extraction Time
@@ -51,15 +78,6 @@ The comparison was performed using the following metrics:
 
 ---
 
-## Observations
-
-- Both libraries successfully processed all pages.
-- PyMuPDF extracted more textual content.
-- PyMuPDF completed extraction significantly faster.
-- pdfplumber preserved readable formatting but required considerably more processing time.
-
----
-
 ## Decision
 
 **Selected Library:** PyMuPDF
@@ -70,24 +88,71 @@ The comparison was performed using the following metrics:
 - Higher text extraction coverage
 - Better scalability
 - Lower processing latency
-- Suitable for production-scale RAG document ingestion
-
----
-
-## Files
-
-```
-Experiment_01/
-│
-├── SBP-Act.pdf
-├── pymupdf_loader.py
-├── pdfplumber_loader.py
-├── compare.py
-└── Experiment_01_PDF_Loader_Comparison.ipynb
-```
+- Well suited for production document ingestion
 
 ---
 
 ## Key Learning
 
-This experiment demonstrated that selecting technologies based on practical benchmarking is more reliable than relying solely on documentation. Performance evaluation helps identify the most suitable components for production AI systems.
+Practical benchmarking demonstrated that technology selection should be based on measurable performance rather than documentation alone. PyMuPDF consistently outperformed pdfplumber in extraction speed while preserving high-quality text.
+
+---
+
+# Experiment 02: Chunking Strategy Comparison
+
+## Objective
+
+Compare two commonly used chunking strategies to determine the most suitable approach for document chunking in a production RAG pipeline.
+
+### Technologies Evaluated
+
+- Recursive Character Text Splitter
+- Token Text Splitter
+
+---
+
+## Evaluation Metrics
+
+- Number of Chunks
+- Average Characters per Chunk
+- Average Tokens per Chunk
+- Execution Time
+
+---
+
+## Results
+
+| Metric | Recursive Character | Token |
+|---------|--------------------:|------:|
+| Number of Chunks | 232 | 75 |
+| Average Characters | 457.78 | 1557.12 |
+| Average Tokens | 107.94 | 362.19 |
+| Execution Time | **0.0054 sec** | **0.1794 sec** |
+
+---
+
+## Decision
+
+**Selected Strategy:** Recursive Character Text Splitter
+
+### Reasons
+
+- Faster execution
+- Smaller and more manageable chunks
+- Better retrieval granularity
+- Lower preprocessing overhead
+- Widely adopted in production RAG systems
+
+---
+
+## Key Learning
+
+This experiment highlighted how different chunking strategies affect preprocessing efficiency and chunk granularity. Recursive Character Text Splitter provided significantly faster execution while producing consistent chunk sizes suitable for downstream retrieval tasks.
+
+---
+
+# Summary
+
+The experiments conducted in this directory provide practical evidence for selecting components of a production-level RAG pipeline. Each experiment measures performance, compares alternative implementations, and documents the engineering decisions used throughout the project.
+
+Detailed implementation notes, observations, challenges, and technical learnings are documented separately in **LEARNINGS.md**.
