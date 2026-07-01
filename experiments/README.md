@@ -25,7 +25,16 @@ experiments/
 │   ├── token_chunking.py
 │   └── Experiment_02_Chunking_Comparison.ipynb
 │
-└── ...
+└──Experiment_03/
+│
+├── SBP-Act.pdf
+├── recursive_chunking.py
+├── queries.py
+├── minilm_embedding.py
+├── bge_embedding.py
+├── compare.py
+├── Experiment_03_Embedding_Comparison.ipynb
+└── retrieval.py
 ```
 
 ---
@@ -36,7 +45,7 @@ experiments/
 |------------|-----------|--------|
 | Experiment 01 | PDF Loader Comparison | ✅ Completed |
 | Experiment 02 | Chunking Strategy Comparison | ✅ Completed |
-| Experiment 03 | Embedding Models Comparison | ⏳ Planned |
+| Experiment 03 | Embedding Models Comparison | ✅ Completed |
 | Experiment 04 | Vector Database Comparison | ⏳ Planned |
 | Experiment 05 | Retrieval Strategy Comparison | ⏳ Planned |
 | Experiment 06 | Reranker Comparison | ⏳ Planned |
@@ -150,6 +159,56 @@ Compare two commonly used chunking strategies to determine the most suitable app
 This experiment highlighted how different chunking strategies affect preprocessing efficiency and chunk granularity. Recursive Character Text Splitter provided significantly faster execution while producing consistent chunk sizes suitable for downstream retrieval tasks.
 
 ---
+
+---
+
+# Experiment 03: Embedding Model Comparison
+
+## Objective
+
+Compare two state-of-the-art embedding models to identify the most suitable embedding model for a production-level Retrieval-Augmented Generation (RAG) pipeline.
+
+Models evaluated:
+
+- all-MiniLM-L6-v2
+- BAAI/bge-m3
+
+---
+
+## Evaluation Metrics
+
+The comparison was performed using the following metrics:
+
+- Embedding Generation Time
+- Embedding Dimension
+- Number of Generated Embeddings
+- Semantic Representation Capability
+
+---
+
+## Results
+
+| Metric | MiniLM | BGE-M3 |
+|---------|--------:|--------:|
+| Embedding Dimension | 384 | 1024 |
+| Number of Embeddings | 232 | 232 |
+| Execution Time | 9.56 sec | 88.81 sec |
+
+---
+
+## Decision
+
+**Selected Model:** BAAI/bge-m3
+
+### Reasons
+
+- Higher-dimensional embeddings
+- Richer semantic representation
+- Better retrieval quality for regulatory documents
+- More suitable for production-scale RAG systems where retrieval accuracy is prioritized over embedding speed
+
+---
+
 
 # Summary
 

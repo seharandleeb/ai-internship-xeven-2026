@@ -248,6 +248,98 @@ Selecting a chunking strategy should depend on the target model, retrieval requi
 - Experiment 07 — End-to-End RAG Evaluation
 
 ---
+---
+
+# Experiment 03 — Embedding Model Comparison
+
+## Objective
+
+The purpose of this experiment was to compare two widely used embedding models used in Retrieval-Augmented Generation (RAG) systems. The goal was to evaluate their performance and semantic representation capability before selecting an embedding model for the production pipeline.
+
+---
+
+## Technologies Used
+
+- Sentence Transformers
+- all-MiniLM-L6-v2
+- BAAI/bge-m3
+- PyMuPDF
+- LangChain Recursive Character Text Splitter
+
+---
+
+## Methodology
+
+The experiment followed the workflow below:
+
+1. Load the PDF document using PyMuPDF.
+2. Split the document into chunks using Recursive Character Text Splitter.
+3. Generate embeddings using MiniLM.
+4. Generate embeddings using BGE-M3.
+5. Compare both models using execution time, embedding dimension, and semantic representation capability.
+6. Select the most suitable embedding model for the RAG pipeline.
+
+---
+
+## Observations
+
+### MiniLM
+
+**Advantages**
+
+- Fast embedding generation
+- Lightweight model
+- Lower computational cost
+- Suitable for real-time applications
+
+**Limitations**
+
+- Lower embedding dimension (384)
+- Less expressive semantic representation
+
+---
+
+### BGE-M3
+
+**Advantages**
+
+- Higher embedding dimension (1024)
+- Rich semantic representation
+- Better understanding of document context
+- More suitable for semantic retrieval tasks
+
+**Limitations**
+
+- Higher embedding generation time
+- Greater computational requirements
+
+---
+
+## Results
+
+| Metric | MiniLM | BGE-M3 |
+|---------|--------:|--------:|
+| Embedding Dimension | 384 | 1024 |
+| Number of Embeddings | 232 | 232 |
+| Execution Time | 9.56 sec | 88.81 sec |
+
+---
+
+## Engineering Decision
+
+Although MiniLM generated embeddings much faster, BGE-M3 was selected because retrieval quality is more important than embedding speed in a production Retrieval-Augmented Generation system. Higher-dimensional embeddings provide richer semantic representation, making BGE-M3 a better choice for regulatory document retrieval.
+
+---
+
+## Key Learnings
+
+- Embeddings transform text into dense numerical vectors that capture semantic meaning.
+- Embedding quality directly influences retrieval performance in RAG systems.
+- Higher-dimensional embeddings generally preserve more semantic information.
+- Practical benchmarking is essential before selecting components for production AI systems.
+- Engineering decisions should be based on experimental evidence rather than assumptions or documentation alone.
+
+--- 
 
 # Overall Engineering Insight
 
