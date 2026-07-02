@@ -1,0 +1,16 @@
+======================================================================
+EXPERIMENT 04: VECTOR DATABASE COMPARISON
+======================================================================
+
+FAISS
+--------------------------------------------------
+Index Creation Time : 95.1296 seconds
+Retrieval Time      : 0.1844 seconds
+Retrieved Documents : 5
+
+ChromaDB
+--------------------------------------------------
+Index Creation Time : 92.9575 seconds
+Retrieval Time      : 0.1947 seconds
+Retrieved Documents : 5
+

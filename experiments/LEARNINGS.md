@@ -241,8 +241,8 @@ Selecting a chunking strategy should depend on the target model, retrieval requi
 
 # Future Experiments
 
-- Experiment 03 — Embedding Model Comparison
-- Experiment 04 — Vector Database Comparison
+# Future Experiments
+
 - Experiment 05 — Retrieval Strategy Comparison
 - Experiment 06 — Reranker Comparison
 - Experiment 07 — End-to-End RAG Evaluation
@@ -340,11 +340,193 @@ Although MiniLM generated embeddings much faster, BGE-M3 was selected because re
 - Engineering decisions should be based on experimental evidence rather than assumptions or documentation alone.
 
 --- 
+# Experiment 04 — Vector Database Comparison
+
+## Objective
+
+The objective of this experiment was to compare two widely used vector databases, **FAISS** and **ChromaDB**, to determine the most suitable vector storage solution for a production Retrieval-Augmented Generation (RAG) pipeline.
+
+To ensure a controlled comparison, all other pipeline components remained unchanged:
+
+- PDF Loader: PyMuPDF
+- Chunking Strategy: Recursive Character Text Splitter
+- Embedding Model: BAAI/bge-m3
+
+Only the vector database was changed throughout the experiment.
+
+---
+
+## Technologies Used
+
+- LangChain
+- FAISS
+- ChromaDB
+- BAAI/bge-m3
+- PyMuPDF
+- Recursive Character Text Splitter
+
+---
+
+## Why Vector Databases are Required
+
+Large Language Models cannot efficiently search raw document collections.
+
+After embeddings are generated, they must be stored in a vector database that supports efficient similarity search.
+
+The vector database is responsible for:
+
+- Storing document embeddings
+- Performing nearest-neighbor similarity search
+- Retrieving the most relevant document chunks
+- Reducing retrieval latency
+- Supporting scalable Retrieval-Augmented Generation pipelines
+
+Choosing an appropriate vector database directly affects retrieval performance and production maintainability.
+
+---
+
+## Methodology
+
+The experiment followed a controlled engineering workflow:
+
+1. Load the PDF using PyMuPDF.
+2. Split the document using Recursive Character Text Splitter.
+3. Generate embeddings using BAAI/bge-m3.
+4. Build a FAISS vector store.
+5. Build a ChromaDB vector store.
+6. Create retrievers for both vector databases.
+7. Execute the same retrieval query against both systems.
+8. Benchmark retrieval performance over multiple runs.
+9. Compare the results and make an engineering decision.
+
+---
+
+## Evaluation Metrics
+
+The following metrics were used during evaluation:
+
+- Index Creation Time
+- Average Retrieval Time
+- Number of Retrieved Documents
+- Persistence Support
+- Ease of Integration
+- Production Suitability
+
+Average retrieval latency was measured over multiple benchmark runs to reduce the influence of one-time execution overhead.
+
+---
+
+## Observations
+
+### FAISS
+
+**Advantages**
+
+- Lightweight implementation
+- Fast similarity search
+- Simple deployment
+- Excellent in-memory performance
+- Widely adopted in production AI systems
+
+**Limitations**
+
+- No built-in persistence
+- External storage is required for long-term deployment
+- Collection management must be implemented separately
+
+---
+
+### ChromaDB
+
+**Advantages**
+
+- Persistent vector storage
+- Easy document collection management
+- Native integration with LangChain
+- Suitable for long-running applications
+- Minimal configuration
+
+**Limitations**
+
+- Slightly higher storage overhead
+- Additional persistence layer compared to FAISS
+
+---
+
+## Results
+
+| Metric | FAISS | ChromaDB |
+|---------|-------:|---------:|
+| Index Creation Time | 95.13 sec | 92.96 sec |
+| Average Retrieval Time | 0.1844 sec | 0.1947 sec |
+| Retrieved Documents | 5 | 5 |
+
+> **Note:** Execution times may vary slightly across different runs depending on hardware, operating system scheduling, model initialization, and caching effects.
+
+---
+
+## Understanding the Results
+
+### Why were retrieval times so similar?
+
+Both FAISS and ChromaDB indexed exactly the same document chunks using identical embeddings.
+
+Because the document collection was relatively small, retrieval latency was naturally very close for both systems.
+
+---
+
+### Why benchmark multiple retrieval runs?
+
+The first retrieval often includes initialization overhead such as cache warming.
+
+Measuring average retrieval latency across multiple executions provides a more reliable estimate of real-world performance than relying on a single run.
+
+---
+
+### Why can index creation times vary?
+
+Index creation involves embedding insertion, vector indexing, memory allocation, and disk operations.
+
+These processes are influenced by system resources and background activity, resulting in small timing differences across executions.
+
+---
+
+## Engineering Decision
+
+Both vector databases successfully supported semantic retrieval under identical experimental conditions.
+
+### FAISS was preferred for:
+
+- Lightweight deployment
+- Fast in-memory retrieval
+- Minimal overhead
+- Applications where persistence is not required
+
+### ChromaDB was preferred for:
+
+- Persistent storage
+- Long-running production systems
+- Easier collection management
+- Better maintainability
+
+The final selection depends on deployment requirements rather than retrieval latency alone.
+
+---
+
+## Key Learnings
+
+- Vector databases are fundamental components of Retrieval-Augmented Generation systems.
+- Similarity search performance depends on both embeddings and vector indexing.
+- Retrieval latency should be benchmarked over multiple runs to obtain reliable measurements.
+- Small benchmark differences should not be overinterpreted, particularly for small datasets.
+- Production engineering decisions should consider scalability, persistence, maintainability, and deployment requirements in addition to raw speed.
+- Controlled experiments produce more reliable engineering decisions than assumptions or isolated benchmarks.
+
+--- 
+
 
 # Overall Engineering Insight
 
-Building a production-level RAG system involves a series of engineering decisions rather than simply integrating available libraries.
+Every major component—including document loading, chunking, embedding generation, vector storage, retrieval, reranking, and response generation—should be evaluated experimentally before being integrated into a production pipeline.
 
-Every component—including document loading, chunking, embedding generation, retrieval, reranking, and response generation—should be evaluated experimentally.
-
-This internship focuses on selecting technologies based on measurable performance, scalability, and production suitability rather than assumptions or default implementations.
+Throughout these experiments, each component has been isolated, benchmarked, and selected using measurable performance metrics while keeping the remaining pipeline unchanged. This controlled engineering methodology ensures that design decisions are evidence-based, reproducible, and suitable for real-world AI applications.

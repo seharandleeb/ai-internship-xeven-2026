@@ -1,8 +1,8 @@
 # Experiments
 
-This directory contains practical experiments conducted during the AI Engineer Internship to evaluate different components of a production-level Retrieval-Augmented Generation (RAG) pipeline.
+This directory contains practical engineering experiments conducted during the AI Engineer Internship to evaluate individual components of a production-level Retrieval-Augmented Generation (RAG) pipeline.
 
-Each experiment focuses on benchmarking multiple approaches, measuring their performance, and selecting the most suitable technology based on practical implementation instead of theoretical assumptions.
+Each experiment benchmarks two alternative technologies under identical conditions, measures their performance using objective metrics, and documents the engineering decision based on experimental evidence rather than theoretical assumptions.
 
 ---
 
@@ -12,6 +12,7 @@ Each experiment focuses on benchmarking multiple approaches, measuring their per
 experiments/
 │
 ├── README.md
+├── LEARNINGS.md
 │
 ├── Experiment_01/
 │   ├── compare.py
@@ -25,16 +26,27 @@ experiments/
 │   ├── token_chunking.py
 │   └── Experiment_02_Chunking_Comparison.ipynb
 │
-└──Experiment_03/
+├── Experiment_03/
+│   ├── compare.py
+│   ├── minilm_embedding.py
+│   ├── bge_embedding.py
+│   ├── queries.py
+│   ├── retrieval.py
+│   └── Experiment_03_Embedding_Comparison.ipynb
 │
-├── SBP-Act.pdf
-├── recursive_chunking.py
-├── queries.py
-├── minilm_embedding.py
-├── bge_embedding.py
-├── compare.py
-├── Experiment_03_Embedding_Comparison.ipynb
-└── retrieval.py
+└── Experiment_04/
+    ├── config/
+    ├── data/
+    ├── embeddings/
+    ├── evaluation/
+    ├── loaders/
+    ├── retrieval/
+    ├── splitters/
+    ├── utils/
+    ├── vectorstores/
+    ├── run_experiment.py
+    ├── comparison_results.txt
+    └── Experiment_04_Vector_Database_Comparison.ipynb
 ```
 
 ---
@@ -45,8 +57,8 @@ experiments/
 |------------|-----------|--------|
 | Experiment 01 | PDF Loader Comparison | ✅ Completed |
 | Experiment 02 | Chunking Strategy Comparison | ✅ Completed |
-| Experiment 03 | Embedding Models Comparison | ✅ Completed |
-| Experiment 04 | Vector Database Comparison | ⏳ Planned |
+| Experiment 03 | Embedding Model Comparison | ✅ Completed |
+| Experiment 04 | Vector Database Comparison | ✅ Completed |
 | Experiment 05 | Retrieval Strategy Comparison | ⏳ Planned |
 | Experiment 06 | Reranker Comparison | ⏳ Planned |
 
@@ -56,9 +68,9 @@ experiments/
 
 ## Objective
 
-Compare two widely used PDF processing libraries to determine the most suitable PDF loader for a production-level RAG pipeline.
+Compare two widely used PDF processing libraries to determine the most suitable PDF loader for a production-level Retrieval-Augmented Generation (RAG) pipeline.
 
-### Libraries Evaluated
+### Technologies Evaluated
 
 - PyMuPDF
 - pdfplumber
@@ -87,7 +99,7 @@ Compare two widely used PDF processing libraries to determine the most suitable 
 
 ---
 
-## Decision
+## Engineering Decision
 
 **Selected Library:** PyMuPDF
 
@@ -96,14 +108,14 @@ Compare two widely used PDF processing libraries to determine the most suitable 
 - Faster document loading
 - Higher text extraction coverage
 - Better scalability
-- Lower processing latency
-- Well suited for production document ingestion
+- Lower preprocessing latency
+- Better suited for production document ingestion
 
 ---
 
 ## Key Learning
 
-Practical benchmarking demonstrated that technology selection should be based on measurable performance rather than documentation alone. PyMuPDF consistently outperformed pdfplumber in extraction speed while preserving high-quality text.
+Practical benchmarking demonstrated that technology selection should be based on measurable performance rather than documentation alone. PyMuPDF consistently outperformed pdfplumber in extraction speed while preserving high-quality text, making it the preferred choice for production document ingestion.
 
 ---
 
@@ -111,7 +123,7 @@ Practical benchmarking demonstrated that technology selection should be based on
 
 ## Objective
 
-Compare two commonly used chunking strategies to determine the most suitable approach for document chunking in a production RAG pipeline.
+Compare two commonly used document chunking strategies to determine the most suitable preprocessing approach for a production Retrieval-Augmented Generation (RAG) pipeline.
 
 ### Technologies Evaluated
 
@@ -140,26 +152,23 @@ Compare two commonly used chunking strategies to determine the most suitable app
 
 ---
 
-## Decision
+## Engineering Decision
 
 **Selected Strategy:** Recursive Character Text Splitter
 
 ### Reasons
 
-- Faster execution
+- Faster preprocessing
 - Smaller and more manageable chunks
 - Better retrieval granularity
-- Lower preprocessing overhead
+- Lower computational overhead
 - Widely adopted in production RAG systems
 
 ---
 
 ## Key Learning
 
-This experiment highlighted how different chunking strategies affect preprocessing efficiency and chunk granularity. Recursive Character Text Splitter provided significantly faster execution while producing consistent chunk sizes suitable for downstream retrieval tasks.
-
----
-
+The chunking strategy has a direct impact on preprocessing efficiency and retrieval quality. Recursive Character Text Splitter generated consistent chunk sizes while significantly reducing preprocessing time, making it the preferred choice for downstream semantic retrieval tasks.
 ---
 
 # Experiment 03: Embedding Model Comparison
@@ -168,7 +177,7 @@ This experiment highlighted how different chunking strategies affect preprocessi
 
 Compare two state-of-the-art embedding models to identify the most suitable embedding model for a production-level Retrieval-Augmented Generation (RAG) pipeline.
 
-Models evaluated:
+### Technologies Evaluated
 
 - all-MiniLM-L6-v2
 - BAAI/bge-m3
@@ -176,8 +185,6 @@ Models evaluated:
 ---
 
 ## Evaluation Metrics
-
-The comparison was performed using the following metrics:
 
 - Embedding Generation Time
 - Embedding Dimension
@@ -196,7 +203,7 @@ The comparison was performed using the following metrics:
 
 ---
 
-## Decision
+## Engineering Decision
 
 **Selected Model:** BAAI/bge-m3
 
@@ -204,14 +211,112 @@ The comparison was performed using the following metrics:
 
 - Higher-dimensional embeddings
 - Richer semantic representation
-- Better retrieval quality for regulatory documents
-- More suitable for production-scale RAG systems where retrieval accuracy is prioritized over embedding speed
+- Better contextual understanding
+- Improved semantic retrieval capability
+- Better suited for production RAG systems where retrieval quality is prioritized over embedding speed
 
 ---
 
+## Key Learning
+
+Embedding models significantly influence retrieval quality in Retrieval-Augmented Generation systems. Although BGE-M3 requires more time to generate embeddings, its richer semantic representation makes it a better choice for production environments where retrieval accuracy is more important than preprocessing speed.
+
+---
+
+# Experiment 04: Vector Database Comparison
+
+## Objective
+
+Compare two widely used vector databases to determine the most suitable vector storage solution for a production-level Retrieval-Augmented Generation (RAG) pipeline.
+
+To ensure a controlled and fair comparison, all previously selected pipeline components remained unchanged:
+
+- PDF Loader: PyMuPDF
+- Chunking Strategy: Recursive Character Text Splitter
+- Embedding Model: BAAI/bge-m3
+
+Only the vector database was changed throughout the experiment.
+
+### Technologies Evaluated
+
+- FAISS
+- ChromaDB
+
+---
+
+## Evaluation Metrics
+
+- Index Creation Time
+- Average Retrieval Time (10 benchmark runs)
+- Number of Retrieved Documents
+- Persistence Support
+- Ease of Integration
+- Production Suitability
+
+---
+
+## Results
+
+| Metric | FAISS | ChromaDB |
+|---------|-------:|---------:|
+| Index Creation Time | Varies per execution* | Varies per execution* |
+| Average Retrieval Time | Varies per execution* | Varies per execution* |
+| Retrieved Documents | 5 | 5 |
+
+> **Note:** Execution times vary slightly between runs depending on hardware, operating system scheduling, caching, and model initialization. The comparison is based on average benchmark measurements rather than a single execution.
+
+---
+
+## Engineering Decision
+
+Both vector databases performed well under identical experimental conditions.
+
+### FAISS
+
+- Lightweight implementation
+- Fast in-memory similarity search
+- Minimal deployment overhead
+- Excellent choice for applications where persistence is not required
+
+### ChromaDB
+
+- Built-in persistence
+- Easy collection management
+- Native LangChain integration
+- Better suited for long-running production systems
+
+---
+
+## Final Recommendation
+
+Both FAISS and ChromaDB are suitable vector databases for Retrieval-Augmented Generation systems.
+
+- Choose **FAISS** for lightweight deployments and high-performance in-memory retrieval.
+- Choose **ChromaDB** when persistent storage, maintainability, and long-term document management are important.
+
+The final engineering decision should be based on production requirements rather than benchmark speed alone.
+
+---
+
+## Key Learning
+
+This experiment demonstrated that vector databases with identical embeddings and document chunks produce very similar retrieval performance on moderate-sized datasets. While benchmark timings are useful, production engineering decisions should also consider persistence, scalability, maintainability, and deployment requirements.
+
+---
 
 # Summary
 
-The experiments conducted in this directory provide practical evidence for selecting components of a production-level RAG pipeline. Each experiment measures performance, compares alternative implementations, and documents the engineering decisions used throughout the project.
+This directory documents a series of controlled engineering experiments conducted during the AI Engineer Internship to evaluate the core components of a production-level Retrieval-Augmented Generation (RAG) pipeline.
 
-Detailed implementation notes, observations, challenges, and technical learnings are documented separately in **LEARNINGS.md**.
+Each experiment isolates a single pipeline component while keeping the remaining components unchanged, ensuring fair and reproducible comparisons. Engineering decisions are based on practical benchmarking rather than theoretical assumptions.
+
+The completed experiments cover:
+
+- PDF Loader Comparison
+- Chunking Strategy Comparison
+- Embedding Model Comparison
+- Vector Database Comparison
+
+Together, these experiments establish the foundation of a production-oriented RAG pipeline by selecting each major component through measurable performance evaluation and reproducible engineering practices.
+
+Detailed implementation notes, observations, engineering decisions, and technical learnings are documented separately in **LEARNINGS.md**.
