@@ -624,35 +624,52 @@ Today I went beyond the planned exercises and built ScholarRAG, a full RAG appli
 
 ---
 
-# Day 26 — Tool-Using Agents: ReAct over Calculator, Web Search & RAG
+# Day 26 — Tool-Using Agents: ReAct to Tool-Calling Agent with Chainlit UI
 
 ## What I Learned
-Built a ReAct agent that reasons and acts in a loop: Thought → Action →
-Observation, repeating until it has enough to give a Final Answer.
-Wrapped three tools with LangChain's `@tool` decorator — a safe
-calculator, a DuckDuckGo (`ddgs`) web search, and a RAG tool reusing
-Day 25's hybrid retrieval service — and let `create_react_agent` pick
-the right one per question instead of hand-coding routing logic. Saw
-the agent self-correct live: a quoted calculator input ("23 * 45")
-failed, and it retried unquoted on its own without help. Learned that
-`@tool`-wrapped functions are `BaseTool` objects, not plain callables,
-so composing one tool inside another requires `.invoke()`, not a direct
-call — calling them directly is deprecated. Also learned the calculator
-needed `ast`-based parsing rather than raw `eval()`, since an unguarded
-`eval` is a code-execution hole. Finished by serving the agent through
-a FastAPI `/ask` endpoint, built once at startup via `lifespan`, with a
-small vanilla JS chat UI.
+Built a full tool-calling agent starting from a text-based ReAct agent
+and iterating to a production-ready chatbot. Began with
+`create_react_agent` (Thought → Action → Observation loop) but switched
+to `create_tool_calling_agent` after observing repeated iteration-limit
+failures and slow responses — native tool-calling is faster and more
+reliable because the model calls tools directly through function-calling
+instead of parsing text. Learned that `@tool`-decorated functions are
+`BaseTool` objects, not plain callables, so composing one tool inside
+another requires `.invoke()` not a direct call. Built four tools: an
+`ast`-based safe calculator (rejects code injection that raw `eval()`
+would execute), a DuckDuckGo web search via `ddgs`, a RAG tool reusing
+Day 25's hybrid FAISS + BM25 retrieval pipeline, and a live weather
+tool using Open-Meteo's free API with no key required. Added
+conversation memory by passing the last 6 turns into every agent
+invocation, and file upload support using PyMuPDF extraction with
+keyword-based chunk selection (instead of full-document injection, which
+blew past Groq's per-minute token limit). Upgraded the UI from a custom
+FastAPI + vanilla JS chat interface to Chainlit (dark theme, real
+chatbot UX, built-in file upload) per mentor feedback. Discovered the
+Day 25 RAG reranker was hardcoded to `llama-3.3-70b-versatile`,
+silently burning the shared daily Groq quota — unified everything onto
+`llama-3.1-8b-instant` to fix both latency and quota exhaustion.
+Iterated the system prompt several times: the agent first over-used
+tools (looping on simple questions), then hallucinated weather from
+stale training data instead of calling the tool, then leaked internal
+reasoning into final answers — each fixed by making tool-to-use-case
+mapping explicit and removing vague heuristics.
 
 ## Research Sources (consulted 21 June 2026)
-Claude; LangChain docs (`create_react_agent`, ReAct reference);
-`ddgs` PyPI page; LangChain January/June 2026 changelogs.
+Claude; LangChain docs (`create_tool_calling_agent`, `AgentExecutor`);
+Open-Meteo API docs; Chainlit docs (file upload, session management,
+branding); `ddgs` PyPI page; Groq rate limit documentation.
 
-**Clearest Explanation:** treating the ReAct loop as the model
-"thinking out loud" before each tool call, rather than a black box —
-the Thought/Action/Observation trace is literally readable.
+**Clearest Explanation:** the difference between a router and an agent —
+a router picks one fixed path, an agent observes tool results and
+decides what to do next. Seeing the model self-correct a bad calculator
+input on its own made that click.
 
 ## Personal Insight
-The most useful bug was the calculator's quote-mangling failure — it
-proved the agent isn't just calling tools blindly, it's reasoning about
-*why* a call failed and adjusting. That made the difference between an
-agent and a router click for me.
+The biggest lesson was that prompt engineering is iterative, not
+declarative — every instruction I added to fix one failure mode created
+a new one (over-using tools → hallucinating → leaking reasoning). The
+right system prompt is as short and unambiguous as possible, not a long
+list of rules. And the most impactful single fix all day was one line
+in `reranker.py`: changing the model name from 70b to 8b, which fixed
+quota exhaustion, latency, and RAG failures simultaneously.

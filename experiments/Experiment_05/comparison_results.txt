@@ -1,0 +1,19 @@
+EXPERIMENT 05: RETRIEVAL STRATEGY COMPARISON
+======================================================================
+
+Similarity Search
+--------------------------------------------------
+Average Retrieval Time : 0.1723 seconds
+Retrieved Documents    : 5
+Unique Pages           : 2
+Duplicate Chunks       : 3
+Context Diversity      : 0.40
+
+MMR
+--------------------------------------------------
+Average Retrieval Time : 0.1602 seconds
+Retrieved Documents    : 5
+Unique Pages           : 5
+Duplicate Chunks       : 0
+Context Diversity      : 1.00
+

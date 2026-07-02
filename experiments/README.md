@@ -34,19 +34,41 @@ experiments/
 │   ├── retrieval.py
 │   └── Experiment_03_Embedding_Comparison.ipynb
 │
-└── Experiment_04/
-    ├── config/
-    ├── data/
-    ├── embeddings/
-    ├── evaluation/
-    ├── loaders/
-    ├── retrieval/
-    ├── splitters/
-    ├── utils/
-    ├── vectorstores/
-    ├── run_experiment.py
-    ├── comparison_results.txt
-    └── Experiment_04_Vector_Database_Comparison.ipynb
+├── Experiment_04/
+│   ├── config/
+│   ├── data/
+│   ├── embeddings/
+│   ├── evaluation/
+│   ├── loaders/
+│   ├── retrieval/
+│   ├── splitters/
+│   ├── utils/
+│   ├── vectorstores/
+│   ├── comparison_results.txt
+│   ├── run_experiment.py
+│   └── Experiment_04_Vector_Database_Comparison.ipynb
+│
+├── Experiment_05/
+│   ├── config/
+│   ├── data/
+│   ├── embeddings/
+│   ├── evaluation/
+│   ├── loaders/
+│   ├── outputs/
+│   ├── retrieval/
+│   ├── splitters/
+│   ├── utils/
+│   ├── vectorstores/
+│   ├── comparison_results.txt
+│   ├── run_experiment.py
+│   └── Experiment_05_Retrieval_Strategy_Comparison.ipynb
+│
+├── Experiment_06/
+│   └── (Planned)
+│
+└── Experiment_07/
+    └── (Planned)
+```
 ```
 
 ---
@@ -59,7 +81,7 @@ experiments/
 | Experiment 02 | Chunking Strategy Comparison | ✅ Completed |
 | Experiment 03 | Embedding Model Comparison | ✅ Completed |
 | Experiment 04 | Vector Database Comparison | ✅ Completed |
-| Experiment 05 | Retrieval Strategy Comparison | ⏳ Planned |
+| Experiment 05 | Retrieval Strategy Comparison | ✅ Completed |
 | Experiment 06 | Reranker Comparison | ⏳ Planned |
 
 ---
@@ -301,6 +323,64 @@ The final engineering decision should be based on production requirements rather
 ## Key Learning
 
 This experiment demonstrated that vector databases with identical embeddings and document chunks produce very similar retrieval performance on moderate-sized datasets. While benchmark timings are useful, production engineering decisions should also consider persistence, scalability, maintainability, and deployment requirements.
+
+---
+---
+
+# Experiment 05: Retrieval Strategy Comparison
+
+## Objective
+
+Compare two commonly used retrieval strategies to determine the most suitable approach for retrieving relevant document chunks in a production-level Retrieval-Augmented Generation (RAG) pipeline.
+
+### Retrieval Strategies Evaluated
+
+- Similarity Search
+- Maximal Marginal Relevance (MMR)
+
+---
+
+## Evaluation Metrics
+
+- Average Retrieval Time
+- Retrieved Documents
+- Unique Pages Retrieved
+- Duplicate Chunks
+- Context Diversity Score
+
+---
+
+## Results
+
+| Metric | Similarity Search | MMR |
+|---------|------------------:|----:|
+| Average Retrieval Time | 0.1723 sec | **0.1602 sec** |
+| Retrieved Documents | 5 | 5 |
+| Unique Pages | 2 | **5** |
+| Duplicate Chunks | 3 | **0** |
+| Context Diversity Score | 0.40 | **1.00** |
+
+> **Note:** Retrieval time may vary slightly between executions depending on hardware, system load, and caching. The remaining metrics consistently demonstrate the difference in retrieval behavior between the two strategies.
+
+---
+
+## Decision
+
+**Selected Strategy:** Maximal Marginal Relevance (MMR)
+
+### Reasons
+
+- Retrieves documents from a wider range of pages
+- Eliminates redundant document chunks
+- Produces more diverse retrieval context
+- Improves contextual coverage for downstream Large Language Models
+- Maintains retrieval performance comparable to Similarity Search
+
+---
+
+## Key Learning
+
+This experiment demonstrated that retrieval quality depends not only on semantic similarity but also on contextual diversity. While Similarity Search tends to return highly similar chunks from the same document region, MMR balances relevance with diversity by selecting complementary information from different sections of the document. This makes MMR a more suitable retrieval strategy for production RAG systems where comprehensive context improves response quality.
 
 ---
 
