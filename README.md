@@ -24,7 +24,7 @@ through daily hands-on work.
 ---
 ## Highlights
 - 🔍 **ScholarRAG** (Day 25) — hybrid retrieval + LLM reranking RAG app, chat with any arXiv paper
-- 🤖 **ReAct Agent** (Day 26) — multi-tool agent (calculator, web search, RAG) with a live chat UI
+- 🤖 **Tool-Calling Agent** (Day 26) — four-tool agent (calculator, web search, RAG, live weather) with Chainlit chat UI, conversation memory, and PDF file upload
 - ⚡ **FastAPI services** (Days 24–26) — three working REST APIs with Pydantic validation and Swagger docs
 
 ## Tools and Technologies
@@ -39,6 +39,9 @@ through daily hands-on work.
 - Hugging Face `sentence-transformers` & FAISS — embeddings + semantic search (Day 17)
 - FastAPI + Uvicorn — REST APIs, Pydantic validation, Swagger docs (Day 24)
 - Google Gemini Embedding API, BM25 hybrid retrieval, single-call LLM reranking, ar5iv/PyMuPDF ingestion — full RAG application (Day 25)
+- Chainlit — production chatbot UI with dark theme, file upload, session memory (Day 26)
+- Open-Meteo API — free live weather data, no API key required (Day 26)
+- `ddgs` (DuckDuckGo Search) — free web search, no API key required (Day 26)
 
 ---
 
@@ -242,15 +245,24 @@ ai-internship-xeven-2026/
     │   ├── chat-ui.png
     │   └── api-docs.png
     └── day25.ipynb                     # Concepts, research table, executed results
-└── day26/                     # Tool-Using Agents — ReAct over Calculator, Web Search & RAG
+└── day26/                     # Tool-Calling Agent — calculator, web search, RAG, weather + Chainlit UI
     ├── tools/
     │   ├── calculator_tool.py      # ast-based safe expression evaluator (no eval())
     │   ├── web_search_tool.py      # ddgs (DuckDuckGo) live web search
-    │   └── rag_tool.py             # thin wrapper around Day 25's RagService
-    ├── agent.py                    # LangChain create_react_agent + AgentExecutor (Groq)
-    ├── ui_main.py                  # FastAPI: single POST /ask endpoint, static UI mount
+    │   ├── rag_tool.py             # thin wrapper around Day 25's RagService
+    │   └── weather_tool.py         # Open-Meteo live weather (no API key)
+    ├── agent.py                    # LangChain create_tool_calling_agent + AgentExecutor (Groq 8b-instant)
+    ├── chainlit_app.py             # Chainlit UI: dark theme, memory, file upload
+    ├── ui_main.py                  # FastAPI: single POST /ask endpoint (original UI)
     ├── ui/
-    │   └── index.html              # Vanilla JS chat UI — bubbles, typing indicator, gradient header
+    │   └── index.html              # Vanilla JS chat UI (original, superseded by Chainlit)
+    ├── public/
+    │   ├── logo_dark.png           # Chat-spark logo for dark mode
+    │   ├── logo_light.png          # Chat-spark logo for light mode
+    │   └── avatars/
+    │       └── Assistant.png       # Per-message bot avatar
+    ├── .chainlit/
+    │   └── config.toml             # Dark theme, name, file upload settings
     ├── screenshots/
     │   ├── chat-ui.png
     │   └── chat-ui-full.png
@@ -302,7 +314,7 @@ executed output.
 | 23 | RAG Pipeline Development — simple RAG, enhanced RAG with custom prompts, multi-document RAG | `task1_simple_rag.py`, `task2_enhanced_rag.py`, `task3_multi_doc_rag.py`, `day23.ipynb` | ✅ Done |
 | 24 | Advanced Context Management & FastAPI — conversational RAG with memory (recent-verbatim + summarized-older pruning), FastAPI fundamentals (path/query params, Pydantic validation, Swagger docs), RAG wrapped in `POST /ask` with lifespan startup + HTTP error handling | `rag_core.py`, `conversation_memory.py`, `conversational_rag.py`, `main.py`, `rag_api.py`, `day24.ipynb` | ✅ Done |
 | 25 | Advanced RAG Techniques — ScholarRAG, a full RAG application: ar5iv/PDF ingestion with section-aware chunking, hybrid (FAISS + BM25) retrieval, single-call LLM reranking, a FastAPI service with API-key auth, a dependency-free UI, and a recall@k evaluation | `ingestion.py`, `hybrid_search.py`, `reranker.py`, `rag_service.py`, `main.py`, `day25.ipynb` | ✅ Done |
-| 26 | Tool-Using Agents — ReAct agent routing between a safe calculator, live web search, and RAG retrieval; FastAPI `/ask` endpoint + custom chat UI | `agent.py`, `calculator_tool.py`, `web_search_tool.py`, `rag_tool.py`, `ui_main.py`, `day26.ipynb` | ✅ Done |
+| 26 | Tool-Calling Agent — four tools (safe calculator, DuckDuckGo web search, hybrid RAG, live weather), conversation memory, PDF file upload, Chainlit dark-theme chat UI; switched from ReAct to native tool-calling for reliability; unified all models onto llama-3.1-8b-instant to fix quota exhaustion | `agent.py`, `chainlit_app.py`, `calculator_tool.py`, `web_search_tool.py`, `rag_tool.py`, `weather_tool.py`, `day26.ipynb` | ✅ Done |
 ---
 
 ## How to Run
@@ -379,12 +391,15 @@ python task1_openai_setup.py
 > `http://127.0.0.1:5500`. Full architecture, screenshots, and evaluation
 > results are in **[`day25/README.md`](day25/README.md)**.
 
-> **Day 26 (Tool-Using Agents):** uses the same Python 3.12 env (`.venv312`),
-> plus `langchain`, `langchain-groq`, and `ddgs`. Needs `GROQ_API_KEY` in the
-> root `.env`. From `day26/`: `python agent.py` runs the agent standalone
-> against three test questions in the terminal. To use the chat UI instead:
-> `uvicorn ui_main:app --reload`, then open `http://127.0.0.1:8000/` in your
-> browser.
+> **Day 26 (Tool-Calling Agent + Chainlit UI):** uses the same Python 3.12
+> env (`.venv312`), plus `langchain`, `langchain-groq`, `ddgs`, `chainlit`,
+> `pymupdf`, and `requests`. Needs `GROQ_API_KEY` in the root `.env`.
+> From `day26/`:
+> `python agent.py` runs the agent standalone (4 test questions, terminal output).
+> `chainlit run chainlit_app.py -w` starts the full Chainlit chat UI at
+> `http://localhost:8000` — dark theme, conversation memory, PDF/text file
+> upload, and live weather. The original FastAPI UI is still available via
+> `uvicorn ui_main:app --reload` if needed.
 ---
 
 ## Goals

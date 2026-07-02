@@ -1,0 +1,106 @@
+======================================================================
+EXPERIMENT 06: RERANKER COMPARISON
+MMR vs MMR + Cross-Encoder Reranker
+======================================================================
+
+MMR RETRIEVAL
+--------------------------------------------------
+Retrieval Time      : 0.2738 seconds
+Retrieved Documents : 5
+Unique Pages        : 4
+Duplicate Chunks    : 0
+Context Diversity   : 0.80
+
+MMR + CROSS-ENCODER
+--------------------------------------------------
+Retrieval Time      : 0.2738 seconds
+Reranking Time      : 0.3823 seconds
+Total Pipeline Time : 0.6561 seconds
+Retrieved Documents : 5
+Unique Pages        : 4
+Duplicate Chunks    : 0
+Context Diversity   : 0.80
+
+======================================================================
+ENGINEERING DECISION
+======================================================================
+✓ Cross-Encoder introduced additional inference latency.
+✓ Context diversity was preserved after reranking.
+✓ Reranking maintained low document redundancy.
+
+Production Considerations:
+- MMR efficiently retrieves diverse candidate documents.
+- Cross-Encoder performs semantic relevance refinement.
+- Reranking increases latency but improves document ordering.
+- Suitable when answer quality is prioritized over response speed.
+
+Final Recommendation:
+Use MMR retrieval with Cross-Encoder reranking in production RAG systems where retrieval quality is more important than slightly higher latency.
+
+======================================================================
+MMR RETRIEVAL - DOCUMENTS
+======================================================================
+
+Result 1
+--------------------------------------------------
+Page: 11
+
+(c) carry out and disseminate research relevant to Bank's objectives and functions; (d) hold and manage all international reserves of Pakistan; (e) issue and manage the currency of Pakistan, including regulating their denominations; (f) collect and produce statistics relevant to the Bank's objective...
+
+Result 2
+--------------------------------------------------
+Page: 11
+
+- 7 - 264B. Objectives. — (1) The primary objective of the Bank shall be to achieve and maintain domestic price stability. (2) Without prejudice to the Bank's primary objective, the Bank shall contribute to the stability of the financial system of Pakistan. (3) Subject to sub-sections (1) and (2), t...
+
+Result 3
+--------------------------------------------------
+Page: 5
+
+- 1 - The State Bank of Pakistan Act, 1956 Act No. XXXIII of 1956 AN ACT TO PROVIDE FOR THE ESTABLISHMENT OF THE STATE BANK OF PAKISTAN 1WHEREAS it is necessary to provide for the constitution of State Bank to achieve domestic price stability by way of regulating the monetary and credit system of Pa...
+
+Result 4
+--------------------------------------------------
+Page: 14
+
+- 10 - pertaining to banking and finance sector; (b) for handling the function of receipt, supply and exchange of Bank notes and coins which are legal tender; (c) for issue , supply, sale and purchase of prize bonds, holding draws thereof and other National Savings instruments; 34[***] (d) 35for pro...
+
+Result 5
+--------------------------------------------------
+Page: 19
+
+rates and the supply of reserves in Pakistan and may make regulations for their implementation; (b) approve and issue the monetary policy statement and other monetary policy measures; (c) perform any other functions conferred on it by law; and (d) carry out any ancillary activities incidental to the...
+
+======================================================================
+MMR + CROSS-ENCODER - DOCUMENTS
+======================================================================
+
+Result 1
+--------------------------------------------------
+Page: 11
+
+- 7 - 264B. Objectives. — (1) The primary objective of the Bank shall be to achieve and maintain domestic price stability. (2) Without prejudice to the Bank's primary objective, the Bank shall contribute to the stability of the financial system of Pakistan. (3) Subject to sub-sections (1) and (2), t...
+
+Result 2
+--------------------------------------------------
+Page: 5
+
+- 1 - The State Bank of Pakistan Act, 1956 Act No. XXXIII of 1956 AN ACT TO PROVIDE FOR THE ESTABLISHMENT OF THE STATE BANK OF PAKISTAN 1WHEREAS it is necessary to provide for the constitution of State Bank to achieve domestic price stability by way of regulating the monetary and credit system of Pa...
+
+Result 3
+--------------------------------------------------
+Page: 11
+
+(c) carry out and disseminate research relevant to Bank's objectives and functions; (d) hold and manage all international reserves of Pakistan; (e) issue and manage the currency of Pakistan, including regulating their denominations; (f) collect and produce statistics relevant to the Bank's objective...
+
+Result 4
+--------------------------------------------------
+Page: 19
+
+rates and the supply of reserves in Pakistan and may make regulations for their implementation; (b) approve and issue the monetary policy statement and other monetary policy measures; (c) perform any other functions conferred on it by law; and (d) carry out any ancillary activities incidental to the...
+
+Result 5
+--------------------------------------------------
+Page: 14
+
+- 10 - pertaining to banking and finance sector; (b) for handling the function of receipt, supply and exchange of Bank notes and coins which are legal tender; (c) for issue , supply, sale and purchase of prize bonds, holding draws thereof and other National Savings instruments; 34[***] (d) 35for pro...

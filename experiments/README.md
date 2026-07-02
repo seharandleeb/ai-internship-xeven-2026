@@ -63,8 +63,21 @@ experiments/
 │   ├── run_experiment.py
 │   └── Experiment_05_Retrieval_Strategy_Comparison.ipynb
 │
-├── Experiment_06/
-│   └── (Planned)
+└── Experiment_06/
+    ├── config/
+    ├── data/
+    ├── embeddings/
+    ├── evaluation/
+    ├── loaders/
+    ├── outputs/
+    ├── reranker/
+    ├── retrieval/
+    ├── splitters/
+    ├── utils/
+    ├── vectorstores/
+    ├── comparison_results.txt
+    ├── run_experiment.py
+    └── Experiment_06_Reranker_Comparison.ipynb
 │
 └── Experiment_07/
     └── (Planned)
@@ -82,7 +95,7 @@ experiments/
 | Experiment 03 | Embedding Model Comparison | ✅ Completed |
 | Experiment 04 | Vector Database Comparison | ✅ Completed |
 | Experiment 05 | Retrieval Strategy Comparison | ✅ Completed |
-| Experiment 06 | Reranker Comparison | ⏳ Planned |
+| Experiment 06 | Reranker Comparison | ✅ Completed |
 
 ---
 
@@ -383,6 +396,36 @@ Compare two commonly used retrieval strategies to determine the most suitable ap
 This experiment demonstrated that retrieval quality depends not only on semantic similarity but also on contextual diversity. While Similarity Search tends to return highly similar chunks from the same document region, MMR balances relevance with diversity by selecting complementary information from different sections of the document. This makes MMR a more suitable retrieval strategy for production RAG systems where comprehensive context improves response quality.
 
 ---
+## Experiment 06 — Cross-Encoder Reranker Comparison
+
+### Objective
+
+Compare baseline MMR retrieval with MMR followed by Cross-Encoder reranking while keeping every other RAG component unchanged.
+
+### Components
+
+- PyMuPDF
+- Recursive Character Splitter
+- BAAI/bge-m3
+- ChromaDB
+- MMR Retriever
+- Cross-Encoder Reranker
+
+### Evaluation Metrics
+
+- Retrieval Time
+- Reranking Time
+- Total Pipeline Time
+- Retrieved Documents
+- Unique Pages
+- Duplicate Chunks
+- Context Diversity
+
+### Key Findings
+
+- Cross-Encoder reranking improves semantic ordering of retrieved documents.
+- MMR provides a diverse candidate set for reranking.
+- Reranking introduces additional latency but can improve retrieval quality before generation.
 
 # Summary
 
